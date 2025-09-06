@@ -235,10 +235,6 @@ npm test -- --coverage
 - 更新相关文档
 - 确保所有测试通过
 
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
 ## 🙋‍♂️ 支持
 
 如果你在使用过程中遇到问题，可以通过以下方式获得帮助：
@@ -255,8 +251,3 @@ npm test -- --coverage
 - [Electron React Boilerplate](https://electron-react-boilerplate.js.org/)
 
 ---
-
-<div align="center">
-  <p>由 ❤️ 驱动开发</p>
-  <p>如果这个项目对你有帮助，请考虑给它一个 ⭐</p>
-</div>
