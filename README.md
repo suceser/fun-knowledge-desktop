@@ -14,34 +14,48 @@
 
 ## ✨ 项目概览
 
-趣知桌面版是一个现代化的桌面应用程序，基于成熟的 Electron React Boilerplate 架构构建。项目采用了最新的前端技术栈，为知识管理和学习提供了强大的桌面端解决方案。
+趣知桌面版是一个现代化的桌面知识管理应用程序，采用精美的深色主题和流畅的交互设计。应用基于成熟的 Electron React Boilerplate 架构构建，提供完整的知识管理工作流，包括知识问答、图谱可视化、数字图书管理和数据分析等功能。
 
 ### 🛠️ 核心技术栈
 
 - **🖥️ 桌面框架**: Electron 35.0.2 - 跨平台桌面应用开发
-- **⚛️ 前端框架**: React 19.0.0 - 现代化用户界面库
+- **⚛️ 前端框架**: React 19.0.0 - 现代化用户界面库  
 - **📝 开发语言**: TypeScript 5.8.2 - 类型安全的JavaScript超集
+- **🎨 UI 组件库**: Ant Design 5.27.1 - 企业级UI设计语言
+- **📊 数据可视化**: @ant-design/charts 2.6.2 - 图表和可视化组件
 - **📦 构建工具**: Webpack 5.98.0 - 模块打包和构建系统
-- **🎨 样式处理**: Sass + CSS Modules - 现代CSS解决方案
+- **🎨 样式处理**: CSS Variables + CSS Modules - 现代主题系统
 - **🔍 代码质量**: ESLint + Prettier - 代码规范和格式化
 - **🧪 测试框架**: Jest + Testing Library - 单元测试和组件测试
 
 ## 🚀 功能特性
 
-### 核心功能
-- ✅ **跨平台支持** - 支持 Windows、macOS 和 Linux
-- ✅ **现代化UI** - 基于React构建的响应式用户界面
-- ✅ **类型安全** - 完整的TypeScript类型定义
-- ✅ **热重载开发** - 开发时自动刷新，提升开发效率
-- ✅ **自动更新** - 内置应用自动更新机制
-- ✅ **安全通信** - 通过IPC实现主进程与渲染进程安全通信
+### 🎯 核心功能模块
+- ✅ **我的首页** - 个性化仪表盘，快速访问常用功能
+- ✅ **知识问答** - 智能问答系统，快速获取知识解答  
+- ✅ **知识图谱** - 可视化知识关系网络，构建知识体系
+- ✅ **我的书库** - 数字图书管理，支持多格式阅读
+- ✅ **数据分析** - 学习数据可视化，优化知识管理策略
 
-### 开发特性
-- ✅ **模块化架构** - 清晰的项目结构和模块化设计
-- ✅ **开发工具集成** - 内置React DevTools支持
-- ✅ **源码映射** - 便于调试的源码映射
-- ✅ **代码分割** - 智能的代码分割和懒加载
-- ✅ **性能优化** - 内置性能优化和打包优化
+### 🎨 界面设计特色
+- ✅ **深色主题** - 护眼的深色界面，支持长时间使用
+- ✅ **毛玻璃效果** - 现代化的视觉设计，层次分明
+- ✅ **流畅动画** - 精心设计的过渡动画，提升交互体验
+- ✅ **响应式布局** - 支持不同窗口尺寸的自适应显示
+- ✅ **青绿色主题** - 基于 #38b2ac 的完整色彩系统
+
+### 🔧 交互功能
+- ✅ **可折叠侧边栏** - 灵活的布局控制，最大化内容区域
+- ✅ **智能导航** - 直观的Tab式导航，支持快速切换
+- ✅ **悬停反馈** - 丰富的视觉反馈，提升操作确认感
+- ✅ **懒加载组件** - 按需加载页面组件，优化启动性能
+
+### 🛠️ 开发特性
+- ✅ **模块化架构** - 清晰的组件分层和目录结构
+- ✅ **TypeScript严格模式** - 完整的类型安全保障
+- ✅ **组件化开发** - 可复用的UI组件和业务组件
+- ✅ **主题系统** - 基于CSS Variables的可扩展主题
+- ✅ **代码分割** - 智能的代码分割和懒加载优化
 
 ## 📋 系统要求
 
@@ -80,27 +94,46 @@ npm start
 ### 项目结构
 ```
 fun-knowledge-desktop/
-├── src/                    # 源代码目录
-│   ├── main/              # 主进程代码
-│   │   ├── main.ts        # 应用主入口
-│   │   ├── menu.ts        # 菜单配置
-│   │   ├── preload.ts     # 预加载脚本
-│   │   └── util.ts        # 工具函数
-│   └── renderer/          # 渲染进程代码
-│       ├── App.tsx        # React应用根组件
-│       ├── App.css        # 全局样式
-│       ├── index.tsx      # 渲染进程入口
-│       └── index.ejs      # HTML模板
-├── assets/                # 静态资源
-│   ├── icon.png          # 应用图标
-│   └── icons/            # 多尺寸图标
-├── .erb/                 # 构建配置
-│   ├── configs/          # Webpack配置
-│   ├── scripts/          # 构建脚本
-│   └── dll/             # 动态链接库
-├── release/              # 构建输出
-├── package.json          # 项目配置
-└── tsconfig.json        # TypeScript配置
+├── src/                          # 源代码目录
+│   ├── main/                    # 主进程代码
+│   │   ├── main.ts              # 应用主入口
+│   │   ├── menu.ts              # 菜单配置
+│   │   ├── preload.ts           # 预加载脚本
+│   │   └── util.ts              # 工具函数
+│   └── renderer/                # 渲染进程代码
+│       ├── components/          # React组件
+│       │   ├── Layout/          # 布局组件
+│       │   │   ├── MainLayout.tsx
+│       │   │   └── MainLayout.css
+│       │   ├── Sidebar/         # 侧边栏组件
+│       │   │   ├── Sidebar.tsx
+│       │   │   └── Sidebar.css
+│       │   ├── Content/         # 内容区域组件
+│       │   │   ├── ContentArea.tsx
+│       │   │   └── ContentArea.css
+│       │   └── Pages/           # 页面组件
+│       │       ├── Home/        # 我的首页
+│       │       ├── QnA/         # 知识问答
+│       │       ├── KnowledgeGraph/ # 知识图谱
+│       │       ├── Library/     # 我的书库
+│       │       └── Analytics/   # 数据分析
+│       ├── styles/              # 全局样式
+│       │   └── theme.css        # 主题系统
+│       ├── App.tsx              # React应用根组件
+│       ├── App.css              # 全局样式覆盖
+│       ├── index.tsx            # 渲染进程入口
+│       └── index.ejs            # HTML模板
+├── assets/                      # 静态资源
+│   ├── icon.png                # 应用图标
+│   └── icons/                  # 多尺寸图标
+├── design/                      # 设计文档
+│   ├── 产品设计.md              # 产品设计规范
+│   ├── 架构设计.md              # 技术架构文档
+│   └── 交互设计.md              # UI交互设计规范
+├── .erb/                       # 构建配置
+├── release/                    # 构建输出
+├── package.json               # 项目配置
+└── tsconfig.json             # TypeScript配置
 ```
 
 ### 开发命令
@@ -133,9 +166,17 @@ npm run package
 - **preload.ts**: 预加载脚本，提供安全的IPC通信接口
 
 #### 渲染进程 (Renderer Process)
-- **App.tsx**: React应用的根组件
-- **路由管理**: 使用React Router进行页面路由管理
-- **组件架构**: 采用函数式组件和Hooks模式
+- **App.tsx**: React应用的根组件，配置Antd主题和全局Provider
+- **MainLayout**: 主要布局组件，管理侧边栏和内容区域
+- **Sidebar**: 可折叠侧边栏，包含导航、头像和功能按钮
+- **ContentArea**: 内容区域，支持懒加载和页面切换
+- **Pages**: 各功能页面组件，采用模块化设计
+
+#### 组件架构设计
+- **函数式组件**: 全面采用React Hooks模式
+- **TypeScript接口**: 严格的Props类型定义
+- **CSS模块化**: 组件级样式隔离
+- **主题系统**: 基于CSS Variables的统一主题管理
 
 #### 进程间通信 (IPC)
 ```typescript
@@ -172,13 +213,37 @@ npm run package
 {
   "build": {
     "productName": "趣知桌面版",
-    "appId": "com.yourcompany.fun-knowledge",
+    "appId": "com.funknowledge.desktop",
     "directories": {
       "output": "release/build"
+    },
+    "files": [
+      "dist",
+      "node_modules", 
+      "package.json"
+    ],
+    "mac": {
+      "target": ["arm64", "x64"]
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "linux": {
+      "target": ["AppImage"]
     }
   }
 }
 ```
+
+### 🎨 主题配置
+
+项目采用了完整的设计系统，支持：
+
+- **色彩系统**: 基于青绿色(#38b2ac)的完整调色板
+- **深色主题**: 护眼的深色界面设计
+- **毛玻璃效果**: backdrop-filter实现的现代视觉效果
+- **动画系统**: 流畅的过渡和交互动画
+- **响应式设计**: 支持不同窗口尺寸的自适应
 
 ## 🧪 测试
 
@@ -249,5 +314,3 @@ npm test -- --coverage
 - [React 官方文档](https://reactjs.org/docs)
 - [TypeScript 官方文档](https://www.typescriptlang.org/docs)
 - [Electron React Boilerplate](https://electron-react-boilerplate.js.org/)
-
----
