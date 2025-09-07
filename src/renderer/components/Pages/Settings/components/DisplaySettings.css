@@ -296,11 +296,12 @@
 }
 
 /* 开关样式 */
-.display-settings .ant-switch {
+/* .display-settings .ant-switch {
   background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px !important;
   transition: all 0.3s ease;
-}
+} */
 
 .display-settings .ant-switch:hover {
   background: rgba(255, 255, 255, 0.25) !important;
@@ -317,11 +318,13 @@
 
 .display-settings .ant-switch .ant-switch-handle {
   background: #ffffff;
+  border-radius: 50% !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .display-settings .ant-switch .ant-switch-handle::before {
   background: #ffffff;
+  border-radius: 50% !important;
 }
 
 /* 文本样式 */

@@ -135,11 +135,11 @@
 }
 
 /* 开关样式 */
-.general-settings .ant-switch {
+/* .general-settings .ant-switch {
   background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-}
+} */
 
 .general-settings .ant-switch:hover {
   background: rgba(255, 255, 255, 0.25) !important;
