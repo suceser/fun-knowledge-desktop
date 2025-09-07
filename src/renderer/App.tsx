@@ -1,50 +1,57 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import React from 'react';
+import { ConfigProvider, theme } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
+import MainLayout from './components/Layout/MainLayout';
+import './styles/theme.css';
 import './App.css';
 
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-}
+const { darkAlgorithm } = theme;
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        algorithm: darkAlgorithm,
+        token: {
+          colorPrimary: '#38b2ac',
+          colorBgBase: '#0f0f23',
+          colorBgContainer: '#1a1a2e',
+          colorBgElevated: '#16213e',
+          colorText: '#ffffff',
+          colorTextSecondary: 'rgba(255, 255, 255, 0.8)',
+          colorTextTertiary: 'rgba(255, 255, 255, 0.6)',
+          colorBorder: 'rgba(255, 255, 255, 0.08)',
+          colorBorderSecondary: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: 12,
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+        },
+        components: {
+          Layout: {
+            bodyBg: 'transparent',
+            siderBg: 'transparent',
+            headerBg: 'transparent',
+          },
+          Button: {
+            colorBgContainer: 'rgba(26, 26, 46, 0.3)',
+            colorBgContainerDisabled: 'rgba(26, 26, 46, 0.1)',
+          },
+          Card: {
+            colorBgContainer: 'rgba(26, 26, 46, 0.6)',
+            colorBorderSecondary: 'rgba(255, 255, 255, 0.1)',
+          },
+          Typography: {
+            colorText: '#ffffff',
+            colorTextHeading: '#ffffff',
+            colorTextDescription: 'rgba(255, 255, 255, 0.8)',
+          },
+          Spin: {
+            colorPrimary: '#38b2ac',
+          }
+        }
+      }}
+    >
+      <MainLayout />
+    </ConfigProvider>
   );
 }
