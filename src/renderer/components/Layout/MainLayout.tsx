@@ -29,7 +29,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ className }) => {
         collapsed={collapsed}
         collapsible
         trigger={null}
-        width={280}
+        width={180}
         collapsedWidth={80}
         theme="dark"
       >
