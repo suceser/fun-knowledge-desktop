@@ -1,247 +1,148 @@
 import React, { useState } from 'react';
-import { Card, Switch, Select, Slider, Button, Typography, Divider, Space, Row, Col } from 'antd';
+import { Typography, Divider } from 'antd';
 import {
-  BellOutlined,
+  SettingOutlined,
   EyeOutlined,
+  DatabaseOutlined,
+  ThunderboltOutlined,
+  RobotOutlined,
+  BulbOutlined,
+  FileTextOutlined,
   GlobalOutlined,
-  LockOutlined,
-  DesktopOutlined,
-  SoundOutlined,
-  SaveOutlined,
-  ReloadOutlined
+  ApiOutlined,
+  InfoCircleOutlined
 } from '@ant-design/icons';
+import GeneralSettings from './components/GeneralSettings';
+import DisplaySettings from './components/DisplaySettings';
+import DataSettings from './components/DataSettings';
+import ShortcutSettings from './components/ShortcutSettings';
+import ModelSettings from './components/ModelSettings';
+import MemorySettings from './components/MemorySettings';
+import DocumentSettings from './components/DocumentSettings';
+import SearchSettings from './components/SearchSettings';
+import MCPSettings from './components/MCPSettings';
+import AboutSettings from './components/AboutSettings';
 import './SettingsPage.css';
 
-const { Title, Text } = Typography;
-const { Option } = Select;
+const { Title } = Typography;
 
-interface SettingsState {
-  notifications: boolean;
-  darkMode: boolean;
-  language: string;
-  fontSize: number;
-  autoSave: boolean;
-  soundEnabled: boolean;
-  privacy: string;
-  updateFrequency: string;
+interface SettingItem {
+  key: string;
+  label: string;
+  icon: React.ReactNode;
 }
 
+interface SettingGroup {
+  title?: string;
+  items: SettingItem[];
+}
+
+const settingGroups: SettingGroup[] = [
+  {
+    items: [
+      { key: 'general', label: '常规设置', icon: <SettingOutlined /> },
+      { key: 'display', label: '显示设置', icon: <EyeOutlined /> },
+      { key: 'data', label: '数据设置', icon: <DatabaseOutlined /> },
+      { key: 'shortcuts', label: '快捷键', icon: <ThunderboltOutlined /> }
+    ]
+  },
+  {
+    items: [
+      { key: 'model', label: '模型设置', icon: <RobotOutlined /> },
+      { key: 'memory', label: '记忆设置', icon: <BulbOutlined /> },
+      { key: 'document', label: '文档处理', icon: <FileTextOutlined /> },
+      { key: 'search', label: '网络搜索', icon: <GlobalOutlined /> },
+      { key: 'mcp', label: 'MCP', icon: <ApiOutlined /> }
+    ]
+  },
+  {
+    items: [
+      { key: 'about', label: '关于我们', icon: <InfoCircleOutlined /> }
+    ]
+  }
+];
+
 const SettingsPage: React.FC = () => {
-  const [settings, setSettings] = useState<SettingsState>({
-    notifications: true,
-    darkMode: true,
-    language: 'zh-CN',
-    fontSize: 14,
-    autoSave: true,
-    soundEnabled: true,
-    privacy: 'medium',
-    updateFrequency: 'daily'
-  });
+  const [selectedTab, setSelectedTab] = useState('general');
 
-  const handleSettingChange = (key: keyof SettingsState, value: any) => {
-    setSettings(prev => ({
-      ...prev,
-      [key]: value
-    }));
+  const handleTabClick = (key: string) => {
+    setSelectedTab(key);
   };
 
-  const handleSave = () => {
-    console.log('保存设置:', settings);
-    // 这里可以添加保存到本地存储或发送到服务器的逻辑
+  const renderTabItem = (item: SettingItem) => {
+    const isSelected = selectedTab === item.key;
+    
+    return (
+      <div
+        key={item.key}
+        className={`tab-item ${isSelected ? 'selected' : ''}`}
+        onClick={() => handleTabClick(item.key)}
+      >
+        <span className="tab-icon">{item.icon}</span>
+        <span className="tab-label">{item.label}</span>
+      </div>
+    );
   };
 
-  const handleReset = () => {
-    setSettings({
-      notifications: true,
-      darkMode: true,
-      language: 'zh-CN',
-      fontSize: 14,
-      autoSave: true,
-      soundEnabled: true,
-      privacy: 'medium',
-      updateFrequency: 'daily'
-    });
+  const renderContent = () => {
+    switch (selectedTab) {
+      case 'general':
+        return <GeneralSettings />;
+      case 'display':
+        return <DisplaySettings />;
+      case 'data':
+        return <DataSettings />;
+      case 'shortcuts':
+        return <ShortcutSettings />;
+      case 'model':
+        return <ModelSettings />;
+      case 'memory':
+        return <MemorySettings />;
+      case 'document':
+        return <DocumentSettings />;
+      case 'search':
+        return <SearchSettings />;
+      case 'mcp':
+        return <MCPSettings />;
+      case 'about':
+        return <AboutSettings />;
+      default:
+        return (
+          <div className="content-placeholder">
+            <Title level={3}>请选择设置项</Title>
+            <p>请从左侧选择要配置的设置项...</p>
+          </div>
+        );
+    }
   };
 
   return (
     <div className="settings-page">
       <div className="settings-header">
         <Title level={2} className="settings-title">
-          <DesktopOutlined className="title-icon" />
+          <SettingOutlined className="title-icon" />
           应用设置
         </Title>
-        <Text className="settings-description">
-          个性化您的应用体验，调整各项功能设置
-        </Text>
       </div>
 
-      <div className="settings-content">
-        <Row gutter={[24, 24]}>
-          {/* 通知设置 */}
-          <Col xs={24} lg={12}>
-            <Card className="settings-card" title={
-              <Space>
-                <BellOutlined className="card-icon" />
-                <span>通知设置</span>
-              </Space>
-            }>
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>桌面通知</Text>
-                  <Text type="secondary">接收重要消息的桌面通知</Text>
-                </div>
-                <Switch
-                  checked={settings.notifications}
-                  onChange={(checked) => handleSettingChange('notifications', checked)}
-                />
-              </div>
-              
-              <Divider />
-              
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>声音提醒</Text>
-                  <Text type="secondary">播放通知声音</Text>
-                </div>
-                <Switch
-                  checked={settings.soundEnabled}
-                  onChange={(checked) => handleSettingChange('soundEnabled', checked)}
-                />
-              </div>
-            </Card>
-          </Col>
+      <div className="settings-layout">
+        {/* 左侧导航 */}
+        <div className="settings-sidebar">
+          {settingGroups.map((group, groupIndex) => (
+            <div key={groupIndex} className="tab-group">
+              {group.items.map(renderTabItem)}
+              {groupIndex < settingGroups.length - 1 && (
+                <Divider className="group-divider" />
+              )}
+            </div>
+          ))}
+        </div>
 
-          {/* 外观设置 */}
-          <Col xs={24} lg={12}>
-            <Card className="settings-card" title={
-              <Space>
-                <EyeOutlined className="card-icon" />
-                <span>外观设置</span>
-              </Space>
-            }>
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>深色模式</Text>
-                  <Text type="secondary">使用深色主题界面</Text>
-                </div>
-                <Switch
-                  checked={settings.darkMode}
-                  onChange={(checked) => handleSettingChange('darkMode', checked)}
-                />
-              </div>
-              
-              <Divider />
-              
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>字体大小</Text>
-                  <Text type="secondary">调整界面字体大小</Text>
-                </div>
-                <div className="slider-container">
-                  <Slider
-                    min={12}
-                    max={20}
-                    value={settings.fontSize}
-                    onChange={(value) => handleSettingChange('fontSize', value)}
-                    marks={{
-                      12: '小',
-                      16: '中',
-                      20: '大'
-                    }}
-                  />
-                </div>
-              </div>
-            </Card>
-          </Col>
-
-          {/* 语言设置 */}
-          <Col xs={24} lg={12}>
-            <Card className="settings-card" title={
-              <Space>
-                <GlobalOutlined className="card-icon" />
-                <span>语言设置</span>
-              </Space>
-            }>
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>界面语言</Text>
-                  <Text type="secondary">选择应用界面语言</Text>
-                </div>
-                <Select
-                  value={settings.language}
-                  onChange={(value) => handleSettingChange('language', value)}
-                  style={{ width: 120 }}
-                >
-                  <Option value="zh-CN">简体中文</Option>
-                  <Option value="zh-TW">繁體中文</Option>
-                  <Option value="en-US">English</Option>
-                  <Option value="ja-JP">日本語</Option>
-                </Select>
-              </div>
-            </Card>
-          </Col>
-
-          {/* 隐私设置 */}
-          <Col xs={24} lg={12}>
-            <Card className="settings-card" title={
-              <Space>
-                <LockOutlined className="card-icon" />
-                <span>隐私设置</span>
-              </Space>
-            }>
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>自动保存</Text>
-                  <Text type="secondary">自动保存您的工作内容</Text>
-                </div>
-                <Switch
-                  checked={settings.autoSave}
-                  onChange={(checked) => handleSettingChange('autoSave', checked)}
-                />
-              </div>
-              
-              <Divider />
-              
-              <div className="setting-item">
-                <div className="setting-label">
-                  <Text strong>隐私级别</Text>
-                  <Text type="secondary">设置数据收集级别</Text>
-                </div>
-                <Select
-                  value={settings.privacy}
-                  onChange={(value) => handleSettingChange('privacy', value)}
-                  style={{ width: 120 }}
-                >
-                  <Option value="high">高</Option>
-                  <Option value="medium">中</Option>
-                  <Option value="low">低</Option>
-                </Select>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* 操作按钮 */}
-        <div className="settings-actions">
-          <Space size="large">
-            <Button
-              type="primary"
-              icon={<SaveOutlined />}
-              size="large"
-              onClick={handleSave}
-              className="save-button"
-            >
-              保存设置
-            </Button>
-            <Button
-              icon={<ReloadOutlined />}
-              size="large"
-              onClick={handleReset}
-              className="reset-button"
-            >
-              重置默认
-            </Button>
-          </Space>
+        {/* 右侧内容 */}
+        <div className="settings-content">
+          <div className="content-container">
+            {renderContent()}
+          </div>
         </div>
       </div>
     </div>
