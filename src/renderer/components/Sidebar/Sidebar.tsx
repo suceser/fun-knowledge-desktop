@@ -153,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="bottom-section">
         <div className="bottom-buttons">
           {renderBottomButton('login', <LoginOutlined />, '登录')}
-          {renderBottomButton('settings', <SettingOutlined />, '设置')}
+          {renderBottomButton('settings', <SettingOutlined />, '设置', () => onTabChange('settings'))}
         </div>
       </div>
     </div>

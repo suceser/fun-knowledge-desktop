@@ -8,6 +8,7 @@ const QnAPage = lazy(() => import('../Pages/QnA/QnAPage'));
 const KnowledgeGraphPage = lazy(() => import('../Pages/KnowledgeGraph/KnowledgeGraphPage'));
 const LibraryPage = lazy(() => import('../Pages/Library/LibraryPage'));
 const AnalyticsPage = lazy(() => import('../Pages/Analytics/AnalyticsPage'));
+const SettingsPage = lazy(() => import('../Pages/Settings/SettingsPage'));
 
 export interface ContentAreaProps {
   selectedTab: string;
@@ -26,6 +27,8 @@ const ContentArea: React.FC<ContentAreaProps> = ({ selectedTab }) => {
         return <LibraryPage />;
       case 'analytics':
         return <AnalyticsPage />;
+      case 'settings':
+        return <SettingsPage />;
       default:
         return <HomePage />;
     }
