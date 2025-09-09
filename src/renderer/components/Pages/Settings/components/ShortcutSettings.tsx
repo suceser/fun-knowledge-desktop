@@ -402,7 +402,7 @@ const ShortcutSettings: React.FC<ShortcutSettingsProps> = () => {
             </div>
             
             {/* 重要快捷键说明 */}
-            <div className="shortcut-tips">
+            {/* <div className="shortcut-tips">
               <div className="tips-header">
                 <QuestionCircleOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
                 <span style={{ color: '#ffffff', fontWeight: 500 }}>重要快捷键说明</span>
@@ -425,7 +425,7 @@ const ShortcutSettings: React.FC<ShortcutSettingsProps> = () => {
                   <span className="tip-description">退出全屏模式，返回窗口模式</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </Card>
       </div>
