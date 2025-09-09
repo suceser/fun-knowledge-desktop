@@ -141,7 +141,7 @@
   transition: all 0.3s ease;
 } */
 
-.general-settings .ant-switch:hover {
+/* .general-settings .ant-switch:hover {
   background: rgba(255, 255, 255, 0.25) !important;
 }
 
@@ -161,7 +161,7 @@
 
 .general-settings .ant-switch .ant-switch-handle::before {
   background: #ffffff;
-}
+} */
 
 /* 文本样式 */
 .general-settings .ant-typography {
