@@ -47,7 +47,7 @@ const navigationItems: NavigationItem[] = [
   {
     key: 'library',
     icon: <BookOutlined />,
-    label: '我的书库'
+    label: '知识库'
   },
   {
     key: 'notes',
