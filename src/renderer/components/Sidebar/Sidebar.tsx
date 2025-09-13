@@ -57,7 +57,7 @@ const navigationItems: NavigationItem[] = [
   {
     key: 'analytics',
     icon: <BarChartOutlined />,
-    label: '数据分析'
+    label: '学习数据'
   }
 ];
 

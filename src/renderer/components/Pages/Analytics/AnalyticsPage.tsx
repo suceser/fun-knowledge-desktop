@@ -11,7 +11,7 @@ const AnalyticsPage: React.FC = () => {
       <div className="page-header">
         <div className="page-title">
           <BarChartOutlined className="page-icon" />
-          <Title level={2} className="title-text">数据分析</Title>
+          <Title level={2} className="title-text">学习数据</Title>
         </div>
         <Paragraph className="page-description">
           深入分析您的学习数据，优化知识管理策略
@@ -22,7 +22,7 @@ const AnalyticsPage: React.FC = () => {
         <Card className="placeholder-card glass-card">
           <div className="placeholder-content">
             <BarChartOutlined className="placeholder-icon" />
-            <Title level={3}>数据分析功能</Title>
+            <Title level={3}>学习数据功能</Title>
             <Paragraph>
               通过数据可视化展示您的学习进展，
               帮助您发现学习模式，提升学习效率。
