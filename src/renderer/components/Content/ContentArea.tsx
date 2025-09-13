@@ -4,6 +4,7 @@ import './ContentArea.css';
 
 // 懒加载各个页面组件
 const HomePage = lazy(() => import('../Pages/Home/HomePage'));
+const NotesPage = lazy(() => import('../Pages/Notes/NotesPage'));
 const QnAPage = lazy(() => import('../Pages/QnA/QnAPage'));
 const KnowledgeGraphPage = lazy(() => import('../Pages/KnowledgeGraph/KnowledgeGraphPage'));
 const LibraryPage = lazy(() => import('../Pages/Library/LibraryPage'));
@@ -19,6 +20,8 @@ const ContentArea: React.FC<ContentAreaProps> = ({ selectedTab }) => {
     switch (selectedTab) {
       case 'home':
         return <HomePage />;
+      case 'notes':
+        return <NotesPage />;
       case 'qna':
         return <QnAPage />;
       case 'knowledge-graph':

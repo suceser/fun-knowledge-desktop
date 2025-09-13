@@ -6,6 +6,7 @@ import {
   ShareAltOutlined,
   BookOutlined,
   BarChartOutlined,
+  EditOutlined,
   LoginOutlined,
   SettingOutlined,
   MenuFoldOutlined,
@@ -47,6 +48,11 @@ const navigationItems: NavigationItem[] = [
     key: 'library',
     icon: <BookOutlined />,
     label: '我的书库'
+  },
+  {
+    key: 'notes',
+    icon: <EditOutlined />,
+    label: '我的笔记'
   },
   {
     key: 'analytics',
