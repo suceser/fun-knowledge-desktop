@@ -24,7 +24,8 @@ export default function App() {
           colorBorder: 'rgba(255, 255, 255, 0.08)',
           colorBorderSecondary: 'rgba(255, 255, 255, 0.1)',
           borderRadius: 12,
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+          fontFamily:
+            '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
         },
         components: {
           Layout: {
@@ -47,8 +48,8 @@ export default function App() {
           },
           Spin: {
             colorPrimary: '#38b2ac',
-          }
-        }
+          },
+        },
       }}
     >
       <MainLayout />

@@ -4,13 +4,13 @@ import Sidebar from '../Sidebar/Sidebar';
 import ContentArea from '../Content/ContentArea';
 import './MainLayout.css';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export interface MainLayoutProps {
   className?: string;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ className }) => {
+function MainLayout({ className }: MainLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedTab, setSelectedTab] = useState('home');
 
@@ -48,6 +48,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ className }) => {
       </Layout>
     </Layout>
   );
+}
+
+MainLayout.defaultProps = {
+  className: '',
 };
 
 export default MainLayout;

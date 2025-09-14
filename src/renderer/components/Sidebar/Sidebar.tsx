@@ -11,7 +11,7 @@ import {
   SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined
+  UserOutlined,
 } from '@ant-design/icons';
 import './Sidebar.css';
 
@@ -32,42 +32,41 @@ const navigationItems: NavigationItem[] = [
   {
     key: 'home',
     icon: <HomeOutlined />,
-    label: '我的首页'
+    label: '我的首页',
   },
   {
     key: 'qna',
     icon: <QuestionCircleOutlined />,
-    label: '知识问答'
+    label: '知识问答',
   },
   {
     key: 'knowledge-graph',
     icon: <ShareAltOutlined />,
-    label: '知识图谱'
+    label: '知识图谱',
   },
   {
     key: 'library',
     icon: <BookOutlined />,
-    label: '知识库'
+    label: '知识库',
   },
   {
     key: 'notes',
     icon: <EditOutlined />,
-    label: '我的笔记'
+    label: '我的笔记',
   },
   {
     key: 'analytics',
     icon: <BarChartOutlined />,
-    label: '学习数据'
-  }
+    label: '学习数据',
+  },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({
+function Sidebar({
   collapsed,
   selectedTab,
   onTabChange,
-  onToggle
-}) => {
-
+  onToggle,
+}: SidebarProps) {
   const renderNavigationItem = (item: NavigationItem) => {
     const isSelected = selectedTab === item.key;
 
@@ -89,14 +88,16 @@ const Sidebar: React.FC<SidebarProps> = ({
       <Tooltip key={item.key} title={item.label} placement="right">
         {navButton}
       </Tooltip>
-    ) : navButton;
+    ) : (
+      navButton
+    );
   };
 
   const renderBottomButton = (
     key: string,
     icon: React.ReactNode,
     label: string,
-    onClick?: () => void
+    onClick?: () => void,
   ) => {
     const button = (
       <Button
@@ -116,7 +117,9 @@ const Sidebar: React.FC<SidebarProps> = ({
       <Tooltip key={key} title={label} placement="right">
         {button}
       </Tooltip>
-    ) : button;
+    ) : (
+      button
+    );
   };
 
   return (
@@ -159,11 +162,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="bottom-section">
         <div className="bottom-buttons">
           {renderBottomButton('login', <LoginOutlined />, '登录')}
-          {renderBottomButton('settings', <SettingOutlined />, '设置', () => onTabChange('settings'))}
+          {renderBottomButton('settings', <SettingOutlined />, '设置', () =>
+            onTabChange('settings'),
+          )}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;

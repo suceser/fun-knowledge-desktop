@@ -6,7 +6,9 @@ import './ContentArea.css';
 const HomePage = lazy(() => import('../Pages/Home/HomePage'));
 const NotesPage = lazy(() => import('../Pages/Notes/NotesPage'));
 const QnAPage = lazy(() => import('../Pages/QnA/QnAPage'));
-const KnowledgeGraphPage = lazy(() => import('../Pages/KnowledgeGraph/KnowledgeGraphPage'));
+const KnowledgeGraphPage = lazy(
+  () => import('../Pages/KnowledgeGraph/KnowledgeGraphPage'),
+);
 const LibraryPage = lazy(() => import('../Pages/Library/LibraryPage'));
 const AnalyticsPage = lazy(() => import('../Pages/Analytics/AnalyticsPage'));
 const SettingsPage = lazy(() => import('../Pages/Settings/SettingsPage'));
@@ -15,7 +17,7 @@ export interface ContentAreaProps {
   selectedTab: string;
 }
 
-const ContentArea: React.FC<ContentAreaProps> = ({ selectedTab }) => {
+function ContentArea({ selectedTab }: ContentAreaProps) {
   const renderContent = () => {
     switch (selectedTab) {
       case 'home':
@@ -47,12 +49,10 @@ const ContentArea: React.FC<ContentAreaProps> = ({ selectedTab }) => {
           </div>
         }
       >
-        <div className="content-wrapper">
-          {renderContent()}
-        </div>
+        <div className="content-wrapper">{renderContent()}</div>
       </Suspense>
     </div>
   );
-};
+}
 
 export default ContentArea;
