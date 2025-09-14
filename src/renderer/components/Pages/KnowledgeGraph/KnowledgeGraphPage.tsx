@@ -5,13 +5,15 @@ import './KnowledgeGraphPage.css';
 
 const { Title, Paragraph } = Typography;
 
-const KnowledgeGraphPage: React.FC = () => {
+function KnowledgeGraphPage() {
   return (
     <div className="knowledge-graph-page">
       <div className="page-header">
         <div className="page-title">
           <ShareAltOutlined className="page-icon" />
-          <Title level={2} className="title-text">知识图谱</Title>
+          <Title level={2} className="title-text">
+            知识图谱
+          </Title>
         </div>
         <Paragraph className="page-description">
           可视化知识关系，构建您的专属知识网络
@@ -32,6 +34,6 @@ const KnowledgeGraphPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default KnowledgeGraphPage;

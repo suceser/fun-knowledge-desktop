@@ -5,13 +5,15 @@ import './QnAPage.css';
 
 const { Title, Paragraph } = Typography;
 
-const QnAPage: React.FC = () => {
+function QnAPage() {
   return (
     <div className="qna-page">
       <div className="page-header">
         <div className="page-title">
           <QuestionCircleOutlined className="page-icon" />
-          <Title level={2} className="title-text">知识问答</Title>
+          <Title level={2} className="title-text">
+            知识问答
+          </Title>
         </div>
         <Paragraph className="page-description">
           智能问答系统，快速获取您需要的知识答案
@@ -32,6 +34,6 @@ const QnAPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default QnAPage;

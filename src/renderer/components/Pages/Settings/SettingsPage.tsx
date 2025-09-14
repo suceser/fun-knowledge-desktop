@@ -10,7 +10,7 @@ import {
   FileTextOutlined,
   GlobalOutlined,
   ApiOutlined,
-  InfoCircleOutlined
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 import GeneralSettings from './components/GeneralSettings';
 import DisplaySettings from './components/DisplaySettings';
@@ -43,8 +43,8 @@ const settingGroups: SettingGroup[] = [
       { key: 'general', label: '常规设置', icon: <SettingOutlined /> },
       { key: 'display', label: '显示设置', icon: <EyeOutlined /> },
       { key: 'data', label: '数据设置', icon: <DatabaseOutlined /> },
-      { key: 'shortcuts', label: '快捷键', icon: <ThunderboltOutlined /> }
-    ]
+      { key: 'shortcuts', label: '快捷键', icon: <ThunderboltOutlined /> },
+    ],
   },
   {
     items: [
@@ -52,17 +52,15 @@ const settingGroups: SettingGroup[] = [
       { key: 'memory', label: '记忆设置', icon: <BulbOutlined /> },
       { key: 'document', label: '文档处理', icon: <FileTextOutlined /> },
       { key: 'search', label: '网络搜索', icon: <GlobalOutlined /> },
-      { key: 'mcp', label: 'MCP', icon: <ApiOutlined /> }
-    ]
+      { key: 'mcp', label: 'MCP', icon: <ApiOutlined /> },
+    ],
   },
   {
-    items: [
-      { key: 'about', label: '关于我们', icon: <InfoCircleOutlined /> }
-    ]
-  }
+    items: [{ key: 'about', label: '关于我们', icon: <InfoCircleOutlined /> }],
+  },
 ];
 
-const SettingsPage: React.FC = () => {
+function SettingsPage() {
   const [selectedTab, setSelectedTab] = useState('general');
 
   const handleTabClick = (key: string) => {
@@ -71,12 +69,18 @@ const SettingsPage: React.FC = () => {
 
   const renderTabItem = (item: SettingItem) => {
     const isSelected = selectedTab === item.key;
-    
     return (
       <div
         key={item.key}
         className={`tab-item ${isSelected ? 'selected' : ''}`}
         onClick={() => handleTabClick(item.key)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleTabClick(item.key);
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
         <span className="tab-icon">{item.icon}</span>
         <span className="tab-label">{item.label}</span>
@@ -129,7 +133,10 @@ const SettingsPage: React.FC = () => {
         {/* 左侧导航 */}
         <div className="settings-sidebar">
           {settingGroups.map((group, groupIndex) => (
-            <div key={groupIndex} className="tab-group">
+            <div
+              key={`group-${group.items[0]?.key || 'default'}`}
+              className="tab-group"
+            >
               {group.items.map(renderTabItem)}
               {groupIndex < settingGroups.length - 1 && (
                 <Divider className="group-divider" />
@@ -140,13 +147,11 @@ const SettingsPage: React.FC = () => {
 
         {/* 右侧内容 */}
         <div className="settings-content">
-          <div className="content-container">
-            {renderContent()}
-          </div>
+          <div className="content-container">{renderContent()}</div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default SettingsPage;

@@ -5,13 +5,15 @@ import './HomePage.css';
 
 const { Title, Paragraph } = Typography;
 
-const HomePage: React.FC = () => {
+function HomePage() {
   return (
     <div className="home-page">
       <div className="page-header">
         <div className="page-title">
           <HomeOutlined className="page-icon" />
-          <Title level={2} className="title-text">我的首页</Title>
+          <Title level={2} className="title-text">
+            我的首页
+          </Title>
         </div>
         <Paragraph className="page-description">
           欢迎回到趣知，开始您的知识探索之旅
@@ -56,6 +58,6 @@ const HomePage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HomePage;

@@ -5,13 +5,15 @@ import './AnalyticsPage.css';
 
 const { Title, Paragraph } = Typography;
 
-const AnalyticsPage: React.FC = () => {
+function AnalyticsPage() {
   return (
     <div className="analytics-page">
       <div className="page-header">
         <div className="page-title">
           <BarChartOutlined className="page-icon" />
-          <Title level={2} className="title-text">学习数据</Title>
+          <Title level={2} className="title-text">
+            学习数据
+          </Title>
         </div>
         <Paragraph className="page-description">
           深入分析您的学习数据，优化知识管理策略
@@ -32,6 +34,6 @@ const AnalyticsPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default AnalyticsPage;

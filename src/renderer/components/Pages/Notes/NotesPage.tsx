@@ -14,7 +14,7 @@ import {
   Empty,
   Tooltip,
   Dropdown,
-  MenuProps
+  MenuProps,
 } from 'antd';
 import {
   PlusOutlined,
@@ -25,7 +25,7 @@ import {
   FolderOutlined,
   MoreOutlined,
   StarOutlined,
-  StarFilled
+  StarFilled,
 } from '@ant-design/icons';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -35,12 +35,18 @@ const { Title, Text, Paragraph } = Typography;
 const { Option } = Select;
 
 // Tiptap编辑器组件
-const TiptapEditor = ({ value, onChange }: { value?: string; onChange?: (value: string) => void }) => {
+function TiptapEditor({
+  value = '<p>在这里记录你的想法...</p>',
+  onChange,
+}: {
+  value?: string;
+  onChange?: (value: string) => void;
+}) {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: value || '<p>在这里记录你的想法...</p>',
-    onUpdate: ({ editor }) => {
-      const html = editor.getHTML();
+    content: value,
+    onUpdate: ({ editor: editorInstance }) => {
+      const html = editorInstance.getHTML();
       onChange?.(html);
     },
   });
@@ -50,6 +56,11 @@ const TiptapEditor = ({ value, onChange }: { value?: string; onChange?: (value: 
       <EditorContent editor={editor} />
     </div>
   );
+}
+
+TiptapEditor.defaultProps = {
+  value: '<p>在这里记录你的想法...</p>',
+  onChange: undefined,
 };
 
 interface Note {
@@ -70,13 +81,13 @@ interface Category {
   count: number;
 }
 
-const NotesPage: React.FC = () => {
+function NotesPage() {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [categories, setCategories] = useState<Category[]>([
+  const [categories] = useState<Category[]>([
     { id: '1', name: '工作', color: '#38b2ac', count: 0 },
     { id: '2', name: '学习', color: '#4299e1', count: 0 },
     { id: '3', name: '生活', color: '#48bb78', count: 0 },
-    { id: '4', name: '想法', color: '#ed8936', count: 0 }
+    { id: '4', name: '想法', color: '#ed8936', count: 0 },
   ]);
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -90,43 +101,50 @@ const NotesPage: React.FC = () => {
       {
         id: '1',
         title: '项目会议记录',
-        content: '今天的项目会议讨论了以下几个重点：\n1. 产品功能优化\n2. 用户体验改进\n3. 技术架构升级',
+        content:
+          '今天的项目会议讨论了以下几个重点：\n1. 产品功能优化\n2. 用户体验改进\n3. 技术架构升级',
         category: '工作',
         tags: ['会议', '项目'],
         createdAt: new Date('2024-01-15'),
         updatedAt: new Date('2024-01-15'),
-        isFavorite: true
+        isFavorite: true,
       },
       {
         id: '2',
         title: 'React学习笔记',
-        content: 'React Hooks的使用要点：\n- useState用于状态管理\n- useEffect用于副作用处理\n- useCallback用于性能优化',
+        content:
+          'React Hooks的使用要点：\n- useState用于状态管理\n- useEffect用于副作用处理\n- useCallback用于性能优化',
         category: '学习',
         tags: ['React', '前端', 'JavaScript'],
         createdAt: new Date('2024-01-14'),
         updatedAt: new Date('2024-01-14'),
-        isFavorite: false
+        isFavorite: false,
       },
       {
         id: '3',
         title: '读书心得',
-        content: '《深度工作》这本书让我重新思考了工作效率的问题。深度工作能力在信息时代变得越来越稀缺，也越来越有价值。',
+        content:
+          '《深度工作》这本书让我重新思考了工作效率的问题。深度工作能力在信息时代变得越来越稀缺，也越来越有价值。',
         category: '学习',
         tags: ['读书', '效率'],
         createdAt: new Date('2024-01-13'),
         updatedAt: new Date('2024-01-13'),
-        isFavorite: true
-      }
+        isFavorite: true,
+      },
     ];
     setNotes(mockNotes);
   }, []);
 
   // 过滤笔记
-  const filteredNotes = notes.filter(note => {
-    const matchesSearch = note.title.toLowerCase().includes(searchText.toLowerCase()) ||
-                         note.content.toLowerCase().includes(searchText.toLowerCase()) ||
-                         note.tags.some(tag => tag.toLowerCase().includes(searchText.toLowerCase()));
-    const matchesCategory = selectedCategory === 'all' || note.category === selectedCategory;
+  const filteredNotes = notes.filter((note) => {
+    const matchesSearch =
+      note.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      note.content.toLowerCase().includes(searchText.toLowerCase()) ||
+      note.tags.some((tag) =>
+        tag.toLowerCase().includes(searchText.toLowerCase()),
+      );
+    const matchesCategory =
+      selectedCategory === 'all' || note.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -136,25 +154,25 @@ const NotesPage: React.FC = () => {
       ...values,
       tags: values.tags || [],
       updatedAt: new Date(),
-      isFavorite: editingNote?.isFavorite || false
+      isFavorite: editingNote?.isFavorite || false,
     };
 
     if (editingNote) {
       // 编辑现有笔记
-      setNotes(prev => prev.map(note => 
-        note.id === editingNote.id 
-          ? { ...note, ...noteData }
-          : note
-      ));
+      setNotes((prev) =>
+        prev.map((note) =>
+          note.id === editingNote.id ? { ...note, ...noteData } : note,
+        ),
+      );
       message.success('笔记更新成功');
     } else {
       // 新建笔记
       const newNote: Note = {
         id: Date.now().toString(),
         createdAt: new Date(),
-        ...noteData
+        ...noteData,
       };
-      setNotes(prev => [newNote, ...prev]);
+      setNotes((prev) => [newNote, ...prev]);
       message.success('笔记创建成功');
     }
 
@@ -172,19 +190,19 @@ const NotesPage: React.FC = () => {
       okType: 'danger',
       cancelText: '取消',
       onOk: () => {
-        setNotes(prev => prev.filter(note => note.id !== noteId));
+        setNotes((prev) => prev.filter((note) => note.id !== noteId));
         message.success('笔记删除成功');
-      }
+      },
     });
   };
 
   // 切换收藏状态
   const toggleFavorite = (noteId: string) => {
-    setNotes(prev => prev.map(note => 
-      note.id === noteId 
-        ? { ...note, isFavorite: !note.isFavorite }
-        : note
-    ));
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === noteId ? { ...note, isFavorite: !note.isFavorite } : note,
+      ),
+    );
   };
 
   // 打开编辑模态框
@@ -195,7 +213,7 @@ const NotesPage: React.FC = () => {
         title: note.title,
         content: note.content,
         category: note.category,
-        tags: note.tags
+        tags: note.tags,
       });
     } else {
       setEditingNote(null);
@@ -211,25 +229,25 @@ const NotesPage: React.FC = () => {
         key: 'edit',
         icon: <EditOutlined />,
         label: '编辑',
-        onClick: () => openEditModal(note)
+        onClick: () => openEditModal(note),
       },
       {
         key: 'favorite',
         icon: note.isFavorite ? <StarFilled /> : <StarOutlined />,
         label: note.isFavorite ? '取消收藏' : '收藏',
-        onClick: () => toggleFavorite(note.id)
+        onClick: () => toggleFavorite(note.id),
       },
       {
-        type: 'divider'
+        type: 'divider',
       },
       {
         key: 'delete',
         icon: <DeleteOutlined />,
         label: '删除',
         danger: true,
-        onClick: () => handleDeleteNote(note.id)
-      }
-    ]
+        onClick: () => handleDeleteNote(note.id),
+      },
+    ],
   });
 
   return (
@@ -246,8 +264,8 @@ const NotesPage: React.FC = () => {
           </Text>
         </div>
         <div className="header-right">
-          <Button 
-            type="primary" 
+          <Button
+            type="primary"
             icon={<PlusOutlined />}
             onClick={() => openEditModal()}
             className="create-button"
@@ -278,17 +296,27 @@ const NotesPage: React.FC = () => {
             >
               全部 ({notes.length})
             </Button>
-            {categories.map(category => {
-              const count = notes.filter(note => note.category === category.name).length;
+            {categories.map((category) => {
+              const count = notes.filter(
+                (note) => note.category === category.name,
+              ).length;
               return (
                 <Button
                   key={category.id}
-                  type={selectedCategory === category.name ? 'primary' : 'default'}
+                  type={
+                    selectedCategory === category.name ? 'primary' : 'default'
+                  }
                   onClick={() => setSelectedCategory(category.name)}
                   className="category-button"
                   style={{
-                    borderColor: selectedCategory === category.name ? category.color : undefined,
-                    backgroundColor: selectedCategory === category.name ? category.color : undefined
+                    borderColor:
+                      selectedCategory === category.name
+                        ? category.color
+                        : undefined,
+                    backgroundColor:
+                      selectedCategory === category.name
+                        ? category.color
+                        : undefined,
                   }}
                 >
                   <FolderOutlined /> {category.name} ({count})
@@ -307,7 +335,11 @@ const NotesPage: React.FC = () => {
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             className="empty-state"
           >
-            <Button type="primary" icon={<PlusOutlined />} onClick={() => openEditModal()}>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => openEditModal()}
+            >
               创建第一条笔记
             </Button>
           </Empty>
@@ -320,7 +352,7 @@ const NotesPage: React.FC = () => {
               md: 2,
               lg: 2,
               xl: 3,
-              xxl: 3
+              xxl: 3,
             }}
             dataSource={filteredNotes}
             renderItem={(note) => (
@@ -328,47 +360,63 @@ const NotesPage: React.FC = () => {
                 <Card
                   className="note-card"
                   actions={[
-                    <Tooltip title="编辑">
+                    <Tooltip title="编辑" key="edit">
                       <EditOutlined onClick={() => openEditModal(note)} />
                     </Tooltip>,
-                    <Tooltip title={note.isFavorite ? '取消收藏' : '收藏'}>
+                    <Tooltip
+                      title={note.isFavorite ? '取消收藏' : '收藏'}
+                      key="favorite"
+                    >
                       {note.isFavorite ? (
-                        <StarFilled 
-                          className="favorite-icon active" 
-                          onClick={() => toggleFavorite(note.id)} 
+                        <StarFilled
+                          className="favorite-icon active"
+                          onClick={() => toggleFavorite(note.id)}
                         />
                       ) : (
-                        <StarOutlined 
-                          className="favorite-icon" 
-                          onClick={() => toggleFavorite(note.id)} 
+                        <StarOutlined
+                          className="favorite-icon"
+                          onClick={() => toggleFavorite(note.id)}
                         />
                       )}
                     </Tooltip>,
-                    <Dropdown menu={getActionMenu(note)} trigger={['click']}>
+                    <Dropdown
+                      menu={getActionMenu(note)}
+                      trigger={['click']}
+                      key="more"
+                    >
                       <MoreOutlined />
-                    </Dropdown>
+                    </Dropdown>,
                   ]}
                 >
                   <div className="note-header">
-                    <Title level={4} className="note-title" ellipsis={{ rows: 1 }}>
+                    <Title
+                      level={4}
+                      className="note-title"
+                      ellipsis={{ rows: 1 }}
+                    >
                       {note.title}
                     </Title>
-                    <Tag color={categories.find(c => c.name === note.category)?.color}>
+                    <Tag
+                      color={
+                        categories.find((c) => c.name === note.category)?.color
+                      }
+                    >
                       {note.category}
                     </Tag>
                   </div>
-                  
-                  <Paragraph 
-                    className="note-content" 
-                    ellipsis={{ rows: 3 }}
-                  >
+
+                  <Paragraph className="note-content" ellipsis={{ rows: 3 }}>
                     {note.content}
                   </Paragraph>
-                  
+
                   <div className="note-footer">
                     <div className="note-tags">
-                      {note.tags.map(tag => (
-                        <Tag key={tag} icon={<TagOutlined />} className="note-tag">
+                      {note.tags.map((tag) => (
+                        <Tag
+                          key={tag}
+                          icon={<TagOutlined />}
+                          className="note-tag"
+                        >
                           {tag}
                         </Tag>
                       ))}
@@ -417,18 +465,16 @@ const NotesPage: React.FC = () => {
             rules={[{ required: true, message: '请选择分类' }]}
           >
             <Select placeholder="选择分类">
-              {categories.map(category => (
+              {categories.map((category) => (
                 <Option key={category.id} value={category.name}>
-                  <FolderOutlined style={{ color: category.color }} /> {category.name}
+                  <FolderOutlined style={{ color: category.color }} />{' '}
+                  {category.name}
                 </Option>
               ))}
             </Select>
           </Form.Item>
 
-          <Form.Item
-            name="tags"
-            label="标签"
-          >
+          <Form.Item name="tags" label="标签">
             <Select
               mode="tags"
               placeholder="添加标签（按回车确认）"
@@ -437,22 +483,24 @@ const NotesPage: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-                 name="content"
-                 label="内容"
-                 rules={[{ required: true, message: '请输入笔记内容' }]}
-               >
-                 <Form.Item name="content" noStyle>
-                   <TiptapEditor />
-                 </Form.Item>
-               </Form.Item>
+            name="content"
+            label="内容"
+            rules={[{ required: true, message: '请输入笔记内容' }]}
+          >
+            <Form.Item name="content" noStyle>
+              <TiptapEditor />
+            </Form.Item>
+          </Form.Item>
 
           <Form.Item className="form-actions">
             <Space>
-              <Button onClick={() => {
-                setIsModalVisible(false);
-                setEditingNote(null);
-                form.resetFields();
-              }}>
+              <Button
+                onClick={() => {
+                  setIsModalVisible(false);
+                  setEditingNote(null);
+                  form.resetFields();
+                }}
+              >
                 取消
               </Button>
               <Button type="primary" htmlType="submit">
@@ -464,6 +512,6 @@ const NotesPage: React.FC = () => {
       </Modal>
     </div>
   );
-};
+}
 
 export default NotesPage;
