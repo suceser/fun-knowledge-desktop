@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { Typography, Input, Button } from 'antd';
-import { SearchOutlined, ApiOutlined, KeyOutlined, DatabaseOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+  SearchOutlined,
+  ApiOutlined,
+  KeyOutlined,
+  DatabaseOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import './ModelSettings.css';
 
 const { Title, Text } = Typography;
 const { Password } = Input;
 
-interface ModelSettingsProps {
-  // 可以添加props用于状态管理
+interface ModelInfo {
+  id: string;
+  name: string;
+  status: 'available' | 'unavailable';
 }
 
 interface ModelProvider {
@@ -20,14 +28,9 @@ interface ModelProvider {
   models?: ModelInfo[];
 }
 
-interface ModelInfo {
-  id: string;
-  name: string;
-  status: 'available' | 'unavailable';
-}
-
-const ModelSettings: React.FC<ModelSettingsProps> = () => {
-  const [selectedProvider, setSelectedProvider] = useState<string>('modelscope');
+function ModelSettings(): React.ReactElement {
+  const [selectedProvider, setSelectedProvider] =
+    useState<string>('modelscope');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // 模拟的模型提供商数据
@@ -41,8 +44,8 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
       apiUrl: 'https://api.cherryin.com/v1/',
       models: [
         { id: 'gpt-4', name: 'GPT-4', status: 'available' },
-        { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', status: 'available' }
-      ]
+        { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', status: 'available' },
+      ],
     },
     {
       id: 'siliconflow',
@@ -53,8 +56,8 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
       apiUrl: 'https://api.siliconflow.cn/v1/',
       models: [
         { id: 'qwen-turbo', name: 'Qwen Turbo', status: 'available' },
-        { id: 'qwen-plus', name: 'Qwen Plus', status: 'available' }
-      ]
+        { id: 'qwen-plus', name: 'Qwen Plus', status: 'available' },
+      ],
     },
     {
       id: 'modelscope',
@@ -64,121 +67,148 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
       apiKey: '••••••••••••••••••••••••••••••••',
       apiUrl: 'https://api-inference.modelscope.cn/v1/',
       models: [
-        { id: 'qwen2.5-72b-instruct', name: 'Qwen/Qwen2.5-72B-Instruct', status: 'available' },
-        { id: 'qwen2.5-vl-72b-instruct', name: 'Qwen/Qwen2.5-VL-72B-Instruct', status: 'available' },
-        { id: 'qwen2.5-coder-32b-instruct', name: 'Qwen/Qwen2.5-Coder-32B-Instruct', status: 'available' },
-        { id: 'deepseek-r1', name: 'deepseek-ai/DeepSeek-R1', status: 'available' },
-        { id: 'deepseek-v3', name: 'deepseek-ai/DeepSeek-V3', status: 'available' }
-      ]
+        {
+          id: 'qwen2.5-72b-instruct',
+          name: 'Qwen/Qwen2.5-72B-Instruct',
+          status: 'available',
+        },
+        {
+          id: 'qwen2.5-vl-72b-instruct',
+          name: 'Qwen/Qwen2.5-VL-72B-Instruct',
+          status: 'available',
+        },
+        {
+          id: 'qwen2.5-coder-32b-instruct',
+          name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
+          status: 'available',
+        },
+        {
+          id: 'deepseek-r1',
+          name: 'deepseek-ai/DeepSeek-R1',
+          status: 'available',
+        },
+        {
+          id: 'deepseek-v3',
+          name: 'deepseek-ai/DeepSeek-V3',
+          status: 'available',
+        },
+      ],
     },
     {
       id: 'openrouter',
       name: 'OpenRouter',
       icon: 'openrouter',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'o3',
       name: 'O3',
       icon: 'o3',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'aihubmix',
       name: 'AiHubMix',
       icon: 'aihubmix',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'deepseek',
       name: '深度求索',
       icon: 'deepseek',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'ollama',
       name: 'Ollama',
       icon: 'ollama',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'anthropic',
       name: 'Anthropic',
       icon: 'anthropic',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'openai',
       name: 'OpenAI',
       icon: 'openai',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'azure',
       name: 'Azure OpenAI',
       icon: 'azure',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'ppio',
       name: 'PPIO 派盘云',
       icon: 'ppio',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'burncloud',
       name: 'BurnCloud',
       icon: 'burncloud',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'cephalon',
       name: 'Cephalon',
       icon: 'cephalon',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'phb',
       name: 'PHB 大模型开放平台',
       icon: 'phb',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'ai302',
       name: '302.AI',
       icon: 'ai302',
-      status: 'off'
+      status: 'off',
     },
     {
       id: 'newapi',
       name: 'New API',
       icon: 'newapi',
-      status: 'off'
-    }
+      status: 'off',
+    },
   ];
 
   // 过滤提供商
-  const filteredProviders = modelProviders.filter(provider =>
-    provider.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProviders = modelProviders.filter((provider) =>
+    provider.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // 获取当前选中的提供商
-  const currentProvider = modelProviders.find(p => p.id === selectedProvider);
+  const currentProvider = modelProviders.find((p) => p.id === selectedProvider);
 
   const handleProviderSelect = (providerId: string) => {
     setSelectedProvider(providerId);
   };
 
   const handleTest = () => {
-    console.log('测试连接');
+    // TODO: 实现测试连接功能
   };
 
   const handleManage = () => {
-    console.log('管理模型');
+    // TODO: 实现管理模型功能
   };
 
   const handleAdd = () => {
-    console.log('添加模型');
+    // TODO: 实现添加模型功能
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent, providerId: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleProviderSelect(providerId);
+    }
   };
 
   const renderProviderIcon = (icon: string) => {
@@ -199,7 +229,7 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
       cephalon: '🧠',
       phb: '🏢',
       ai302: '🎯',
-      newapi: '🆕'
+      newapi: '🆕',
     };
     return iconMap[icon] || '🤖';
   };
@@ -212,11 +242,13 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
           <Title level={5} className="providers-title">
             搜索模型平台
           </Title>
-          
+
           <div className="provider-search">
             <Input
               placeholder="搜索模型平台..."
-              prefix={<SearchOutlined style={{ color: 'rgba(255, 255, 255, 0.5)' }} />}
+              prefix={
+                <SearchOutlined style={{ color: 'rgba(255, 255, 255, 0.5)' }} />
+              }
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -226,8 +258,13 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
             {filteredProviders.map((provider) => (
               <div
                 key={provider.id}
-                className={`provider-item ${selectedProvider === provider.id ? 'active' : ''}`}
+                className={`provider-item ${
+                  selectedProvider === provider.id ? 'active' : ''
+                }`}
                 onClick={() => handleProviderSelect(provider.id)}
+                onKeyDown={(e) => handleKeyDown(e, provider.id)}
+                role="button"
+                tabIndex={0}
               >
                 <div className={`provider-icon ${provider.icon}`}>
                   {renderProviderIcon(provider.icon)}
@@ -236,7 +273,7 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
                   <div className="provider-name">{provider.name}</div>
                 </div>
                 <div className="provider-status">
-                  <div className={`status-indicator ${provider.status}`}></div>
+                  <div className={`status-indicator ${provider.status}`} />
                   <span className={`status-text ${provider.status}`}>
                     {provider.status.toUpperCase()}
                   </span>
@@ -275,7 +312,7 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
                     <KeyOutlined />
                     API 密钥
                   </Title>
-                  
+
                   <div className="form-item">
                     <Text className="form-label">API Key</Text>
                     <div className="password-input">
@@ -286,8 +323,14 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
                       />
                     </div>
                   </div>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      marginTop: '0.5rem',
+                    }}
+                  >
                     <Button className="test-btn" onClick={handleTest}>
                       检测
                     </Button>
@@ -300,7 +343,7 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
                     <ApiOutlined />
                     API 地址
                   </Title>
-                  
+
                   <div className="form-item">
                     <Text className="form-label">Base URL</Text>
                     <div className="form-input">
@@ -310,56 +353,73 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
                       />
                     </div>
                   </div>
-                  
-                  <Text style={{ 
-                    color: 'rgba(255, 255, 255, 0.6)', 
-                    fontSize: '0.8rem',
-                    display: 'block',
-                    marginTop: '0.5rem'
-                  }}>
-                    {currentProvider.apiUrl} 结束配置时请确保以 / 结尾，否则可能导致请求失败
+
+                  <Text
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      fontSize: '0.8rem',
+                      display: 'block',
+                      marginTop: '0.5rem',
+                    }}
+                  >
+                    {currentProvider.apiUrl} 结束配置时请确保以 /
+                    结尾，否则可能导致请求失败
                   </Text>
                 </div>
 
                 {/* 模型列表 */}
-                {currentProvider.models && currentProvider.models.length > 0 && (
-                  <div className="config-section models-section">
-                    <Title level={5} className="section-title">
-                      <DatabaseOutlined />
-                      模型
-                    </Title>
-                    
-                    <div className="models-grid">
-                      {currentProvider.models.map((model) => (
-                        <div key={model.id} className="model-item">
-                          <div className="model-name">
-                            {model.name}
+                {currentProvider.models &&
+                  currentProvider.models.length > 0 && (
+                    <div className="config-section models-section">
+                      <Title level={5} className="section-title">
+                        <DatabaseOutlined />
+                        模型
+                      </Title>
+
+                      <div className="models-grid">
+                        {currentProvider.models.map((model) => (
+                          <div key={model.id} className="model-item">
+                            <div className="model-name">{model.name}</div>
+                            <div className="model-status">
+                              <div
+                                className={`status-indicator ${
+                                  model.status === 'available' ? 'on' : 'off'
+                                }`}
+                              />
+                              <span
+                                className={`status-text ${
+                                  model.status === 'available' ? 'on' : 'off'
+                                }`}
+                              >
+                                {model.status === 'available'
+                                  ? '可用'
+                                  : '不可用'}
+                              </span>
+                            </div>
                           </div>
-                          <div className="model-status">
-                            <div className={`status-indicator ${model.status === 'available' ? 'on' : 'off'}`}></div>
-                            <span className={`status-text ${model.status === 'available' ? 'on' : 'off'}`}>
-                              {model.status === 'available' ? '可用' : '不可用'}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+
+                      <Text
+                        style={{
+                          color: 'rgba(255, 255, 255, 0.6)',
+                          fontSize: '0.8rem',
+                          display: 'block',
+                          marginTop: '1rem',
+                        }}
+                      >
+                        备有 ModelScope 魔搭 又名 模型 优化更新详情
+                      </Text>
                     </div>
-                    
-                    <Text style={{ 
-                      color: 'rgba(255, 255, 255, 0.6)', 
-                      fontSize: '0.8rem',
-                      display: 'block',
-                      marginTop: '1rem'
-                    }}>
-                      备有 ModelScope 魔搭 又名 模型 优化更新详情
-                    </Text>
-                  </div>
-                )}
+                  )}
               </div>
 
               {/* 操作按钮 */}
               <div className="config-actions">
-                <Button className="action-btn manage-btn" onClick={handleManage}>
+                <Button
+                  className="action-btn manage-btn"
+                  onClick={handleManage}
+                >
                   管理
                 </Button>
                 <Button className="action-btn add-btn" onClick={handleAdd}>
@@ -368,12 +428,16 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
               </div>
             </>
           ) : (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '3rem 2rem',
-              color: 'rgba(255, 255, 255, 0.6)'
-            }}>
-              <SettingOutlined style={{ fontSize: '3rem', marginBottom: '1rem' }} />
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '3rem 2rem',
+                color: 'rgba(255, 255, 255, 0.6)',
+              }}
+            >
+              <SettingOutlined
+                style={{ fontSize: '3rem', marginBottom: '1rem' }}
+              />
               <Title level={4} style={{ color: '#ffffff' }}>
                 请选择模型提供商
               </Title>
@@ -386,6 +450,6 @@ const ModelSettings: React.FC<ModelSettingsProps> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ModelSettings;

@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import { Card, Switch, Select, Typography, Input, Button, Space, Upload, List, Progress, Tag, message } from 'antd';
-import { 
-  FileTextOutlined, 
-  UploadOutlined, 
-  DeleteOutlined, 
-  EyeOutlined, 
+import {
+  Card,
+  Select,
+  Typography,
+  Input,
+  Button,
+  Space,
+  Upload,
+  List,
+  Progress,
+  Tag,
+  message,
+} from 'antd';
+import {
+  FileTextOutlined,
+  DeleteOutlined,
+  EyeOutlined,
   DownloadOutlined,
   CloudOutlined,
   SettingOutlined,
   InboxOutlined,
   CheckCircleOutlined,
   LoadingOutlined,
-  ExclamationCircleOutlined
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import './DocumentSettings.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 const { Dragger } = Upload;
-
-interface DocumentSettingsProps {
-  // 可以添加props用于状态管理
-}
 
 interface DocumentItem {
   id: string;
@@ -32,12 +39,10 @@ interface DocumentItem {
   type: string;
 }
 
-const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
+function DocumentSettings(): React.ReactElement {
   // 状态管理
   const [ocrProvider, setOcrProvider] = useState('系统OCR');
-  const [apiKey, setApiKey] = useState('');
   const [apiUrl, setApiUrl] = useState('https://mineru.net');
-  const [autoOcr, setAutoOcr] = useState(true);
   const [documents, setDocuments] = useState<DocumentItem[]>([
     {
       id: '1',
@@ -45,25 +50,21 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
       size: '2.5MB',
       status: 'completed',
       progress: 100,
-      type: 'PDF'
+      type: 'PDF',
     },
     {
-      id: '2', 
+      id: '2',
       name: 'research_paper.docx',
       size: '1.8MB',
       status: 'processing',
       progress: 65,
-      type: 'DOCX'
-    }
+      type: 'DOCX',
+    },
   ]);
 
   const handleOcrProviderChange = (value: string) => {
     setOcrProvider(value);
     message.success('OCR服务提供商已更新');
-  };
-
-  const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setApiKey(e.target.value);
   };
 
   const handleApiUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,16 +82,16 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
         size: `${(info.file.size / 1024 / 1024).toFixed(1)}MB`,
         status: 'processing',
         progress: 0,
-        type: info.file.name.split('.').pop()?.toUpperCase() || 'UNKNOWN'
+        type: info.file.name.split('.').pop()?.toUpperCase() || 'UNKNOWN',
       };
-      setDocuments(prev => [newDoc, ...prev]);
+      setDocuments((prev) => [newDoc, ...prev]);
     } else if (status === 'error') {
       message.error(`${info.file.name} 文件上传失败`);
     }
   };
 
   const handleDeleteDocument = (id: string) => {
-    setDocuments(prev => prev.filter(doc => doc.id !== id));
+    setDocuments((prev) => prev.filter((doc) => doc.id !== id));
     message.success('文档已删除');
   };
 
@@ -131,7 +132,7 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
 
       <div className="settings-sections">
         {/* OCR服务配置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -144,7 +145,9 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>OCR服务提供商</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    OCR服务提供商
+                  </Text>
                 </div>
                 <Select
                   value={ocrProvider}
@@ -160,7 +163,9 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>支持的语言</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    支持的语言
+                  </Text>
                 </div>
                 <Tag color="#38b2ac">MacOS无需配置</Tag>
               </div>
@@ -169,11 +174,13 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
         </Card>
 
         {/* 文档处理配置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <SettingOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <SettingOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               文档处理
             </span>
           }
@@ -182,12 +189,11 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>文档处理服务商</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    文档处理服务商
+                  </Text>
                 </div>
-                <Select
-                  value="MinerU"
-                  style={{ minWidth: '120px' }}
-                >
+                <Select value="MinerU" style={{ minWidth: '120px' }}>
                   <Option value="MinerU">MinerU</Option>
                 </Select>
               </div>
@@ -195,15 +201,31 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
 
             <div className="setting-item">
               <div className="setting-content">
-                <div className="setting-info" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <Text style={{ color: '#ffffff', fontSize: '14px', marginBottom: '4px' }}>API密钥</Text>
-                  <Text style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
+                <div
+                  className="setting-info"
+                  style={{ flexDirection: 'column', alignItems: 'flex-start' }}
+                >
+                  <Text
+                    style={{
+                      color: '#ffffff',
+                      fontSize: '14px',
+                      marginBottom: '4px',
+                    }}
+                  >
+                    API密钥
+                  </Text>
+                  <Text
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      fontSize: '12px',
+                    }}
+                  >
                     MinerU现在提供每日500次的免费额度，您无需提供API密钥。
                   </Text>
                 </div>
-                <Button 
-                  type="link" 
-                  size="small" 
+                <Button
+                  type="link"
+                  size="small"
                   style={{ color: '#38b2ac', padding: 0 }}
                   onClick={() => window.open('https://mineru.net', '_blank')}
                 >
@@ -215,7 +237,9 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>API地址</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    API地址
+                  </Text>
                 </div>
                 <Input
                   value={apiUrl}
@@ -229,7 +253,7 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
         </Card>
 
         {/* 图片上传区域 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -265,28 +289,28 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
                 renderItem={(item) => (
                   <List.Item
                     actions={[
-                      <Button 
+                      <Button
                         key="view"
-                        type="text" 
-                        icon={<EyeOutlined />} 
+                        type="text"
+                        icon={<EyeOutlined />}
                         size="small"
                         style={{ color: '#38b2ac' }}
                       />,
-                      <Button 
+                      <Button
                         key="download"
-                        type="text" 
-                        icon={<DownloadOutlined />} 
+                        type="text"
+                        icon={<DownloadOutlined />}
                         size="small"
                         style={{ color: '#38b2ac' }}
                       />,
-                      <Button 
+                      <Button
                         key="delete"
-                        type="text" 
-                        icon={<DeleteOutlined />} 
+                        type="text"
+                        icon={<DeleteOutlined />}
                         size="small"
                         danger
                         onClick={() => handleDeleteDocument(item.id)}
-                      />
+                      />,
                     ]}
                   >
                     <List.Item.Meta
@@ -294,19 +318,36 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
                       title={item.name}
                       description={
                         <div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                              marginBottom: '4px',
+                            }}
+                          >
                             <Tag>{item.type}</Tag>
-                            <Text style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
+                            <Text
+                              style={{
+                                color: 'rgba(255, 255, 255, 0.6)',
+                                fontSize: '12px',
+                              }}
+                            >
                               {item.size}
                             </Text>
-                            <Text style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px' }}>
+                            <Text
+                              style={{
+                                color: 'rgba(255, 255, 255, 0.6)',
+                                fontSize: '12px',
+                              }}
+                            >
                               {getStatusText(item.status)}
                             </Text>
                           </div>
                           {item.status === 'processing' && (
-                            <Progress 
-                              percent={item.progress} 
-                              size="small" 
+                            <Progress
+                              percent={item.progress}
+                              size="small"
                               showInfo={false}
                             />
                           )}
@@ -322,6 +363,6 @@ const DocumentSettings: React.FC<DocumentSettingsProps> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default DocumentSettings;

@@ -1,33 +1,23 @@
 import React, { useState } from 'react';
-import { Card, Switch, Select, Typography, Divider, Space, Button, message } from 'antd';
-import { 
-  SettingOutlined, 
-  GlobalOutlined, 
-  ThunderboltOutlined,
+import { Card, Switch, Select, Typography, Space, message } from 'antd';
+import {
+  GlobalOutlined,
   BellOutlined,
-  MessageOutlined,
-  CloudUploadOutlined,
-  DatabaseOutlined,
   RocketOutlined,
   AppstoreOutlined,
-  InfoCircleOutlined
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 import './GeneralSettings.css';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { Option } = Select;
 
-interface GeneralSettingsProps {
-  // 可以添加props用于状态管理
-}
-
-const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
+function GeneralSettings(): React.ReactElement {
   // 状态管理
   const [language, setLanguage] = useState('zh-CN');
   const [proxyMode, setProxyMode] = useState('system');
   const [spellCheck, setSpellCheck] = useState(true);
   const [hardwareAcceleration, setHardwareAcceleration] = useState(true);
-  const [notifications, setNotifications] = useState(true);
   const [assistantMessages, setAssistantMessages] = useState(true);
   const [backup, setBackup] = useState(true);
   const [knowledgeBase, setKnowledgeBase] = useState(true);
@@ -35,6 +25,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
   const [minimizeToTray, setMinimizeToTray] = useState(true);
   const [showTrayIcon, setShowTrayIcon] = useState(true);
   const [closeToTray, setCloseToTray] = useState(true);
+  const [anonymousReporting, setAnonymousReporting] = useState(true);
 
   const handleLanguageChange = (value: string) => {
     setLanguage(value);
@@ -57,11 +48,13 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
 
       <div className="settings-sections">
         {/* 常规设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <GlobalOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <GlobalOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               常规设置
             </span>
           }
@@ -85,7 +78,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
 
             <div className="setting-item">
               <div className="setting-label">
-                <Text style={{ color: '#ffffff', fontSize: '14px' }}>代理模式</Text>
+                <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                  代理模式
+                </Text>
               </div>
               <Select
                 value={proxyMode}
@@ -102,7 +97,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>拼写检查</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    拼写检查
+                  </Text>
                 </div>
                 <Switch
                   checked={spellCheck}
@@ -115,7 +112,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>禁用硬件加速</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    禁用硬件加速
+                  </Text>
                 </div>
                 <Switch
                   checked={!hardwareAcceleration}
@@ -128,7 +127,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
         </Card>
 
         {/* 通知设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -141,8 +140,16 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>助手消息</Text>
-                  <InfoCircleOutlined style={{ marginLeft: '4px', color: '#38b2ac', fontSize: '12px' }} />
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    助手消息
+                  </Text>
+                  <InfoCircleOutlined
+                    style={{
+                      marginLeft: '4px',
+                      color: '#38b2ac',
+                      fontSize: '12px',
+                    }}
+                  />
                 </div>
                 <Switch
                   checked={assistantMessages}
@@ -155,20 +162,20 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>备份</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    备份
+                  </Text>
                 </div>
-                <Switch
-                  checked={backup}
-                  onChange={setBackup}
-                  size="small"
-                />
+                <Switch checked={backup} onChange={setBackup} size="small" />
               </div>
             </div>
 
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>知识库</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    知识库
+                  </Text>
                 </div>
                 <Switch
                   checked={knowledgeBase}
@@ -181,11 +188,13 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
         </Card>
 
         {/* 启动 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <RocketOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <RocketOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               启动
             </span>
           }
@@ -194,7 +203,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>开机自动启动</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    开机自动启动
+                  </Text>
                 </div>
                 <Switch
                   checked={autoStart}
@@ -207,7 +218,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>启动时最小化到托盘</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    启动时最小化到托盘
+                  </Text>
                 </div>
                 <Switch
                   checked={minimizeToTray}
@@ -220,11 +233,13 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
         </Card>
 
         {/* 托盘 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <AppstoreOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <AppstoreOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               托盘
             </span>
           }
@@ -233,7 +248,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>显示托盘图标</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    显示托盘图标
+                  </Text>
                 </div>
                 <Switch
                   checked={showTrayIcon}
@@ -246,7 +263,9 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>关闭时最小化到托盘</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    关闭时最小化到托盘
+                  </Text>
                 </div>
                 <Switch
                   checked={closeToTray}
@@ -259,11 +278,13 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
         </Card>
 
         {/* 隐私设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <InfoCircleOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <InfoCircleOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               隐私设置
             </span>
           }
@@ -272,10 +293,13 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>匿名发送错误报告和数据统计</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    匿名发送错误报告和数据统计
+                  </Text>
                 </div>
                 <Switch
-                  checked={true}
+                  checked={anonymousReporting}
+                  onChange={setAnonymousReporting}
                   size="small"
                 />
               </div>
@@ -285,6 +309,6 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default GeneralSettings;

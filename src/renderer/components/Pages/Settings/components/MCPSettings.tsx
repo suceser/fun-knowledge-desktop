@@ -1,13 +1,14 @@
 import React from 'react';
 import { Card, Typography, Button } from 'antd';
-import { ApiOutlined, PlusOutlined, LinkOutlined, AppstoreOutlined } from '@ant-design/icons';
+import {
+  ApiOutlined,
+  PlusOutlined,
+  LinkOutlined,
+  AppstoreOutlined,
+} from '@ant-design/icons';
 import './MCPSettings.css';
 
 const { Title, Text } = Typography;
-
-interface MCPSettingsProps {
-  // 可以添加props用于状态管理
-}
 
 interface MCPServer {
   id: string;
@@ -17,7 +18,7 @@ interface MCPServer {
   url?: string;
 }
 
-const MCPSettings: React.FC<MCPSettingsProps> = () => {
+function MCPSettings(): React.ReactElement {
   // 模拟的更多MCP服务器数据
   const moreMCPServers: MCPServer[] = [
     {
@@ -25,82 +26,82 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
       name: 'BigModel MCP Market',
       description: '精选MCP，极速接入',
       icon: 'bigmodel',
-      url: 'https://bigmodel.cn'
+      url: 'https://bigmodel.cn',
     },
     {
       id: 'modelscope',
       name: 'modelscope.cn',
       description: '魔搭社区 MCP 服务器',
       icon: 'modelscope',
-      url: 'https://modelscope.cn'
+      url: 'https://modelscope.cn',
     },
     {
       id: 'higress',
       name: 'mcp.higress.ai',
       description: 'Higress MCP 服务器',
       icon: 'higress',
-      url: 'https://higress.ai'
+      url: 'https://higress.ai',
     },
     {
       id: 'mcpso',
       name: 'mcp.so',
       description: 'MCP 服务器发现平台',
       icon: 'mcpso',
-      url: 'https://mcp.so'
+      url: 'https://mcp.so',
     },
     {
       id: 'smithery',
       name: 'smithery.ai',
       description: 'Smithery MCP 工具',
       icon: 'smithery',
-      url: 'https://smithery.ai'
+      url: 'https://smithery.ai',
     },
     {
       id: 'glama',
       name: 'glama.ai',
       description: 'Glama MCP 服务器目录',
       icon: 'glama',
-      url: 'https://glama.ai'
+      url: 'https://glama.ai',
     },
     {
       id: 'pulsemcp',
       name: 'pulsemcp.com',
       description: 'Pulse MCP 服务器',
       icon: 'pulsemcp',
-      url: 'https://pulsemcp.com'
+      url: 'https://pulsemcp.com',
     },
     {
       id: 'composio',
       name: 'mcp.composio.dev',
       description: 'Composio MCP 开发工具',
       icon: 'composio',
-      url: 'https://composio.dev'
+      url: 'https://composio.dev',
     },
     {
       id: 'mcpservers',
       name: 'Model Context Protocol Servers',
       description: '官方 MCP 服务器集合',
       icon: 'mcpservers',
-      url: 'https://github.com/modelcontextprotocol/servers'
+      url: 'https://github.com/modelcontextprotocol/servers',
     },
     {
       id: 'awesome',
       name: 'Awesome MCP Servers',
       description: '精选的 MCP 服务器列表',
       icon: 'awesome',
-      url: 'https://github.com/punkpeye/awesome-mcp-servers'
-    }
+      url: 'https://github.com/punkpeye/awesome-mcp-servers',
+    },
   ];
 
   const handleAddServer = () => {
     // 处理添加服务器逻辑
-    console.log('添加MCP服务器');
+    // TODO: 实现添加MCP服务器功能
   };
 
   const handleOpenExternal = (url?: string) => {
     if (url) {
       // 处理打开外部链接逻辑
-      console.log('打开外部链接:', url);
+      window.open(url, '_blank');
     }
   };
 
@@ -112,9 +113,7 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
           <ApiOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
           MCP 服务器
         </Title>
-        <Text className="mcp-subtitle">
-          未配置服务器
-        </Text>
+        <Text className="mcp-subtitle">未配置服务器</Text>
       </div>
 
       {/* 空状态 */}
@@ -131,10 +130,7 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
       </div>
 
       {/* 添加服务器按钮 */}
-      <Button 
-        className="add-server-btn"
-        onClick={handleAddServer}
-      >
+      <Button className="add-server-btn" onClick={handleAddServer}>
         <PlusOutlined />
         添加
       </Button>
@@ -145,10 +141,10 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
           <AppstoreOutlined />
           更多 MCP
         </Title>
-        
+
         <div className="more-mcp-grid">
           {moreMCPServers.map((server) => (
-            <Card 
+            <Card
               key={server.id}
               className="more-mcp-card"
               onClick={() => handleOpenExternal(server.url)}
@@ -166,10 +162,8 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
                   {server.icon === 'mcpservers' && '📋'}
                   {server.icon === 'awesome' && '⭐'}
                 </div>
-                <Text className="more-mcp-name">
-                  {server.name}
-                </Text>
-                <LinkOutlined 
+                <Text className="more-mcp-name">{server.name}</Text>
+                <LinkOutlined
                   className="external-link"
                   onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
@@ -177,15 +171,13 @@ const MCPSettings: React.FC<MCPSettingsProps> = () => {
                   }}
                 />
               </div>
-              <Text className="more-mcp-description">
-                {server.description}
-              </Text>
+              <Text className="more-mcp-description">{server.description}</Text>
             </Card>
           ))}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default MCPSettings;

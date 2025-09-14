@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import { Typography, Button, Switch, Select, Input } from 'antd';
-import { BulbOutlined, PlusOutlined, SearchOutlined, MoreOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  BulbOutlined,
+  PlusOutlined,
+  SearchOutlined,
+  MoreOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import './MemorySettings.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-interface MemorySettingsProps {
-  // 可以添加props用于状态管理
-}
-
-const MemorySettings: React.FC<MemorySettingsProps> = () => {
+function MemorySettings(): React.ReactElement {
   const [userManagementEnabled, setUserManagementEnabled] = useState(true);
   const [selectedUser, setSelectedUser] = useState('default');
   const [searchTerm, setSearchTerm] = useState('');
 
   // 模拟用户数据
-  const users = [
-    { id: 'default', name: '默认用户', memoryCount: 0 }
-  ];
+  const users = [{ id: 'default', name: '默认用户', memoryCount: 0 }];
 
   const handleUserChange = (userId: string) => {
     setSelectedUser(userId);
   };
 
   const handleAddMemory = () => {
-    console.log('添加记忆');
+    // TODO: 实现添加记忆功能
   };
 
   const handleMoreActions = () => {
-    console.log('更多操作');
+    // TODO: 实现更多操作功能
   };
 
-  const currentUser = users.find(u => u.id === selectedUser);
+  const currentUser = users.find((u) => u.id === selectedUser);
 
   return (
     <div className="settings-content-section">
@@ -56,16 +56,12 @@ const MemorySettings: React.FC<MemorySettingsProps> = () => {
               <div className="user-info-row">
                 <Text className="user-info-label">用户 ID</Text>
                 <div className="user-info-content">
-                  <div className="user-id-display">
-                    0 条记忆
-                  </div>
-                  <Button 
-                    size="small" 
+                  <div className="user-id-display">0 条记忆</div>
+                  <Button
+                    size="small"
                     icon={<UserOutlined />}
                     className="user-action-btn"
-                  >
-                    
-                  </Button>
+                  />
                 </div>
               </div>
 
@@ -77,9 +73,11 @@ const MemorySettings: React.FC<MemorySettingsProps> = () => {
                     value={selectedUser}
                     onChange={handleUserChange}
                     className="user-select"
-                    suffixIcon={<UserOutlined style={{ color: 'var(--color-primary)' }} />}
+                    suffixIcon={
+                      <UserOutlined style={{ color: 'var(--color-primary)' }} />
+                    }
                   >
-                    {users.map(user => (
+                    {users.map((user) => (
                       <Option key={user.id} value={user.id}>
                         {user.name}
                       </Option>
@@ -102,7 +100,7 @@ const MemorySettings: React.FC<MemorySettingsProps> = () => {
             <Title level={5} className="global-memory-title">
               全局记忆
             </Title>
-            
+
             <div className="global-memory-actions">
               <Input
                 placeholder="搜索记忆..."
@@ -152,6 +150,6 @@ const MemorySettings: React.FC<MemorySettingsProps> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default MemorySettings;

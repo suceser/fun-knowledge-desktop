@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
-import { Card, Switch, Select, Button, Typography, Divider, Space, Progress, message, Modal } from 'antd';
-import { 
-  DatabaseOutlined, 
-  FolderOpenOutlined, 
-  CloudUploadOutlined, 
+import { Card, Button, Typography, Space, message, Modal } from 'antd';
+import {
+  FolderOpenOutlined,
   DeleteOutlined,
   SaveOutlined,
   ReloadOutlined,
   SettingOutlined,
-  FileTextOutlined,
-  FolderOutlined,
   ClearOutlined,
-  ExclamationCircleOutlined
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import './DataSettings.css';
 
-const { Title, Text } = Typography;
-const { Option } = Select;
+const { Text } = Typography;
 const { confirm } = Modal;
 
-interface DataSettingsProps {
-  // 可以添加props用于状态管理
-}
-
-const DataSettings: React.FC<DataSettingsProps> = () => {
-  const [smartBackupEnabled, setSmartBackupEnabled] = useState(true);
+function DataSettings(): React.ReactElement {
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
@@ -33,9 +23,11 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
     setIsBackingUp(true);
     try {
       // 模拟备份过程
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 2000);
+      });
       message.success('数据备份完成');
-    } catch (error) {
+    } catch {
       message.error('备份失败，请重试');
     } finally {
       setIsBackingUp(false);
@@ -47,9 +39,11 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
     setIsRestoring(true);
     try {
       // 模拟恢复过程
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 2000);
+      });
       message.success('数据恢复完成');
-    } catch (error) {
+    } catch {
       message.error('恢复失败，请重试');
     } finally {
       setIsRestoring(false);
@@ -66,21 +60,6 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
   const handleOpenDirectory = (type: string) => {
     message.info(`正在打开${type}目录...`);
     // 这里可以调用electron的shell.openPath
-  };
-
-  // 处理删除文件
-  const handleDeleteFiles = (type: string) => {
-    confirm({
-      title: `确认删除${type}？`,
-      icon: <ExclamationCircleOutlined />,
-      content: '此操作不可恢复，请谨慎操作。',
-      okText: '确认删除',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk() {
-        message.success(`${type}已删除`);
-      },
-    });
   };
 
   // 处理清除缓存
@@ -114,17 +93,18 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
 
   return (
     <div className="settings-content-section data-settings-container">
-       {/* <Title level={3} className="data-settings-title">
+      {/* <Title level={3} className="data-settings-title">
          <DatabaseOutlined className="data-settings-title-icon" />
          数据设置
        </Title> */}
 
-       {/* 数据备份与恢复 */}
-       <Card 
-         title="数据备份与恢复" 
-         className="data-settings-card"
-       >
-        <Space direction="vertical" size="large" className="data-settings-space-vertical">
+      {/* 数据备份与恢复 */}
+      <Card title="数据备份与恢复" className="data-settings-card">
+        <Space
+          direction="vertical"
+          size="large"
+          className="data-settings-space-vertical"
+        >
           <div className="data-settings-row">
             <Space>
               <SaveOutlined className="data-settings-icon" />
@@ -132,8 +112,8 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
                 <Text className="data-settings-text">备份数据到本地文件</Text>
               </div>
             </Space>
-            <Button 
-              type="primary" 
+            <Button
+              type="primary"
               loading={isBackingUp}
               onClick={handleBackup}
               className="data-settings-btn-primary"
@@ -141,7 +121,7 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
               {isBackingUp ? '备份中...' : '备份'}
             </Button>
           </div>
-          
+
           <div className="data-settings-row">
             <Space>
               <ReloadOutlined className="data-settings-icon" />
@@ -149,7 +129,7 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
                 <Text className="data-settings-text">从备份文件恢复数据</Text>
               </div>
             </Space>
-            <Button 
+            <Button
               loading={isRestoring}
               onClick={handleRestore}
               className="data-settings-btn-secondary"
@@ -185,11 +165,12 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
       </Card> */}
 
       {/* 数据目录 */}
-       <Card 
-         title="数据目录" 
-         className="data-settings-card"
-       >
-         <Space direction="vertical" size="middle" className="data-settings-space-middle">
+      <Card title="数据目录" className="data-settings-card">
+        <Space
+          direction="vertical"
+          size="middle"
+          className="data-settings-space-middle"
+        >
           {/* 应用数据 */}
           <div className="data-settings-directory-item data-settings-row">
             <div className="data-settings-directory-info">
@@ -199,8 +180,8 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
               </Text>
             </div>
             <Space>
-              <Button 
-                size="small" 
+              <Button
+                size="small"
                 icon={<SettingOutlined />}
                 onClick={() => handleModifyDirectory('应用数据')}
                 className="data-settings-btn-small"
@@ -219,8 +200,8 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
               </Text>
             </div>
             <Space>
-              <Button 
-                size="small" 
+              <Button
+                size="small"
                 icon={<FolderOpenOutlined />}
                 onClick={() => handleOpenDirectory('应用日志')}
                 className="data-settings-btn-small"
@@ -249,8 +230,8 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
               <Text className="data-settings-text">清除缓存</Text>
               <Text className="data-settings-cache-size">(1.87MB)</Text>
             </div>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               icon={<ClearOutlined />}
               onClick={handleClearCache}
               className="data-settings-btn-small"
@@ -262,8 +243,8 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
           {/* 重置数据 */}
           <div className="data-settings-directory-item data-settings-row">
             <Text className="data-settings-text">重置数据</Text>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               icon={<DeleteOutlined />}
               onClick={handleResetData}
               className="data-settings-btn-danger"
@@ -276,6 +257,6 @@ const DataSettings: React.FC<DataSettingsProps> = () => {
       </Card>
     </div>
   );
-};
+}
 
 export default DataSettings;

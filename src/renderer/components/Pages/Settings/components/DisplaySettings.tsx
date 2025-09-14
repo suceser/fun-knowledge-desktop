@@ -1,44 +1,44 @@
 import React, { useState } from 'react';
-import { Card, Switch, Select, Typography, Space, Slider, Button } from 'antd';
-import { 
+import { Card, Switch, Typography, Space, Button } from 'antd';
+import {
   BgColorsOutlined,
   EyeOutlined,
   MenuOutlined,
   ZoomInOutlined,
   MessageOutlined,
   RobotOutlined,
-  SettingOutlined
 } from '@ant-design/icons';
 import './DisplaySettings.css';
 
-const { Title, Text } = Typography;
-const { Option } = Select;
+const { Text } = Typography;
 
-interface DisplaySettingsProps {
-  // 可以添加props用于状态管理
-}
-
-const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
+function DisplaySettings(): React.ReactElement {
   // 状态管理
   const [theme, setTheme] = useState('深色');
   const [themeColor, setThemeColor] = useState('#00B96B');
   const [transparentWindow, setTransparentWindow] = useState(true);
-  const [navbarSettings, setNavbarSettings] = useState('New');
   const [navbarPosition, setNavbarPosition] = useState('左侧');
   const [zoomLevel, setZoomLevel] = useState(100);
-  const [topicSettings, setTopicSettings] = useState(true);
   const [topicPosition, setTopicPosition] = useState('左侧');
   const [autoSwitchTopic, setAutoSwitchTopic] = useState(false);
   const [showTopicTime, setShowTopicTime] = useState(true);
   const [pinTopicTop, setPinTopicTop] = useState(false);
-  const [assistantSettings, setAssistantSettings] = useState(true);
   const [modelIconType, setModelIconType] = useState('模型图标');
 
   // 主题颜色选项
   const themeColors = [
-    '#00B96B', '#FF4D4F', '#00B2A9', '#722ED1', 
-    '#9254DE', '#EB2F96', '#1677FF', '#FA8C16', 
-    '#9254DE', '#13C2C2', '#1890FF', '#00B96B'
+    '#00B96B',
+    '#FF4D4F',
+    '#00B2A9',
+    '#722ED1',
+    '#9254DE',
+    '#EB2F96',
+    '#1677FF',
+    '#FA8C16',
+    '#9254DE',
+    '#13C2C2',
+    '#1890FF',
+    '#00B96B',
   ];
 
   const handleThemeChange = (value: string) => {
@@ -69,11 +69,22 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
     setZoomLevel(100);
   };
 
+  const handleColorClick = (color: string) => {
+    handleThemeColorChange(color);
+  };
+
+  const handleColorKeyDown = (event: React.KeyboardEvent, color: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleThemeColorChange(color);
+    }
+  };
+
   return (
     <div className="display-settings">
       <div className="settings-sections">
         {/* 显示设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -88,20 +99,20 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
                 <Text style={{ color: '#ffffff', fontSize: '14px' }}>主题</Text>
               </div>
               <div className="theme-selector">
-                <Button 
+                <Button
                   className={`theme-btn ${theme === '浅色' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('浅色')}
                   icon={<BgColorsOutlined />}
                 >
                   浅色
                 </Button>
-                <Button 
+                <Button
                   className={`theme-btn ${theme === '深色' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('深色')}
                 >
                   深色
                 </Button>
-                <Button 
+                <Button
                   className={`theme-btn ${theme === '系统' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('系统')}
                 >
@@ -112,15 +123,23 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
 
             <div className="setting-item">
               <div className="setting-label">
-                <Text style={{ color: '#ffffff', fontSize: '14px' }}>主题颜色</Text>
+                <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                  主题颜色
+                </Text>
               </div>
               <div className="color-palette">
-                {themeColors.map((color, index) => (
+                {themeColors.map((color) => (
                   <div
-                    key={index}
-                    className={`color-item ${themeColor === color ? 'selected' : ''}`}
+                    key={color}
+                    className={`color-item ${
+                      themeColor === color ? 'selected' : ''
+                    }`}
                     style={{ backgroundColor: color }}
-                    onClick={() => handleThemeColorChange(color)}
+                    onClick={() => handleColorClick(color)}
+                    onKeyDown={(event) => handleColorKeyDown(event, color)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`选择颜色 ${color}`}
                   />
                 ))}
                 <div className="color-hex">{themeColor}</div>
@@ -130,7 +149,9 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>透明窗口</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    透明窗口
+                  </Text>
                 </div>
                 <Switch
                   checked={transparentWindow}
@@ -143,7 +164,7 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
         </Card>
 
         {/* 导航栏设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -156,17 +177,23 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
           <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <div className="setting-item">
               <div className="setting-label">
-                <Text style={{ color: '#ffffff', fontSize: '14px' }}>导航栏位置</Text>
+                <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                  导航栏位置
+                </Text>
               </div>
               <div className="position-selector">
-                <Button 
-                  className={`position-btn ${navbarPosition === '左侧' ? 'active' : ''}`}
+                <Button
+                  className={`position-btn ${
+                    navbarPosition === '左侧' ? 'active' : ''
+                  }`}
                   onClick={() => handleNavbarPositionChange('左侧')}
                 >
                   左侧
                 </Button>
-                <Button 
-                  className={`position-btn ${navbarPosition === '顶部' ? 'active' : ''}`}
+                <Button
+                  className={`position-btn ${
+                    navbarPosition === '顶部' ? 'active' : ''
+                  }`}
                   onClick={() => handleNavbarPositionChange('顶部')}
                 >
                   顶部
@@ -177,11 +204,13 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
         </Card>
 
         {/* 缩放设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <ZoomInOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <ZoomInOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               缩放设置
             </span>
           }
@@ -190,28 +219,33 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
             <div className="setting-item">
               <div className="zoom-control">
                 <div className="zoom-label">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>缩放</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    缩放
+                  </Text>
                 </div>
                 <div className="zoom-slider">
-                  <Button 
+                  <Button
                     className="zoom-btn"
-                    onClick={() => handleZoomChange(Math.max(50, zoomLevel - 10))}
+                    onClick={() =>
+                      handleZoomChange(Math.max(50, zoomLevel - 10))
+                    }
                   >
                     -
                   </Button>
                   <div className="zoom-display">
-                    <Text style={{ color: '#ffffff', fontSize: '14px' }}>{zoomLevel}%</Text>
+                    <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                      {zoomLevel}%
+                    </Text>
                   </div>
-                  <Button 
+                  <Button
                     className="zoom-btn"
-                    onClick={() => handleZoomChange(Math.min(200, zoomLevel + 10))}
+                    onClick={() =>
+                      handleZoomChange(Math.min(200, zoomLevel + 10))
+                    }
                   >
                     +
                   </Button>
-                  <Button 
-                    className="reset-btn"
-                    onClick={resetZoom}
-                  >
+                  <Button className="reset-btn" onClick={resetZoom}>
                     重置
                   </Button>
                 </div>
@@ -221,11 +255,13 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
         </Card>
 
         {/* 话题设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
-              <MessageOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
+              <MessageOutlined
+                style={{ marginRight: '8px', color: '#38b2ac' }}
+              />
               话题设置
             </span>
           }
@@ -233,17 +269,23 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
           <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <div className="setting-item">
               <div className="setting-label">
-                <Text style={{ color: '#ffffff', fontSize: '14px' }}>话题位置</Text>
+                <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                  话题位置
+                </Text>
               </div>
               <div className="position-selector">
-                <Button 
-                  className={`position-btn ${topicPosition === '左侧' ? 'active' : ''}`}
+                <Button
+                  className={`position-btn ${
+                    topicPosition === '左侧' ? 'active' : ''
+                  }`}
                   onClick={() => handleTopicPositionChange('左侧')}
                 >
                   左侧
                 </Button>
-                <Button 
-                  className={`position-btn ${topicPosition === '右侧' ? 'active' : ''}`}
+                <Button
+                  className={`position-btn ${
+                    topicPosition === '右侧' ? 'active' : ''
+                  }`}
                   onClick={() => handleTopicPositionChange('右侧')}
                 >
                   右侧
@@ -254,7 +296,9 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>自动切换到话题</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    自动切换到话题
+                  </Text>
                 </div>
                 <Switch
                   checked={autoSwitchTopic}
@@ -267,7 +311,9 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>显示话题时间</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    显示话题时间
+                  </Text>
                 </div>
                 <Switch
                   checked={showTopicTime}
@@ -280,7 +326,9 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
             <div className="setting-item">
               <div className="setting-content">
                 <div className="setting-info">
-                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>固定话题置顶</Text>
+                  <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                    固定话题置顶
+                  </Text>
                 </div>
                 <Switch
                   checked={pinTopicTop}
@@ -293,7 +341,7 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
         </Card>
 
         {/* 助手设置 */}
-        <Card 
+        <Card
           className="settings-card"
           title={
             <span style={{ color: '#ffffff' }}>
@@ -305,23 +353,31 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
           <Space direction="vertical" size="large" style={{ width: '100%' }}>
             <div className="setting-item">
               <div className="setting-label">
-                <Text style={{ color: '#ffffff', fontSize: '14px' }}>模型图标类型</Text>
+                <Text style={{ color: '#ffffff', fontSize: '14px' }}>
+                  模型图标类型
+                </Text>
               </div>
               <div className="icon-type-selector">
-                <Button 
-                  className={`icon-type-btn ${modelIconType === '模型图标' ? 'active' : ''}`}
+                <Button
+                  className={`icon-type-btn ${
+                    modelIconType === '模型图标' ? 'active' : ''
+                  }`}
                   onClick={() => handleModelIconTypeChange('模型图标')}
                 >
                   模型图标
                 </Button>
-                <Button 
-                  className={`icon-type-btn ${modelIconType === 'Emoji 表情' ? 'active' : ''}`}
+                <Button
+                  className={`icon-type-btn ${
+                    modelIconType === 'Emoji 表情' ? 'active' : ''
+                  }`}
                   onClick={() => handleModelIconTypeChange('Emoji 表情')}
                 >
                   Emoji 表情
                 </Button>
-                <Button 
-                  className={`icon-type-btn ${modelIconType === '不显示' ? 'active' : ''}`}
+                <Button
+                  className={`icon-type-btn ${
+                    modelIconType === '不显示' ? 'active' : ''
+                  }`}
                   onClick={() => handleModelIconTypeChange('不显示')}
                 >
                   不显示
@@ -333,6 +389,6 @@ const DisplaySettings: React.FC<DisplaySettingsProps> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default DisplaySettings;
