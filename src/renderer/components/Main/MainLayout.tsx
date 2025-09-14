@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
-import Sidebar from '../Sidebar/Sidebar';
-import ContentArea from '../Content/ContentArea';
+import Sidebar from './Sidebar';
+import ContentArea from './ContentArea';
 import './MainLayout.css';
 
 const { Sider, Content } = Layout;
