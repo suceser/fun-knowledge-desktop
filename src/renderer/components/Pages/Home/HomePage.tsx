@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 function HomePage() {
   return (
     <div className="home-page">
-      <div className="page-header">
+      {/* <div className="page-header">
         <div className="page-title">
           <HomeOutlined className="page-icon" />
           <Title level={2} className="title-text">
@@ -18,7 +18,7 @@ function HomePage() {
         <Paragraph className="page-description">
           欢迎回到趣知，开始您的知识探索之旅
         </Paragraph>
-      </div>
+      </div> */}
 
       <div className="page-content">
         <Row gutter={[24, 24]}>

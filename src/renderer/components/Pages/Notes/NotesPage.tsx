@@ -253,7 +253,7 @@ function NotesPage() {
   return (
     <div className="notes-page">
       {/* 页面头部 */}
-      <div className="notes-header">
+      {/* <div className="notes-header">
         <div className="header-left">
           <Title level={2} className="page-title">
             <EditOutlined className="title-icon" />
@@ -273,7 +273,7 @@ function NotesPage() {
             新建笔记
           </Button>
         </div>
-      </div>
+      </div> */}
 
       {/* 搜索和筛选区域 */}
       <div className="notes-filters">
