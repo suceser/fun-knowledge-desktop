@@ -3,43 +3,31 @@
   background: transparent;
 }
 
-.placeholder-card {
-  background: var(--bg-translucent-medium) !important;
-  backdrop-filter: var(--backdrop-blur-medium);
-  border: 1px solid var(--border-color) !important;
-  border-radius: var(--radius-xl) !important;
-  text-align: center;
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.qna-layout {
+  height: calc(100vh - 200px);
+  margin: 0 !important;
 }
 
-.placeholder-card .ant-card-body {
-  padding: var(--spacing-3xl) !important;
-  background: transparent !important;
+.left-panel-col {
+  padding: 0 8px 0 0 !important;
 }
 
-.placeholder-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
+.chat-area-col {
+  padding: 0 0 0 8px !important;
 }
 
-.placeholder-icon {
-  font-size: 4rem;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-lg);
-}
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .qna-layout .ant-col {
+    padding: 0 !important;
+    margin-bottom: 16px;
+  }
 
-.placeholder-content .ant-typography {
-  color: var(--text-primary) !important;
-  text-align: center;
-}
+  .left-panel-col {
+    order: 2;
+  }
 
-.placeholder-content .ant-typography p {
-  color: var(--text-secondary) !important;
-  max-width: 500px;
-  line-height: 1.8;
+  .chat-area-col {
+    order: 1;
+  }
 }

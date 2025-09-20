@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
+import { Row, Col, Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import LeftSidePanel from './components/LeftSidePanel';
+import ChatArea from './components/ChatArea';
 import './QnAPage.css';
 
 const { Title, Paragraph } = Typography;
@@ -21,16 +23,14 @@ function QnAPage() {
       </div>
 
       <div className="page-content">
-        <Card className="placeholder-card glass-card">
-          <div className="placeholder-content">
-            <QuestionCircleOutlined className="placeholder-icon" />
-            <Title level={3}>知识问答功能</Title>
-            <Paragraph>
-              在这里您可以提出问题，获取智能化的知识解答。
-              支持自然语言查询，让知识获取更加便捷。
-            </Paragraph>
-          </div>
-        </Card>
+        <Row className="qna-layout" gutter={16}>
+          <Col span={8} className="left-panel-col">
+            <LeftSidePanel />
+          </Col>
+          <Col span={16} className="chat-area-col">
+            <ChatArea />
+          </Col>
+        </Row>
       </div>
     </div>
   );

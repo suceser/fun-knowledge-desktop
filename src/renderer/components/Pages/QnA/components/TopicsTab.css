@@ -1,0 +1,150 @@
+.topics-tab {
+  height: 100%;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-title {
+  margin: 0 !important;
+  color: var(--text-primary) !important;
+  font-size: 1rem;
+}
+
+.clear-history-btn {
+  color: var(--text-secondary) !important;
+  padding: 0 !important;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.clear-history-btn:hover {
+  color: #ff4d4f !important;
+}
+
+.topics-list {
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}
+
+.topics-list .ant-list-item {
+  border: none !important;
+  padding: 12px 8px !important;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.topics-list .ant-list-item:hover {
+  background: rgba(56, 178, 172, 0.05);
+  transform: translateX(2px);
+}
+
+.topic-icon {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.topic-title {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.message-count {
+  color: var(--text-secondary) !important;
+  font-size: 0.75rem;
+  background: rgba(56, 178, 172, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.topic-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.last-message {
+  color: var(--text-secondary) !important;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.topic-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-icon {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.last-active {
+  color: var(--text-secondary) !important;
+  font-size: 0.75rem;
+}
+
+.delete-topic {
+  color: var(--text-secondary) !important;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.topic-item:hover .delete-topic {
+  opacity: 1;
+}
+
+.delete-topic:hover {
+  color: #ff4d4f !important;
+}
+
+.empty-topics {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-topics .ant-empty-description {
+  color: var(--text-secondary) !important;
+}
+
+/* 滚动条样式 */
+.topics-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.topics-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.topics-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.topics-list::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}

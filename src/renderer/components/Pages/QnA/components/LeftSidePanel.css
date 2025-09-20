@@ -1,0 +1,90 @@
+.left-side-panel {
+  height: calc(100vh - 200px);
+  background: var(--bg-translucent-medium) !important;
+  backdrop-filter: var(--backdrop-blur-medium);
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden;
+}
+
+.left-side-panel .ant-card-body {
+  padding: 0 !important;
+  background: transparent !important;
+  height: 100%;
+}
+
+.qna-tabs {
+  height: 100%;
+}
+
+.qna-tabs .ant-tabs-nav {
+  background: rgba(26, 26, 46, 0.5);
+  margin: 0;
+  padding: 8px 16px 0 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.qna-tabs .ant-tabs-tab {
+  color: var(--text-secondary) !important;
+  border: none !important;
+  background: transparent !important;
+  margin: 0 8px 0 0 !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.qna-tabs .ant-tabs-tab:hover {
+  color: var(--primary-color) !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.qna-tabs .ant-tabs-tab-active {
+  color: var(--primary-color) !important;
+  background: rgba(56, 178, 172, 0.2) !important;
+  font-weight: 600;
+}
+
+.qna-tabs .ant-tabs-ink-bar {
+  display: none;
+}
+
+.qna-tabs .ant-tabs-content-holder {
+  padding: 16px;
+  height: calc(100% - 48px);
+  overflow-y: auto;
+}
+
+.qna-tabs .ant-tabs-tabpane {
+  height: 100%;
+}
+
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.tab-label .anticon {
+  font-size: 14px;
+}
+
+/* 滚动条样式 */
+.qna-tabs .ant-tabs-content-holder::-webkit-scrollbar {
+  width: 6px;
+}
+
+.qna-tabs .ant-tabs-content-holder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.qna-tabs .ant-tabs-content-holder::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+.qna-tabs .ant-tabs-content-holder::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}

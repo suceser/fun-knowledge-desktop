@@ -1,0 +1,227 @@
+.settings-tab {
+  height: 100%;
+}
+
+.tab-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-title {
+  margin: 0 !important;
+  color: var(--text-primary) !important;
+  font-size: 1rem;
+}
+
+.settings-content {
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}
+
+/* 折叠面板样式 */
+.settings-collapse {
+  background: transparent !important;
+}
+
+.settings-collapse .ant-collapse-item {
+  border: none !important;
+  background: transparent !important;
+  margin-bottom: 12px;
+}
+
+.settings-collapse .ant-collapse-header {
+  background: rgba(26, 26, 46, 0.3) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 12px 16px !important;
+  transition: all 0.3s ease;
+}
+
+.settings-collapse .ant-collapse-header:hover {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.settings-collapse .ant-collapse-item-active .ant-collapse-header {
+  background: rgba(56, 178, 172, 0.15) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.settings-collapse .ant-collapse-content {
+  background: transparent !important;
+  border: none !important;
+}
+
+.settings-collapse .ant-collapse-content-box {
+  padding: 16px 0 8px 0 !important;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-icon {
+  color: var(--primary-color);
+  font-size: 14px;
+}
+
+.settings-collapse .ant-collapse-expand-icon {
+  color: var(--text-secondary) !important;
+  right: 16px !important;
+}
+
+.settings-collapse .ant-collapse-item-active .ant-collapse-expand-icon {
+  color: var(--primary-color) !important;
+}
+
+/* 表单样式 */
+.settings-form {
+  background: transparent;
+}
+
+.setting-item {
+  margin-bottom: 0 !important;
+  padding: 8px 0;
+}
+
+.setting-item .ant-form-item-label {
+  padding: 0 !important;
+}
+
+.setting-item .ant-form-item-label > label {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+/* 开关样式 */
+.setting-item .ant-switch {
+  background: rgba(255, 255, 255, 0.2) !important;
+  min-width: 32px !important;
+  height: 18px !important;
+}
+
+.setting-item .ant-switch-checked {
+  background: var(--primary-color) !important;
+}
+
+.setting-item .ant-switch::after {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* 选择器样式 */
+.setting-select {
+  width: 100% !important;
+}
+
+.setting-item .ant-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  color: var(--text-primary) !important;
+  height: 28px !important;
+  font-size: 0.85rem;
+}
+
+.setting-item .ant-select .ant-select-selection-item {
+  color: var(--text-primary) !important;
+  line-height: 26px !important;
+}
+
+.setting-item .ant-select-focused .ant-select-selector {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2) !important;
+}
+
+/* 滑动条样式 */
+.setting-slider {
+  margin: 8px 0 !important;
+}
+
+.setting-slider .ant-slider-track {
+  background: var(--primary-color) !important;
+}
+
+.setting-slider .ant-slider-handle {
+  border: 2px solid var(--primary-color) !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.setting-slider .ant-slider-handle:focus {
+  box-shadow: 0 0 0 5px rgba(56, 178, 172, 0.2) !important;
+}
+
+.setting-slider .ant-slider-rail {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 字体大小标签 */
+.font-size-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.font-label {
+  font-size: 12px !important;
+  color: var(--text-secondary) !important;
+}
+
+.font-label-large {
+  font-size: 18px !important;
+  color: var(--text-secondary) !important;
+}
+
+/* 设置描述 */
+.setting-description {
+  color: var(--text-secondary) !important;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: block;
+  line-height: 1.4;
+}
+
+/* 滚动条样式 */
+.settings-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.settings-content::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .settings-collapse .ant-collapse-header {
+    padding: 10px 12px !important;
+    font-size: 0.85rem;
+  }
+
+  .setting-item .ant-form-item-label > label {
+    font-size: 0.8rem;
+  }
+
+  .setting-description {
+    font-size: 0.7rem;
+  }
+}
