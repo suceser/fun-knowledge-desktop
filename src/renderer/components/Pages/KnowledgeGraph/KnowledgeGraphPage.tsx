@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 function KnowledgeGraphPage() {
   return (
     <div className="knowledge-graph-page">
-      {/* <div className="page-header">
+      <div className="page-header">
         <div className="page-title">
           <ShareAltOutlined className="page-icon" />
           <Title level={2} className="title-text">
@@ -18,7 +18,7 @@ function KnowledgeGraphPage() {
         <Paragraph className="page-description">
           可视化知识关系，构建您的专属知识网络
         </Paragraph>
-      </div> */}
+      </div>
 
       <div className="page-content">
         <Card className="placeholder-card glass-card">

@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 function LibraryPage() {
   return (
     <div className="library-page">
-      {/* <div className="page-header">
+      <div className="page-header">
         <div className="page-title">
           <BookOutlined className="page-icon" />
           <Title level={2} className="title-text">
@@ -18,7 +18,7 @@ function LibraryPage() {
         <Paragraph className="page-description">
           管理您的数字图书收藏，随时随地阅读学习
         </Paragraph>
-      </div> */}
+      </div>
 
       <div className="page-content">
         <Card className="placeholder-card glass-card">

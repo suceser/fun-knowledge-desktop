@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 function AnalyticsPage() {
   return (
     <div className="analytics-page">
-      {/* <div className="page-header">
+      <div className="page-header">
         <div className="page-title">
           <BarChartOutlined className="page-icon" />
           <Title level={2} className="title-text">
@@ -18,7 +18,7 @@ function AnalyticsPage() {
         <Paragraph className="page-description">
           深入分析您的学习数据，优化知识管理策略
         </Paragraph>
-      </div> */}
+      </div>
 
       <div className="page-content">
         <Card className="placeholder-card glass-card">
