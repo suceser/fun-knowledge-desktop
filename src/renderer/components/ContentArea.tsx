@@ -5,7 +5,7 @@ import './ContentArea.css';
 // 懒加载各个页面组件
 const HomePage = lazy(() => import('./pages/home/HomePage'));
 const NotesPage = lazy(() => import('./pages/notes/NotesPage'));
-const QnAPage = lazy(() => import('./pages/chat/QnAPage'));
+const ChatPage = lazy(() => import('./pages/chat/ChatPage'));
 const KnowledgeGraphPage = lazy(
   () => import('./pages/knowledge/KnowledgeGraphPage'),
 );
@@ -25,7 +25,7 @@ function ContentArea({ selectedTab }: ContentAreaProps) {
       case 'notes':
         return <NotesPage />;
       case 'qna':
-        return <QnAPage />;
+        return <ChatPage />;
       case 'knowledge-graph':
         return <KnowledgeGraphPage />;
       case 'library':

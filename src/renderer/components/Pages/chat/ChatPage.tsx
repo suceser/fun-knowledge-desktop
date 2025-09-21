@@ -3,11 +3,11 @@ import { Row, Col, Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import LeftSidePanel from './components/LeftSidePanel';
 import ChatArea from './components/ChatArea';
-import './QnAPage.css';
+import './ChatPage.css';
 
 const { Title, Paragraph } = Typography;
 
-function QnAPage() {
+function ChatPage() {
   return (
     <div className="qna-page">
       <div className="page-header">
@@ -36,4 +36,4 @@ function QnAPage() {
   );
 }
 
-export default QnAPage;
+export default ChatPage;
