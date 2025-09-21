@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
-import MainLayout from './components/Main/MainLayout';
+import MainLayout from './components/MainLayout';
 import './styles/theme.css';
 import './App.css';
 
