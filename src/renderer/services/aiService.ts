@@ -1,5 +1,11 @@
 // AI 服务核心功能
-import { AIRequest, AIResponse, ModelProvider, Model, Message } from '../types/ai';
+import {
+  AIRequest,
+  AIResponse,
+  ModelProvider,
+  Model,
+  Message,
+} from '../types/ai';
 
 class AIService {
   private providers: Map<string, ModelProvider> = new Map();
@@ -124,7 +130,7 @@ class AIService {
       },
     ];
 
-    defaultProviders.forEach(provider => {
+    defaultProviders.forEach((provider) => {
       this.providers.set(provider.id, provider);
     });
     this.saveProviders();
@@ -176,7 +182,9 @@ class AIService {
   /**
    * 测试提供商连接
    */
-  async testProvider(providerId: string): Promise<{ success: boolean; error?: string }> {
+  async testProvider(
+    providerId: string,
+  ): Promise<{ success: boolean; error?: string }> {
     const provider = this.providers.get(providerId);
     if (!provider) {
       return { success: false, error: '提供商不存在' };
@@ -211,7 +219,8 @@ class AIService {
       this.updateProvider(providerId, { status: 'connected' });
       return { success: true };
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '连接测试失败';
+      const errorMessage =
+        error instanceof Error ? error.message : '连接测试失败';
       this.updateProvider(providerId, { status: 'error' });
       return { success: false, error: errorMessage };
     }
@@ -260,7 +269,9 @@ class AIService {
   /**
    * 发送流式AI请求
    */
-  async *sendStreamRequest(request: AIRequest): AsyncGenerator<AIResponse, void, unknown> {
+  async *sendStreamRequest(
+    request: AIRequest,
+  ): AsyncGenerator<AIResponse, void, unknown> {
     const provider = this.providers.get(request.providerId);
     if (!provider) {
       yield {
@@ -301,8 +312,11 @@ class AIService {
   /**
    * 实际的API请求
    */
-  private async makeAPIRequest(provider: ModelProvider, request: AIRequest): Promise<AIResponse> {
-    const messages = request.messages.map(msg => ({
+  private async makeAPIRequest(
+    provider: ModelProvider,
+    request: AIRequest,
+  ): Promise<AIResponse> {
+    const messages = request.messages.map((msg) => ({
       role: msg.role,
       content: msg.content,
     }));
@@ -317,7 +331,7 @@ class AIService {
 
     const requestBody = {
       model: request.model,
-      messages: messages,
+      messages,
       temperature: request.temperature ?? 0.7,
       max_tokens: request.maxTokens ?? 2048,
       stream: false,
@@ -327,7 +341,7 @@ class AIService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${provider.apiKey}`,
+        Authorization: `Bearer ${provider.apiKey}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -348,11 +362,13 @@ class AIService {
       content: data.choices[0]?.message?.content || '',
       model: data.model || request.model,
       providerId: request.providerId,
-      usage: data.usage ? {
-        promptTokens: data.usage.prompt_tokens,
-        completionTokens: data.usage.completion_tokens,
-        totalTokens: data.usage.total_tokens,
-      } : undefined,
+      usage: data.usage
+        ? {
+            promptTokens: data.usage.prompt_tokens,
+            completionTokens: data.usage.completion_tokens,
+            totalTokens: data.usage.total_tokens,
+          }
+        : undefined,
       finishReason: data.choices[0]?.finish_reason,
     };
   }
@@ -360,8 +376,11 @@ class AIService {
   /**
    * 流式API请求
    */
-  private async *makeStreamAPIRequest(provider: ModelProvider, request: AIRequest): AsyncGenerator<AIResponse, void, unknown> {
-    const messages = request.messages.map(msg => ({
+  private async *makeStreamAPIRequest(
+    provider: ModelProvider,
+    request: AIRequest,
+  ): AsyncGenerator<AIResponse, void, unknown> {
+    const messages = request.messages.map((msg) => ({
       role: msg.role,
       content: msg.content,
     }));
@@ -376,7 +395,7 @@ class AIService {
 
     const requestBody = {
       model: request.model,
-      messages: messages,
+      messages,
       temperature: request.temperature ?? 0.7,
       max_tokens: request.maxTokens ?? 2048,
       stream: true,
@@ -386,7 +405,7 @@ class AIService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${provider.apiKey}`,
+        Authorization: `Bearer ${provider.apiKey}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -427,14 +446,16 @@ class AIService {
               if (content) {
                 yield {
                   id: parsed.id || Date.now().toString(),
-                  content: content,
+                  content,
                   model: parsed.model || request.model,
                   providerId: request.providerId,
-                  usage: parsed.usage ? {
-                    promptTokens: parsed.usage.prompt_tokens,
-                    completionTokens: parsed.usage.completion_tokens,
-                    totalTokens: parsed.usage.total_tokens,
-                  } : undefined,
+                  usage: parsed.usage
+                    ? {
+                        promptTokens: parsed.usage.prompt_tokens,
+                        completionTokens: parsed.usage.completion_tokens,
+                        totalTokens: parsed.usage.total_tokens,
+                      }
+                    : undefined,
                   finishReason: parsed.choices[0]?.finish_reason,
                 };
               }
@@ -453,12 +474,17 @@ class AIService {
   /**
    * 获取可用的模型列表
    */
-  getAvailableModels(): { providerId: string; providerName: string; model: Model }[] {
-    const result: { providerId: string; providerName: string; model: Model }[] = [];
+  getAvailableModels(): {
+    providerId: string;
+    providerName: string;
+    model: Model;
+  }[] {
+    const result: { providerId: string; providerName: string; model: Model }[] =
+      [];
 
     this.providers.forEach((provider, providerId) => {
       if (provider.status === 'connected') {
-        provider.models.forEach(model => {
+        provider.models.forEach((model) => {
           if (model.status === 'available') {
             result.push({
               providerId,

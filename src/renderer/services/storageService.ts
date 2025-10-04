@@ -5,7 +5,7 @@ import {
   Assistant,
   ModelProvider,
   ChatStorage,
-  ChatSettings
+  ChatSettings,
 } from '../types/ai';
 
 class StorageService {
@@ -33,7 +33,7 @@ class StorageService {
    */
   private getDefaultAssistants(): Record<string, Assistant> {
     return {
-      'default': {
+      default: {
         id: 'default',
         name: '默认助手',
         description: '通用AI助手，可以回答各类问题',
@@ -51,7 +51,8 @@ class StorageService {
         description: '专业的产品策略分析师',
         isDefault: false,
         messageCount: 0,
-        systemPrompt: '你是一个资深的产品经理，擅长产品策略分析、用户体验设计和商业模式分析。请用专业的角度分析用户的问题，并给出实用的建议。',
+        systemPrompt:
+          '你是一个资深的产品经理，擅长产品策略分析、用户体验设计和商业模式分析。请用专业的角度分析用户的问题，并给出实用的建议。',
         settings: {
           temperature: 0.6,
           maxTokens: 3000,
@@ -63,7 +64,8 @@ class StorageService {
         description: '电商运营专家助手',
         isDefault: false,
         messageCount: 0,
-        systemPrompt: '你是一个经验丰富的电商运营专家，精通营销策略、数据分析、用户运营和供应链管理。请从商业运营的角度回答用户的问题。',
+        systemPrompt:
+          '你是一个经验丰富的电商运营专家，精通营销策略、数据分析、用户运营和供应链管理。请从商业运营的角度回答用户的问题。',
         settings: {
           temperature: 0.5,
           maxTokens: 2500,
@@ -139,7 +141,9 @@ class StorageService {
    */
   getTopics(): Topic[] {
     const data = this.loadChatData();
-    return Object.values(data.topics).sort((a, b) => b.lastActive - a.lastActive);
+    return Object.values(data.topics).sort(
+      (a, b) => b.lastActive - a.lastActive,
+    );
   }
 
   /**
@@ -182,9 +186,10 @@ class StorageService {
       // 如果删除的是当前话题，清除lastTopicId
       if (data.lastTopicId === topicId) {
         const remainingTopics = Object.values(data.topics);
-        data.lastTopicId = remainingTopics.length > 0 ?
-          remainingTopics.sort((a, b) => b.lastActive - a.lastActive)[0].id :
-          undefined;
+        data.lastTopicId =
+          remainingTopics.length > 0
+            ? remainingTopics.sort((a, b) => b.lastActive - a.lastActive)[0].id
+            : undefined;
       }
 
       this.saveChatData(data);
@@ -211,11 +216,15 @@ class StorageService {
       }
 
       // 更新话题标题（如果是第一条用户消息且标题为默认）
-      if (message.role === 'user' && topic.messages.filter(m => m.role === 'user').length === 1 &&
-          (topic.title === '新对话' || topic.title.startsWith('新对话'))) {
-        topic.title = message.content.length > 30 ?
-          message.content.substring(0, 30) + '...' :
-          message.content;
+      if (
+        message.role === 'user' &&
+        topic.messages.filter((m) => m.role === 'user').length === 1 &&
+        (topic.title === '新对话' || topic.title.startsWith('新对话'))
+      ) {
+        topic.title =
+          message.content.length > 30
+            ? `${message.content.substring(0, 30)}...`
+            : message.content;
       }
 
       data.topics[topicId] = topic;
@@ -240,7 +249,9 @@ class StorageService {
   getContextMessages(topicId: string, contextCount: number = 5): Message[] {
     const messages = this.getMessages(topicId);
     // 只获取用户和助手的消息，排除系统消息
-    const userAssistantMessages = messages.filter(m => m.role === 'user' || m.role === 'assistant');
+    const userAssistantMessages = messages.filter(
+      (m) => m.role === 'user' || m.role === 'assistant',
+    );
     // 返回最后 contextCount*2 条消息（保证用户-助手对话的完整性）
     return userAssistantMessages.slice(-contextCount * 2);
   }
@@ -248,12 +259,16 @@ class StorageService {
   /**
    * 更新消息
    */
-  updateMessage(topicId: string, messageId: string, updates: Partial<Message>): Message | undefined {
+  updateMessage(
+    topicId: string,
+    messageId: string,
+    updates: Partial<Message>,
+  ): Message | undefined {
     const data = this.loadChatData();
     const topic = data.topics[topicId];
 
     if (topic) {
-      const messageIndex = topic.messages.findIndex(m => m.id === messageId);
+      const messageIndex = topic.messages.findIndex((m) => m.id === messageId);
       if (messageIndex >= 0) {
         const updatedMessage = { ...topic.messages[messageIndex], ...updates };
         topic.messages[messageIndex] = updatedMessage;
@@ -276,7 +291,7 @@ class StorageService {
 
     if (topic) {
       const originalLength = topic.messages.length;
-      topic.messages = topic.messages.filter(m => m.id !== messageId);
+      topic.messages = topic.messages.filter((m) => m.id !== messageId);
 
       if (topic.messages.length < originalLength) {
         topic.messageCount = topic.messages.length;
@@ -284,7 +299,7 @@ class StorageService {
 
         // 更新最后一条消息
         const lastMessage = topic.messages
-          .filter(m => m.role === 'user' || m.role === 'assistant')
+          .filter((m) => m.role === 'user' || m.role === 'assistant')
           .pop();
         topic.lastMessage = lastMessage;
 
@@ -335,7 +350,9 @@ class StorageService {
   /**
    * 创建助手
    */
-  createAssistant(assistant: Omit<Assistant, 'id' | 'messageCount'>): Assistant {
+  createAssistant(
+    assistant: Omit<Assistant, 'id' | 'messageCount'>,
+  ): Assistant {
     const newAssistant: Assistant = {
       ...assistant,
       id: `assistant_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -352,7 +369,10 @@ class StorageService {
   /**
    * 更新助手
    */
-  updateAssistant(assistantId: string, updates: Partial<Assistant>): Assistant | undefined {
+  updateAssistant(
+    assistantId: string,
+    updates: Partial<Assistant>,
+  ): Assistant | undefined {
     const data = this.loadChatData();
     const assistant = data.assistants[assistantId];
 
@@ -431,7 +451,12 @@ class StorageService {
     try {
       const data = JSON.parse(jsonData) as ChatStorage;
       // 验证数据结构
-      if (typeof data === 'object' && data.topics && data.assistants && data.settings) {
+      if (
+        typeof data === 'object' &&
+        data.topics &&
+        data.assistants &&
+        data.settings
+      ) {
         this.saveChatData(data);
         return true;
       }
