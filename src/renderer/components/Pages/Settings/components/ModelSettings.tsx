@@ -31,7 +31,8 @@ interface ModelProvider {
 }
 
 function ModelSettings(): React.ReactElement {
-  const [selectedProvider, setSelectedProvider] = useState<string>('modelscope');
+  const [selectedProvider, setSelectedProvider] =
+    useState<string>('modelscope');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modelProviders, setModelProviders] = useState<ModelProvider[]>([]);
   const [loading, setLoading] = useState(false);
@@ -47,11 +48,13 @@ function ModelSettings(): React.ReactElement {
     setModelProviders(providers);
 
     // 如果当前选中的提供商不存在，选择第一个
-    if (providers.length > 0 && !providers.find(p => p.id === selectedProvider)) {
+    if (
+      providers.length > 0 &&
+      !providers.find((p) => p.id === selectedProvider)
+    ) {
       setSelectedProvider(providers[0].id);
     }
   };
-
 
   // 过滤提供商
   const filteredProviders = modelProviders.filter((provider) =>
@@ -181,8 +184,12 @@ function ModelSettings(): React.ReactElement {
                   <div className="provider-name">{provider.name}</div>
                 </div>
                 <div className="provider-status">
-                  <div className={`status-indicator ${provider.status === 'connected' ? 'on' : 'off'}`} />
-                  <span className={`status-text ${provider.status === 'connected' ? 'on' : 'off'}`}>
+                  <div
+                    className={`status-indicator ${provider.status === 'connected' ? 'on' : 'off'}`}
+                  />
+                  <span
+                    className={`status-text ${provider.status === 'connected' ? 'on' : 'off'}`}
+                  >
                     {provider.status === 'connected' ? 'ON' : 'OFF'}
                   </span>
                 </div>
@@ -206,8 +213,11 @@ function ModelSettings(): React.ReactElement {
                       {currentProvider.name}
                     </Title>
                     <Text className="config-subtitle">
-                      {currentProvider.status === 'connected' ? '已连接' :
-                       currentProvider.status === 'error' ? '连接错误' : '未连接'}
+                      {currentProvider.status === 'connected'
+                        ? '已连接'
+                        : currentProvider.status === 'error'
+                          ? '连接错误'
+                          : '未连接'}
                     </Text>
                   </div>
                 </div>
@@ -248,9 +258,13 @@ function ModelSettings(): React.ReactElement {
                       className="test-btn"
                       onClick={handleTest}
                       loading={testingProvider === currentProvider.id}
-                      disabled={!currentProvider.apiKey || testingProvider !== ''}
+                      disabled={
+                        !currentProvider.apiKey || testingProvider !== ''
+                      }
                     >
-                      {testingProvider === currentProvider.id ? '测试中...' : '检测'}
+                      {testingProvider === currentProvider.id
+                        ? '测试中...'
+                        : '检测'}
                     </Button>
                   </div>
                 </div>
