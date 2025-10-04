@@ -12,7 +12,12 @@ import './LeftSidePanel.css';
 
 const { TabPane } = Tabs;
 
-function LeftSidePanel() {
+interface LeftSidePanelProps {
+  onTopicSelect?: (topicId: string) => void;
+  onAssistantSelect?: (assistantId: string) => void;
+}
+
+function LeftSidePanel({ onTopicSelect, onAssistantSelect }: LeftSidePanelProps) {
   return (
     <Card className="left-side-panel glass-card">
       <Tabs
@@ -30,7 +35,7 @@ function LeftSidePanel() {
           }
           key="assistant"
         >
-          <AssistantTab />
+          <AssistantTab onAssistantSelect={onAssistantSelect} />
         </TabPane>
         <TabPane
           tab={
@@ -41,7 +46,7 @@ function LeftSidePanel() {
           }
           key="topics"
         >
-          <TopicsTab />
+          <TopicsTab onTopicSelect={onTopicSelect} />
         </TabPane>
         <TabPane
           tab={

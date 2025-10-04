@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Input, Button, Typography, Space, Tooltip, Divider } from 'antd';
+import React, { useState, useRef, useEffect } from 'react';
+import { Card, Input, Button, Typography, Space, Tooltip, Divider, message, Spin } from 'antd';
 import {
   SendOutlined,
   CommentOutlined,
@@ -17,6 +17,8 @@ import {
   TranslationOutlined,
   UploadOutlined
 } from '@ant-design/icons';
+import { useChatState } from '../../../../hooks/useChatState';
+import ChatMessage from './ChatMessage';
 import { toolbarHandler } from './ToolbarActions';
 import './ChatArea.css';
 
@@ -26,21 +28,53 @@ const { Title, Text } = Typography;
 function ChatArea() {
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isSending, setIsSending] = useState(false);
   const [showCharCount, setShowCharCount] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const {
+    currentTopic,
+    currentAssistant,
+    createTopic,
+    sendMessage,
+    resendMessage,
+    deleteMessage,
+    editMessage,
+    isLoading,
+    error,
+    chatState,
+  } = useChatState();
+
+  // 获取当前话题的消息列表
+  const messages = currentTopic?.messages || [];
+  const isStreaming = chatState.streamingMessageId !== undefined;
+
+  // 自动滚动到底部
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isStreaming]);
 
   const handleSend = async () => {
-    if (inputValue.trim() && !isSending) {
-      setIsSending(true);
+    if (inputValue.trim() && !isLoading) {
       try {
-        // TODO: 实现发送消息逻辑
-        console.log('发送消息:', inputValue);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 模拟发送
+        let topicToUse = currentTopic;
+
+        // 如果没有当前话题，创建一个新话题
+        if (!topicToUse) {
+          topicToUse = await createTopic();
+        }
+
+        await sendMessage(inputValue.trim());
         setInputValue('');
+        localStorage.removeItem('chatDraft'); // 清除草稿
+
+        message.success('消息发送成功');
       } catch (error) {
         console.error('发送失败:', error);
-      } finally {
-        setIsSending(false);
+        message.error('发送消息失败: ' + (error instanceof Error ? error.message : '未知错误'));
       }
     }
   };
@@ -158,13 +192,53 @@ function ChatArea() {
         </div>
 
         <div className="chat-messages">
-          <div className="empty-chat">
-            <CommentOutlined className="empty-icon" />
-            <Text className="empty-text">开始您的智能问答之旅</Text>
-            <Text type="secondary" className="empty-description">
-              在下方输入框中提问，获取AI助手的专业解答
-            </Text>
-          </div>
+          {messages.length === 0 ? (
+            <div className="empty-chat">
+              <CommentOutlined className="empty-icon" />
+              <Text className="empty-text">开始您的智能问答之旅</Text>
+              <Text type="secondary" className="empty-description">
+                {currentAssistant ?
+                  `与${currentAssistant.name}开始对话，获取专业解答` :
+                  '在下方输入框中提问，获取AI助手的专业解答'
+                }
+              </Text>
+              {error && (
+                <div className="error-message">
+                  <Text type="danger">{error}</Text>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              {messages.map((msg) => (
+                <ChatMessage
+                  key={msg.id}
+                  message={msg}
+                  isStreaming={isStreaming && chatState.streamingMessageId === msg.id}
+                  onCopy={() => message.success('已复制到剪贴板')}
+                  onEdit={() => {
+                    // TODO: 实现消息编辑功能
+                    message.info('编辑功能开发中');
+                  }}
+                  onDelete={() => {
+                    deleteMessage(msg.id).then(success => {
+                      if (success) {
+                        message.success('消息已删除');
+                      } else {
+                        message.error('删除消息失败');
+                      }
+                    });
+                  }}
+                  onResend={() => {
+                    resendMessage(msg.id).catch(error => {
+                      message.error('重发消息失败');
+                    });
+                  }}
+                />
+              ))}
+              <div ref={messagesEndRef} />
+            </>
+          )}
         </div>
 
         <div className="chat-input-area">
@@ -177,7 +251,7 @@ function ChatArea() {
                 placeholder={isExpanded ? "全屏编辑模式 - 在这里输入您的消息..." : "在这里输入消息，按 Enter 发送..."}
                 className={`chat-input ${isExpanded ? 'expanded' : ''}`}
                 autoSize={{ minRows: isExpanded ? 10 : 1, maxRows: isExpanded ? 20 : 4 }}
-                disabled={isSending}
+                disabled={isLoading}
               />
 
               {/* 字符统计 */}
@@ -190,13 +264,12 @@ function ChatArea() {
               )}
 
               {/* 发送状态指示器 */}
-              {isSending && (
+              {isLoading && (
                 <div className="sending-indicator">
-                  <div className="sending-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
+                  <Spin size="small" />
+                  <Text type="secondary" className="sending-text">
+                    {isStreaming ? 'AI正在思考...' : '发送中...'}
+                  </Text>
                 </div>
               )}
             </div>
@@ -242,13 +315,13 @@ function ChatArea() {
 
                 <Button
                   type="primary"
-                  icon={isSending ? null : <SendOutlined />}
+                  icon={isLoading ? null : <SendOutlined />}
                   className="send-button"
                   onClick={handleSend}
-                  disabled={!inputValue.trim() || isSending}
-                  loading={isSending}
+                  disabled={!inputValue.trim() || isLoading}
+                  loading={isLoading}
                 >
-                  {isSending ? '发送中...' : '发送'}
+                  {isLoading ? (isStreaming ? 'AI回复中...' : '发送中...') : '发送'}
                 </Button>
               </div>
             </div>

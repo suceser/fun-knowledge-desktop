@@ -6,39 +6,42 @@ import {
   UserOutlined,
   MoreOutlined
 } from '@ant-design/icons';
+import { useChatState } from '../../../../hooks/useChatState';
 import './AssistantTab.css';
 
 const { Text, Title } = Typography;
 
-const mockAssistants = [
-  {
-    id: '1',
-    name: '默认助手',
-    description: '通用AI助手，可以回答各类问题',
-    avatar: <RobotOutlined />,
-    isDefault: true,
-    messageCount: 9
-  },
-  {
-    id: '2',
-    name: '策略产品经理',
-    description: '专业的产品策略分析师',
-    avatar: <UserOutlined />,
-    isDefault: false,
-    messageCount: 0
-  },
-  {
-    id: '3',
-    name: '商家运营',
-    description: '电商运营专家助手',
-    avatar: <UserOutlined />,
-    isDefault: false,
-    messageCount: 0
-  },
-  // 更多助手...
-];
+interface AssistantTabProps {
+  onAssistantSelect?: (assistantId: string) => void;
+}
 
-function AssistantTab() {
+function AssistantTab({ onAssistantSelect }: AssistantTabProps) {
+  const {
+    assistants,
+    currentAssistant,
+    switchAssistant,
+    topics,
+  } = useChatState();
+
+  // 计算助手的消息统计
+  const getAssistantMessageCount = (assistantId: string) => {
+    return topics.filter(topic => topic.assistantId === assistantId).length;
+  };
+
+  // 选择助手
+  const handleAssistantSelect = (assistantId: string) => {
+    switchAssistant(assistantId);
+    onAssistantSelect?.(assistantId);
+  };
+
+  // 获取助手图标
+  const getAssistantIcon = (assistant: any) => {
+    if (assistant.id === 'default') return <RobotOutlined />;
+    if (assistant.id === 'product-manager') return <UserOutlined />;
+    if (assistant.id === 'business-operator') return <UserOutlined />;
+    return <UserOutlined />;
+  };
+
   return (
     <div className="assistant-tab">
       <div className="tab-header">
@@ -50,43 +53,53 @@ function AssistantTab() {
 
       <List
         className="assistant-list"
-        dataSource={mockAssistants}
-        renderItem={(assistant) => (
-          <List.Item
-            key={assistant.id}
-            className={`assistant-item ${assistant.isDefault ? 'default-assistant' : ''}`}
-            onClick={() => {/* 选择助手逻辑 */}}
-          >
-            <List.Item.Meta
-              avatar={
-                <Avatar
-                  icon={assistant.avatar}
-                  className="assistant-avatar"
-                />
-              }
-              title={
-                <Space>
-                  <Text className="assistant-name">{assistant.name}</Text>
-                  {assistant.isDefault && <Tag color="green" size="small">默认</Tag>}
-                  {assistant.messageCount > 0 && (
-                    <Tag color="blue" size="small">{assistant.messageCount}</Tag>
-                  )}
-                </Space>
-              }
-              description={
-                <Text type="secondary" className="assistant-description">
-                  {assistant.description}
-                </Text>
-              }
-            />
-            <Button
-              type="text"
-              size="small"
-              icon={<MoreOutlined />}
-              className="assistant-more"
-            />
-          </List.Item>
-        )}
+        dataSource={assistants}
+        renderItem={(assistant) => {
+          const messageCount = getAssistantMessageCount(assistant.id);
+          const isSelected = currentAssistant?.id === assistant.id;
+
+          return (
+            <List.Item
+              key={assistant.id}
+              className={`assistant-item ${assistant.isDefault ? 'default-assistant' : ''} ${isSelected ? 'selected' : ''}`}
+              onClick={() => handleAssistantSelect(assistant.id)}
+            >
+              <List.Item.Meta
+                avatar={
+                  <Avatar
+                    icon={getAssistantIcon(assistant)}
+                    className={`assistant-avatar ${isSelected ? 'selected' : ''}`}
+                  />
+                }
+                title={
+                  <Space>
+                    <Text className="assistant-name">{assistant.name}</Text>
+                    {assistant.isDefault && <Tag color="green">默认</Tag>}
+                    {isSelected && <Tag color="orange">当前</Tag>}
+                    {messageCount > 0 && (
+                      <Tag color="blue">{messageCount}个话题</Tag>
+                    )}
+                  </Space>
+                }
+                description={
+                  <Text type="secondary" className="assistant-description">
+                    {assistant.description}
+                  </Text>
+                }
+              />
+              <Button
+                type="text"
+                size="small"
+                icon={<MoreOutlined />}
+                className="assistant-more"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // TODO: 显示助手详情/设置菜单
+                }}
+              />
+            </List.Item>
+          );
+        }}
       />
     </div>
   );

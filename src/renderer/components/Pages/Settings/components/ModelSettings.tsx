@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Typography, Input, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Typography, Input, Button, message, Spin } from 'antd';
 import {
   SearchOutlined,
   ApiOutlined,
@@ -7,6 +7,8 @@ import {
   DatabaseOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
+import { aiService } from '../../../../services/aiService';
+import { ModelProvider } from '../../../../types/ai';
 import './ModelSettings.css';
 
 const { Title, Text } = Typography;
@@ -29,156 +31,27 @@ interface ModelProvider {
 }
 
 function ModelSettings(): React.ReactElement {
-  const [selectedProvider, setSelectedProvider] =
-    useState<string>('modelscope');
+  const [selectedProvider, setSelectedProvider] = useState<string>('modelscope');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [modelProviders, setModelProviders] = useState<ModelProvider[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [testingProvider, setTestingProvider] = useState<string>('');
 
-  // 模拟的模型提供商数据
-  const modelProviders: ModelProvider[] = [
-    {
-      id: 'cherryin',
-      name: 'CherryIN',
-      icon: 'cherryin',
-      status: 'on',
-      apiKey: '••••••••••••••••••••••••••••••••',
-      apiUrl: 'https://api.cherryin.com/v1/',
-      models: [
-        { id: 'gpt-4', name: 'GPT-4', status: 'available' },
-        { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', status: 'available' },
-      ],
-    },
-    {
-      id: 'siliconflow',
-      name: '硅基流动',
-      icon: 'siliconflow',
-      status: 'on',
-      apiKey: '••••••••••••••••••••••••••••••••',
-      apiUrl: 'https://api.siliconflow.cn/v1/',
-      models: [
-        { id: 'qwen-turbo', name: 'Qwen Turbo', status: 'available' },
-        { id: 'qwen-plus', name: 'Qwen Plus', status: 'available' },
-      ],
-    },
-    {
-      id: 'modelscope',
-      name: 'ModelScope 魔搭',
-      icon: 'modelscope',
-      status: 'on',
-      apiKey: '••••••••••••••••••••••••••••••••',
-      apiUrl: 'https://api-inference.modelscope.cn/v1/',
-      models: [
-        {
-          id: 'qwen2.5-72b-instruct',
-          name: 'Qwen/Qwen2.5-72B-Instruct',
-          status: 'available',
-        },
-        {
-          id: 'qwen2.5-vl-72b-instruct',
-          name: 'Qwen/Qwen2.5-VL-72B-Instruct',
-          status: 'available',
-        },
-        {
-          id: 'qwen2.5-coder-32b-instruct',
-          name: 'Qwen/Qwen2.5-Coder-32B-Instruct',
-          status: 'available',
-        },
-        {
-          id: 'deepseek-r1',
-          name: 'deepseek-ai/DeepSeek-R1',
-          status: 'available',
-        },
-        {
-          id: 'deepseek-v3',
-          name: 'deepseek-ai/DeepSeek-V3',
-          status: 'available',
-        },
-      ],
-    },
-    {
-      id: 'openrouter',
-      name: 'OpenRouter',
-      icon: 'openrouter',
-      status: 'off',
-    },
-    {
-      id: 'o3',
-      name: 'O3',
-      icon: 'o3',
-      status: 'off',
-    },
-    {
-      id: 'aihubmix',
-      name: 'AiHubMix',
-      icon: 'aihubmix',
-      status: 'off',
-    },
-    {
-      id: 'deepseek',
-      name: '深度求索',
-      icon: 'deepseek',
-      status: 'off',
-    },
-    {
-      id: 'ollama',
-      name: 'Ollama',
-      icon: 'ollama',
-      status: 'off',
-    },
-    {
-      id: 'anthropic',
-      name: 'Anthropic',
-      icon: 'anthropic',
-      status: 'off',
-    },
-    {
-      id: 'openai',
-      name: 'OpenAI',
-      icon: 'openai',
-      status: 'off',
-    },
-    {
-      id: 'azure',
-      name: 'Azure OpenAI',
-      icon: 'azure',
-      status: 'off',
-    },
-    {
-      id: 'ppio',
-      name: 'PPIO 派盘云',
-      icon: 'ppio',
-      status: 'off',
-    },
-    {
-      id: 'burncloud',
-      name: 'BurnCloud',
-      icon: 'burncloud',
-      status: 'off',
-    },
-    {
-      id: 'cephalon',
-      name: 'Cephalon',
-      icon: 'cephalon',
-      status: 'off',
-    },
-    {
-      id: 'phb',
-      name: 'PHB 大模型开放平台',
-      icon: 'phb',
-      status: 'off',
-    },
-    {
-      id: 'ai302',
-      name: '302.AI',
-      icon: 'ai302',
-      status: 'off',
-    },
-    {
-      id: 'newapi',
-      name: 'New API',
-      icon: 'newapi',
-      status: 'off',
-    },
-  ];
+  // 加载提供商数据
+  useEffect(() => {
+    loadProviders();
+  }, []);
+
+  const loadProviders = () => {
+    const providers = aiService.getProviders();
+    setModelProviders(providers);
+
+    // 如果当前选中的提供商不存在，选择第一个
+    if (providers.length > 0 && !providers.find(p => p.id === selectedProvider)) {
+      setSelectedProvider(providers[0].id);
+    }
+  };
+
 
   // 过滤提供商
   const filteredProviders = modelProviders.filter((provider) =>
@@ -192,16 +65,51 @@ function ModelSettings(): React.ReactElement {
     setSelectedProvider(providerId);
   };
 
-  const handleTest = () => {
-    // TODO: 实现测试连接功能
+  const handleTest = async () => {
+    if (!currentProvider) return;
+
+    setTestingProvider(currentProvider.id);
+    try {
+      const result = await aiService.testProvider(currentProvider.id);
+      if (result.success) {
+        message.success('连接测试成功');
+        loadProviders(); // 重新加载提供商状态
+      } else {
+        message.error(`连接测试失败: ${result.error}`);
+      }
+    } catch (error) {
+      message.error('连接测试异常');
+    } finally {
+      setTestingProvider('');
+    }
   };
 
   const handleManage = () => {
     // TODO: 实现管理模型功能
+    message.info('模型管理功能开发中');
   };
 
   const handleAdd = () => {
     // TODO: 实现添加模型功能
+    message.info('添加模型功能开发中');
+  };
+
+  // 更新提供商配置
+  const handleProviderUpdate = async (updates: Partial<ModelProvider>) => {
+    if (!currentProvider) return;
+
+    setLoading(true);
+    try {
+      const updated = aiService.updateProvider(currentProvider.id, updates);
+      if (updated) {
+        loadProviders();
+        message.success('配置更新成功');
+      }
+    } catch (error) {
+      message.error('配置更新失败');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, providerId: string) => {
@@ -273,9 +181,9 @@ function ModelSettings(): React.ReactElement {
                   <div className="provider-name">{provider.name}</div>
                 </div>
                 <div className="provider-status">
-                  <div className={`status-indicator ${provider.status}`} />
-                  <span className={`status-text ${provider.status}`}>
-                    {provider.status.toUpperCase()}
+                  <div className={`status-indicator ${provider.status === 'connected' ? 'on' : 'off'}`} />
+                  <span className={`status-text ${provider.status === 'connected' ? 'on' : 'off'}`}>
+                    {provider.status === 'connected' ? 'ON' : 'OFF'}
                   </span>
                 </div>
               </div>
@@ -298,7 +206,8 @@ function ModelSettings(): React.ReactElement {
                       {currentProvider.name}
                     </Title>
                     <Text className="config-subtitle">
-                      {currentProvider.status === 'on' ? '已连接' : '未连接'}
+                      {currentProvider.status === 'connected' ? '已连接' :
+                       currentProvider.status === 'error' ? '连接错误' : '未连接'}
                     </Text>
                   </div>
                 </div>
@@ -318,8 +227,12 @@ function ModelSettings(): React.ReactElement {
                     <div className="password-input">
                       <Password
                         placeholder="请输入API密钥"
-                        value={currentProvider.apiKey}
+                        value={currentProvider.apiKey || ''}
                         visibilityToggle
+                        onChange={(e) => {
+                          handleProviderUpdate({ apiKey: e.target.value });
+                        }}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -331,8 +244,13 @@ function ModelSettings(): React.ReactElement {
                       marginTop: '0.5rem',
                     }}
                   >
-                    <Button className="test-btn" onClick={handleTest}>
-                      检测
+                    <Button
+                      className="test-btn"
+                      onClick={handleTest}
+                      loading={testingProvider === currentProvider.id}
+                      disabled={!currentProvider.apiKey || testingProvider !== ''}
+                    >
+                      {testingProvider === currentProvider.id ? '测试中...' : '检测'}
                     </Button>
                   </div>
                 </div>
@@ -349,7 +267,11 @@ function ModelSettings(): React.ReactElement {
                     <div className="form-input">
                       <Input
                         placeholder="请输入API地址"
-                        value={currentProvider.apiUrl}
+                        value={currentProvider.apiUrl || ''}
+                        onChange={(e) => {
+                          handleProviderUpdate({ apiUrl: e.target.value });
+                        }}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -379,7 +301,9 @@ function ModelSettings(): React.ReactElement {
                       <div className="models-grid">
                         {currentProvider.models.map((model) => (
                           <div key={model.id} className="model-item">
-                            <div className="model-name">{model.name}</div>
+                            <div className="model-name" title={model.name}>
+                              {model.displayName || model.name}
+                            </div>
                             <div className="model-status">
                               <div
                                 className={`status-indicator ${
@@ -408,7 +332,7 @@ function ModelSettings(): React.ReactElement {
                           marginTop: '1rem',
                         }}
                       >
-                        备有 ModelScope 魔搭 又名 模型 优化更新详情
+                        共 {currentProvider.models.length} 个模型可用
                       </Text>
                     </div>
                   )}
