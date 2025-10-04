@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { Row, Col, Typography, message } from 'antd';
+import React from 'react';
+import { Row, Col, Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import LeftPanel from './components/LeftPanel';
+import ChatArea from './components/ChatArea';
 import './ChatPage.css';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 function ChatPage() {
-
-
   return (
     <div className="qna-page">
       <div className="page-header">
@@ -21,6 +21,12 @@ function ChatPage() {
 
       <div className="page-content">
         <Row className="qna-layout" gutter={16}>
+          <Col xs={24} md={8} lg={6} className="left-panel-col">
+            <LeftPanel />
+          </Col>
+          <Col xs={24} md={16} lg={18} className="chat-area-col">
+            <ChatArea />
+          </Col>
         </Row>
       </div>
     </div>
