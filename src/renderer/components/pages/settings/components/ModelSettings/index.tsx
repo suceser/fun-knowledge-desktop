@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { message } from 'antd';
+import { App } from 'antd';
 import { ModelInfo } from './types';
 import { useProviders } from './hooks/useProviders';
 import { useApiKeyTest } from './hooks/useApiKeyTest';
@@ -19,6 +19,9 @@ import './styles/common.css';
  * - 处理用户交互逻辑
  */
 function ModelSettings(): React.ReactElement {
+  // 使用 App.useApp() 获取上下文化的 message API
+  const { message } = App.useApp();
+  
   // 使用自定义 hooks
   const {
     providers,
@@ -30,14 +33,14 @@ function ModelSettings(): React.ReactElement {
     updateApiUrl,
     addModel,
     deleteModel,
-  } = useProviders();
+  } = useProviders({ message });
 
   const {
     testingApi,
     selectedTestModel,
     setSelectedTestModel,
     executeTest,
-  } = useApiKeyTest();
+  } = useApiKeyTest({ message });
 
   // UI 状态管理
   const [searchText, setSearchText] = useState('');

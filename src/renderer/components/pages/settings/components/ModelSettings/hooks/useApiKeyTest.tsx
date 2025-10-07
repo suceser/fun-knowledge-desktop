@@ -1,7 +1,12 @@
 import { useState, useCallback } from 'react';
-import { message, Modal } from 'antd';
+import { Modal } from 'antd';
+import { MessageInstance } from 'antd/es/message/interface';
 import { ModelInfo } from '../types';
 import { testModelApiKey } from '../services/apiKeyService';
+
+interface UseApiKeyTestProps {
+  message: MessageInstance;
+}
 
 interface UseApiKeyTestReturn {
   testingApi: boolean;
@@ -10,7 +15,7 @@ interface UseApiKeyTestReturn {
   executeTest: (apiUrl: string, apiKey: string, model: ModelInfo) => Promise<void>;
 }
 
-export const useApiKeyTest = (): UseApiKeyTestReturn => {
+export const useApiKeyTest = ({ message }: UseApiKeyTestProps): UseApiKeyTestReturn => {
   const [testingApi, setTestingApi] = useState(false);
   const [selectedTestModel, setSelectedTestModel] = useState<string>('');
 
@@ -76,7 +81,7 @@ export const useApiKeyTest = (): UseApiKeyTestReturn => {
         setTestingApi(false);
       }
     },
-    []
+    [message]
   );
 
   return {

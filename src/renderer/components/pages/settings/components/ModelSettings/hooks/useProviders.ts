@@ -1,9 +1,13 @@
 import { useState, useCallback, useMemo } from 'react';
-import { message } from 'antd';
+import { MessageInstance } from 'antd/es/message/interface';
 import { ProviderConfig, ModelInfo } from '../types';
 import { initialProviders } from '../constants';
 
-export const useProviders = () => {
+interface UseProvidersProps {
+  message: MessageInstance;
+}
+
+export const useProviders = ({ message }: UseProvidersProps) => {
   const [providers, setProviders] = useState<ProviderConfig[]>(initialProviders);
   const [selectedProviderId, setSelectedProviderId] = useState<string>('modelscope');
 
@@ -19,7 +23,7 @@ export const useProviders = () => {
       prev.map((p) => (p.id === providerId ? { ...p, enabled } : p))
     );
     message.success(enabled ? '服务商已启用' : '服务商已禁用');
-  }, []);
+  }, [message]);
 
   // 更新 API 密钥
   const updateApiKey = useCallback((providerId: string, apiKey: string) => {
@@ -65,7 +69,7 @@ export const useProviders = () => {
     );
     message.success('模型添加成功');
     return true;
-  }, []);
+  }, [message]);
 
   // 删除模型
   const deleteModel = useCallback((providerId: string, modelId: string) => {
@@ -81,7 +85,7 @@ export const useProviders = () => {
       })
     );
     message.success('模型已删除');
-  }, []);
+  }, [message]);
 
   return {
     providers,
