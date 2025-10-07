@@ -2,7 +2,7 @@
   "name": "fun-knowledge-desktop",
   "productName": "fun-knowledge-desktop",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "趣知桌面版",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
