@@ -1,7 +1,7 @@
 /* 左侧提供商列表样式 */
 
 .model-providers-sidebar {
-  width: 280px;
+  width: 250px;
   background: rgba(26, 26, 46, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;

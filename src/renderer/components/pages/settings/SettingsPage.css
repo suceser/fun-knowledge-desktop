@@ -48,8 +48,8 @@
 
 /* 左侧导航栏 */
 .settings-sidebar {
-  width: 280px;
-  min-width: 280px;
+  width: 200px;
+  min-width: 200px;
   background: rgba(26, 26, 46, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;

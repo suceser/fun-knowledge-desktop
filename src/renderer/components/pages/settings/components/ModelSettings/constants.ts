@@ -3,7 +3,7 @@ import { ProviderConfig } from './types';
 export const initialProviders: ProviderConfig[] = [
   {
     id: 'modelscope',
-    name: 'ModelScope 魔搭',
+    name: '魔搭',
     icon: 'modelscope',
     enabled: true,
     apiKey: '',
@@ -116,7 +116,7 @@ export const initialProviders: ProviderConfig[] = [
   },
   {
     id: 'aionly',
-    name: '唯一—AI (AiOnly)',
+    name: '唯一—AI',
     icon: 'aihubmix',
     enabled: false,
     apiKey: '',
