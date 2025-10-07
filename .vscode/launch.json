@@ -1,0 +1,51 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Electron: 主进程",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge",
+      "runtimeArgs": [
+        "start",
+        "--",
+        "--inspect=5858",
+        "--remote-debugging-port=9223"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Electron: 渲染进程",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9223,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000,
+      "urlFilter": "http://localhost:*/*"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Electron: 主进程 + 渲染进程",
+      "configurations": [
+        "Electron: 主进程",
+        "Electron: 渲染进程"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "electron",
+        "order": 1
+      }
+    }
+  ]
+}
+

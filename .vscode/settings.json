@@ -1,0 +1,16 @@
+{
+  "debug.javascript.codelens.npmScripts": "never",
+  "debug.node.autoAttach": "disabled",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**/.vite": true,
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/.vite": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/out": true
+  }
+}
+
