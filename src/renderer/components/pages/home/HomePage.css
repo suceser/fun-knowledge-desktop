@@ -1,10 +1,15 @@
 .home-page {
   padding: 0;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 .page-header {
   margin-bottom: var(--spacing-3xl);
+  flex-shrink: 0;
 }
 
 .page-title {
@@ -37,6 +42,9 @@
 
 .page-content {
   background: transparent;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .feature-card {

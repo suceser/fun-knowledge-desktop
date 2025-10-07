@@ -1,15 +1,20 @@
 /* 设置页面主容器 */
 .settings-page {
   padding: 2rem;
-  min-height: 100vh;
+  min-height: 100%;
+  height: 100%;
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* 设置页面头部 */
 .settings-header {
   margin-bottom: 2rem;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .settings-title {
@@ -33,14 +38,18 @@
 .settings-layout {
   display: flex;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   gap: 2rem;
-  min-height: 600px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* 左侧导航栏 */
 .settings-sidebar {
   width: 280px;
+  min-width: 280px;
   background: rgba(26, 26, 46, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -48,6 +57,8 @@
   padding: 1.5rem;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .settings-sidebar:hover {
@@ -151,6 +162,10 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-y: auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings-content:hover {
@@ -161,8 +176,8 @@
 /* 内容容器 */
 .content-container {
   padding: 2rem;
-  height: 100%;
-  min-height: 500px;
+  flex: 1;
+  min-height: 0;
 }
 
 /* 内容占位符 */
@@ -196,11 +211,18 @@
   .settings-layout {
     flex-direction: column;
     gap: 1.5rem;
+    overflow-y: auto;
   }
   
   .settings-sidebar {
     width: 100%;
+    min-width: 100%;
     padding: 1rem;
+    overflow-y: visible;
+  }
+  
+  .settings-content {
+    overflow-y: visible;
   }
   
   .tab-group {

@@ -3,15 +3,31 @@
   overflow: hidden;
   position: relative;
   background: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-wrapper {
-  height: 100%;
+  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding: var(--spacing-2xl);
   background: transparent;
   position: relative;
+  min-height: 0; /* 重要：允许弹性项目正确滚动 */
+}
+
+/* 响应式内边距 */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: var(--spacing-md);
+  }
 }
 
 .content-loading {

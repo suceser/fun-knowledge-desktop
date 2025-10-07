@@ -2,6 +2,7 @@
   height: 100vh;
   overflow: hidden;
   background: var(--bg-gradient);
+  min-width: 900px; /* 防止布局被压缩到不可用 */
 }
 
 .main-sidebar {
@@ -10,6 +11,8 @@
   transition: all var(--transition-standard);
   background: transparent !important;
   border-right: 1px solid var(--border-color);
+  flex-shrink: 0; /* 防止侧边栏被压缩 */
+  min-width: 80px; /* 确保折叠状态下的最小宽度 */
 }
 
 .main-sidebar.ant-layout-sider-collapsed {
@@ -20,13 +23,15 @@
   position: relative;
   background: transparent;
   overflow: hidden;
+  flex: 1;
+  min-width: 0; /* 允许弹性收缩但不会溢出 */
 }
 
 .main-content {
   padding: 0;
   margin: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto; /* 改为 auto，允许在需要时滚动 */
   background: transparent;
 }
 

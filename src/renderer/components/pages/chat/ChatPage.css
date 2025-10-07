@@ -1,33 +1,75 @@
 .qna-page {
   padding: 0;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.page-header {
+  flex-shrink: 0; /* 防止标题被压缩 */
+}
+
+.page-content {
+  flex: 1;
+  min-height: 0; /* 允许正确滚动 */
+  overflow: hidden;
 }
 
 .qna-layout {
-  height: calc(100vh - 200px);
+  height: 100%;
   margin: 0 !important;
+  display: flex;
+  flex-wrap: nowrap; /* 防止在小屏幕上换行导致布局问题 */
 }
 
 .left-panel-col {
   padding: 0 8px 0 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px; /* 确保左侧面板有最小宽度 */
 }
 
 .chat-area-col {
   padding: 0 0 0 8px !important;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* 允许弹性收缩 */
 }
 
-/* 响应式设计 */
+/* 中等屏幕响应式设计 */
+@media (max-width: 1200px) {
+  .qna-layout {
+    flex-wrap: wrap;
+  }
+  
+  .left-panel-col {
+    min-width: 180px;
+  }
+}
+
+/* 小屏幕响应式设计 */
 @media (max-width: 768px) {
+  .qna-layout {
+    flex-direction: column;
+  }
+  
   .qna-layout .ant-col {
     padding: 0 !important;
     margin-bottom: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .left-panel-col {
     order: 2;
+    min-width: 100%;
   }
 
   .chat-area-col {
     order: 1;
+    min-width: 100%;
   }
 }
