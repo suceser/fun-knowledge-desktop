@@ -1,0 +1,229 @@
+.chat-settings-tab {
+  height: 100%;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* 折叠面板样式 */
+.settings-collapse {
+  background: transparent !important;
+}
+
+.settings-collapse .ant-collapse-item {
+  margin-bottom: 12px;
+  border: none !important;
+  background: rgba(26, 26, 46, 0.3) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.settings-collapse .ant-collapse-header {
+  padding: 12px 16px !important;
+  background: rgba(26, 26, 46, 0.5) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.settings-collapse .ant-collapse-header:hover {
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.settings-collapse .ant-collapse-content {
+  background: transparent !important;
+  border: none !important;
+}
+
+.settings-collapse .ant-collapse-content-box {
+  padding: 16px !important;
+}
+
+.settings-collapse .ant-collapse-expand-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 面板头部 */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-icon {
+  font-size: 16px;
+  color: #38b2ac;
+}
+
+.panel-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 设置项 */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.setting-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.setting-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+}
+
+.setting-help-icon {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  cursor: help;
+}
+
+.setting-help-icon:hover {
+  color: #38b2ac;
+}
+
+.setting-switch {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.setting-switch.ant-switch-checked {
+  background: #38b2ac !important;
+}
+
+/* 滑块样式 */
+.setting-slider {
+  margin-bottom: 20px;
+}
+
+.setting-slider .ant-slider-rail {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.setting-slider .ant-slider-track {
+  background: linear-gradient(90deg, #38b2ac 0%, #2d9189 100%);
+}
+
+.setting-slider .ant-slider-handle {
+  border-color: #38b2ac;
+  background: #fff;
+}
+
+.setting-slider .ant-slider-handle:hover,
+.setting-slider .ant-slider-handle:focus {
+  border-color: #47d3cd;
+  box-shadow: 0 0 0 4px rgba(56, 178, 172, 0.2);
+}
+
+/* 选择器样式 */
+.setting-item-select {
+  margin-bottom: 16px;
+}
+
+.setting-item-select .setting-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.setting-select {
+  width: 100%;
+  background: rgba(26, 26, 46, 0.6) !important;
+}
+
+.setting-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.setting-select .ant-select-selector:hover {
+  border-color: #38b2ac !important;
+}
+
+.setting-select.ant-select-focused .ant-select-selector {
+  border-color: #38b2ac !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2) !important;
+}
+
+.setting-select .ant-select-selection-item {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.setting-select .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 字体大小设置 */
+.setting-item-full {
+  margin-bottom: 0;
+}
+
+.setting-item-full .setting-label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.font-size-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.font-size-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.font-size-label.large {
+  font-size: 18px;
+}
+
+.font-size-container .setting-slider {
+  margin-bottom: 0;
+}
+
+.font-size-container .flex-1 {
+  flex: 1;
+}
+
+.font-size-value {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+
+/* 滚动条样式 */
+.chat-settings-tab::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-settings-tab::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-settings-tab::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #267872 100%);
+  border-radius: 3px;
+}
+
+.chat-settings-tab::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #47d3cd 0%, #38b2ac 100%);
+}
+

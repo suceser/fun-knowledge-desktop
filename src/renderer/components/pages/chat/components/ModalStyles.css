@@ -1,0 +1,90 @@
+/* Modal 全局样式覆盖 */
+
+/* 添加助手弹窗 */
+.add-assistant-modal .ant-modal-content {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-assistant-modal .ant-modal-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.add-assistant-modal .ant-modal-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.add-assistant-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.add-assistant-modal .ant-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 表单样式 */
+.add-assistant-form .ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.add-assistant-form .ant-input,
+.add-assistant-form .ant-input-textarea {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.add-assistant-form .ant-input::placeholder,
+.add-assistant-form .ant-input-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.add-assistant-form .ant-input:hover,
+.add-assistant-form .ant-input-textarea:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+}
+
+.add-assistant-form .ant-input:focus,
+.add-assistant-form .ant-input-textarea:focus,
+.add-assistant-form .ant-input-focused,
+.add-assistant-form .ant-input-textarea-focused {
+  border-color: #38b2ac;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+}
+
+/* 弹窗按钮样式 */
+.add-assistant-modal .ant-btn-default,
+.edit-prompt-modal .ant-btn-default {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.add-assistant-modal .ant-btn-default:hover,
+.edit-prompt-modal .ant-btn-default:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+  color: #38b2ac;
+}
+
+.add-assistant-modal .ant-btn-primary,
+.edit-prompt-modal .ant-btn-primary {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+}
+
+.add-assistant-modal .ant-btn-primary:hover,
+.edit-prompt-modal .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+
+/* 遮罩层样式 */
+.ant-modal-mask {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+

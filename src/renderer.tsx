@@ -26,10 +26,16 @@
  * ```
  */
 
-import './index.css';
-// Add this to the end of the existing file
-import './app';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './renderer/App';
 
-console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite',
-);
+// 获取根元素
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Root element not found');
+}
+
+// 创建 React 根并渲染应用
+const root = createRoot(container);
+root.render(<App />);

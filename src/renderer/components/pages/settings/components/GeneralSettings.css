@@ -1,0 +1,276 @@
+/* 常规设置样式 */
+.general-settings {
+  padding: 0;
+  width: 100%;
+}
+
+/* 设置头部 */
+.general-settings .settings-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.general-settings .settings-header h3 {
+  background: linear-gradient(135deg, #ffffff 0%, #38b2ac 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  line-height: 1.4 !important;
+}
+
+/* 设置区域 */
+.general-settings .settings-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 设置卡片 */
+.general-settings .settings-card {
+  background: rgba(26, 26, 46, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.general-settings .settings-card:hover {
+  border-color: rgba(56, 178, 172, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(56, 178, 172, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 卡片头部 */
+.general-settings .settings-card .ant-card-head {
+  background: rgba(56, 178, 172, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 12px 20px !important;
+  min-height: auto !important;
+}
+
+.general-settings .settings-card .ant-card-head-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+}
+
+/* 卡片内容 */
+.general-settings .settings-card .ant-card-body {
+  padding: 20px !important;
+  background: transparent !important;
+}
+
+/* 设置项 */
+.general-settings .setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  min-height: 40px;
+  transition: all 0.3s ease;
+}
+
+.general-settings .setting-item:hover {
+  background: rgba(56, 178, 172, 0.05);
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* 设置标签 */
+.general-settings .setting-label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.general-settings .setting-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.general-settings .setting-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* 选择器样式 */
+.general-settings .ant-select {
+  border-radius: 8px !important;
+}
+
+.general-settings .ant-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease;
+}
+
+.general-settings .ant-select:hover .ant-select-selector {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.1);
+}
+
+.general-settings .ant-select-focused .ant-select-selector {
+  border-color: #38b2ac !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2) !important;
+}
+
+.general-settings .ant-select .ant-select-selection-item {
+  color: #ffffff !important;
+  font-size: 13px;
+}
+
+.general-settings .ant-select .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 开关样式 */
+/* .general-settings .ant-switch {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+} */
+
+/* .general-settings .ant-switch:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.general-settings .ant-switch-checked {
+  background: #38b2ac !important;
+  border-color: #38b2ac;
+}
+
+.general-settings .ant-switch-checked:hover {
+  background: #329a94 !important;
+}
+
+.general-settings .ant-switch .ant-switch-handle {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.general-settings .ant-switch .ant-switch-handle::before {
+  background: #ffffff;
+} */
+
+/* 文本样式 */
+.general-settings .ant-typography {
+  color: #ffffff !important;
+  margin: 0 !important;
+}
+
+/* 空间组件 */
+.general-settings .ant-space {
+  width: 100%;
+}
+
+.general-settings .ant-space-item {
+  width: 100%;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .general-settings .settings-sections {
+    gap: 1rem;
+  }
+  
+  .general-settings .settings-card .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .general-settings .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: auto;
+  }
+  
+  .general-settings .setting-content {
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .general-settings .ant-select {
+    width: 100px !important;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.general-settings .settings-card {
+  animation: slideInUp 0.4s ease forwards;
+}
+
+.general-settings .settings-card:nth-child(1) { animation-delay: 0.1s; }
+.general-settings .settings-card:nth-child(2) { animation-delay: 0.2s; }
+.general-settings .settings-card:nth-child(3) { animation-delay: 0.3s; }
+.general-settings .settings-card:nth-child(4) { animation-delay: 0.4s; }
+.general-settings .settings-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* 滚动条样式 */
+.general-settings::-webkit-scrollbar {
+  width: 6px;
+}
+
+.general-settings::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.general-settings::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #329a94 100%);
+  border-radius: 3px;
+}
+
+.general-settings::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #329a94 0%, #2e918b 100%);
+}
+
+/* 下拉菜单样式 */
+.ant-select-dropdown {
+  background: rgba(26, 26, 46, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-select-dropdown .ant-select-item {
+  color: #ffffff !important;
+  background: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.ant-select-dropdown .ant-select-item:hover {
+  background: rgba(56, 178, 172, 0.1) !important;
+  color: #38b2ac !important;
+}
+
+.ant-select-dropdown .ant-select-item-option-selected {
+  background: rgba(56, 178, 172, 0.2) !important;
+  color: #38b2ac !important;
+  font-weight: 600;
+}
+
+.ant-select-dropdown .ant-select-item-option-active {
+  background: rgba(56, 178, 172, 0.1) !important;
+}

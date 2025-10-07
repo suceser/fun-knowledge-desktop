@@ -1,0 +1,212 @@
+.topic-tab {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topic-header {
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.add-topic-btn {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.add-topic-btn:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(56, 178, 172, 0.3);
+}
+
+.topic-list-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-state {
+  padding: 60px 20px;
+}
+
+.empty-state .ant-empty-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.topic-content {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(26, 26, 46, 0.3);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.topic-content:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.topic-content.active {
+  background: rgba(56, 178, 172, 0.15);
+}
+
+.topic-content:hover .topic-delete-btn {
+  opacity: 1;
+}
+
+.topic-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.topic-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+}
+
+.topic-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topic-time {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+.topic-delete-btn {
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.topic-content.active .topic-delete-btn {
+  opacity: 1;
+}
+
+.topic-delete-btn:hover {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+/* 滚动条样式 */
+.topic-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.topic-list-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.topic-list-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #267872 100%);
+  border-radius: 3px;
+}
+
+.topic-list-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #47d3cd 0%, #38b2ac 100%);
+}
+
+/* 弹窗样式 */
+.topic-modal .ant-modal-content {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topic-modal .ant-modal-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topic-modal .ant-modal-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.topic-modal .ant-modal-body {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.topic-modal .ant-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topic-modal .ant-btn-default {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.topic-modal .ant-btn-default:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+  color: #38b2ac;
+}
+
+.topic-modal .ant-btn-primary {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+}
+
+.topic-modal .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+
+.topic-modal .ant-btn-dangerous {
+  background: #ff4d4f;
+  border: none;
+  color: #fff;
+}
+
+.topic-modal .ant-btn-dangerous:hover {
+  background: #ff7875;
+  box-shadow: 0 4px 15px rgba(255, 77, 79, 0.3);
+}
+
+.topic-modal .ant-input:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+}
+
+.topic-modal .ant-input:focus {
+  border-color: #38b2ac;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+}
+
+.topic-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.topic-select:hover .ant-select-selector {
+  border-color: rgba(56, 178, 172, 0.5) !important;
+}
+
+

@@ -1,0 +1,82 @@
+/* Drawer 全局样式覆盖 */
+
+/* 遮罩层 */
+.ant-drawer-mask {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Drawer 内容样式 */
+.assistant-settings-drawer .ant-drawer-body {
+  background: rgba(15, 15, 35, 0.98);
+}
+
+/* Select 下拉菜单样式 */
+.ant-select-dropdown {
+  background: rgba(26, 26, 46, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ant-select-item {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ant-select-item-option-selected {
+  background: rgba(56, 178, 172, 0.2);
+  color: #38b2ac;
+}
+
+.ant-select-item-option-active {
+  background: rgba(56, 178, 172, 0.1);
+}
+
+/* InputNumber 按钮样式 */
+.setting-input-number .ant-input-number-handler-wrap {
+  background: rgba(26, 26, 46, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-input-number .ant-input-number-handler {
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.setting-input-number .ant-input-number-handler:hover {
+  color: #38b2ac;
+}
+
+.setting-input-number .ant-input-number-handler-up {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Empty 组件样式 */
+.ant-empty-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.ant-empty-image svg {
+  fill: rgba(255, 255, 255, 0.3);
+}
+
+/* Tag 样式 */
+.ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Button 样式增强 */
+.settings-section .ant-btn-text {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.settings-section .ant-btn-text:hover {
+  color: #38b2ac;
+  background: rgba(56, 178, 172, 0.1);
+}
+
+.settings-section .ant-btn-text.ant-btn-dangerous:hover {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+

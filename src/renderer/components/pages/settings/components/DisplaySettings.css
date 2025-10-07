@@ -1,0 +1,427 @@
+/* 显示设置样式 */
+.display-settings {
+  padding: 0;
+  width: 100%;
+}
+
+/* 设置区域 */
+.display-settings .settings-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 设置卡片 */
+.display-settings .settings-card {
+  background: rgba(26, 26, 46, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.display-settings .settings-card:hover {
+  border-color: rgba(56, 178, 172, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(56, 178, 172, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 卡片头部 */
+.display-settings .settings-card .ant-card-head {
+  background: rgba(56, 178, 172, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 12px 20px !important;
+  min-height: auto !important;
+}
+
+.display-settings .settings-card .ant-card-head-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+}
+
+/* New 标签 */
+.display-settings .new-badge {
+  background: #38b2ac;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* 卡片内容 */
+.display-settings .settings-card .ant-card-body {
+  padding: 20px !important;
+  background: transparent !important;
+}
+
+/* 设置项 */
+.display-settings .setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  min-height: 40px;
+  transition: all 0.3s ease;
+}
+
+.display-settings .setting-item:hover {
+  background: rgba(56, 178, 172, 0.05);
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* 设置标签 */
+.display-settings .setting-label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-bottom: 8px;
+}
+
+.display-settings .setting-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.display-settings .setting-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* 主题选择器 */
+.display-settings .theme-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.display-settings .theme-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.display-settings .theme-btn:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.display-settings .theme-btn.active {
+  background: #38b2ac !important;
+  border-color: #38b2ac !important;
+  color: #ffffff !important;
+}
+
+/* 颜色调色板 */
+.display-settings .color-palette {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.display-settings .color-item {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.display-settings .color-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.display-settings .color-item.selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.display-settings .color-hex {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: monospace;
+  margin-left: 8px;
+}
+
+/* 位置选择器 */
+.display-settings .position-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.display-settings .position-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  transition: all 0.3s ease;
+}
+
+.display-settings .position-btn:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.display-settings .position-btn.active {
+  background: #38b2ac !important;
+  border-color: #38b2ac !important;
+  color: #ffffff !important;
+}
+
+/* 缩放控制 */
+.display-settings .zoom-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.display-settings .zoom-label {
+  flex: 1;
+}
+
+.display-settings .zoom-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.display-settings .zoom-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 6px !important;
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.display-settings .zoom-btn:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.display-settings .zoom-display {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px 12px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.display-settings .reset-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 6px !important;
+  padding: 4px 12px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  transition: all 0.3s ease;
+}
+
+.display-settings .reset-btn:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+/* 图标类型选择器 */
+.display-settings .icon-type-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.display-settings .icon-type-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  transition: all 0.3s ease;
+}
+
+.display-settings .icon-type-btn:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  background: rgba(56, 178, 172, 0.1) !important;
+}
+
+.display-settings .icon-type-btn.active {
+  background: #38b2ac !important;
+  border-color: #38b2ac !important;
+  color: #ffffff !important;
+}
+
+/* 开关样式 */
+/* .display-settings .ant-switch {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px !important;
+  transition: all 0.3s ease;
+} */
+
+.display-settings .ant-switch:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.display-settings .ant-switch-checked {
+  background: #38b2ac !important;
+  border-color: #38b2ac;
+}
+
+.display-settings .ant-switch-checked:hover {
+  background: #329a94 !important;
+}
+
+.display-settings .ant-switch .ant-switch-handle {
+  background: #ffffff;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.display-settings .ant-switch .ant-switch-handle::before {
+  background: #ffffff;
+  border-radius: 50% !important;
+}
+
+/* 文本样式 */
+.display-settings .ant-typography {
+  color: #ffffff !important;
+  margin: 0 !important;
+}
+
+/* 空间组件 */
+.display-settings .ant-space {
+  width: 100%;
+}
+
+.display-settings .ant-space-item {
+  width: 100%;
+}
+
+/* 动画效果 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.display-settings .settings-card {
+  animation: slideInUp 0.4s ease forwards;
+}
+
+.display-settings .settings-card:nth-child(1) { animation-delay: 0.1s; }
+.display-settings .settings-card:nth-child(2) { animation-delay: 0.2s; }
+.display-settings .settings-card:nth-child(3) { animation-delay: 0.3s; }
+.display-settings .settings-card:nth-child(4) { animation-delay: 0.4s; }
+.display-settings .settings-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .display-settings .settings-sections {
+    gap: 1rem;
+  }
+  
+  .display-settings .settings-card .ant-card-body {
+    padding: 16px !important;
+  }
+  
+  .display-settings .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: auto;
+  }
+  
+  .display-settings .setting-content {
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .display-settings .theme-selector,
+  .display-settings .position-selector,
+  .display-settings .icon-type-selector {
+    flex-wrap: wrap;
+  }
+  
+  .display-settings .color-palette {
+    justify-content: flex-start;
+  }
+  
+  .display-settings .zoom-control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .display-settings .zoom-slider {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* 滚动条样式 */
+.display-settings::-webkit-scrollbar {
+  width: 6px;
+}
+
+.display-settings::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.display-settings::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #329a94 100%);
+  border-radius: 3px;
+}
+
+.display-settings::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #329a94 0%, #2e918b 100%);
+}

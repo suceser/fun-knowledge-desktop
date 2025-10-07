@@ -1,0 +1,84 @@
+.left-panel {
+  height: 100%;
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-panel-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.left-panel-tabs .ant-tabs-nav {
+  background: rgba(26, 26, 46, 0.5);
+  margin: 0;
+  padding: 8px 12px 0;
+  flex-shrink: 0;
+}
+
+.left-panel-tabs .ant-tabs-tab {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.left-panel-tabs .ant-tabs-tab:hover {
+  color: #38b2ac;
+}
+
+.left-panel-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #38b2ac;
+  font-weight: 600;
+}
+
+.left-panel-tabs .ant-tabs-ink-bar {
+  background: #38b2ac;
+}
+
+.left-panel-tabs .ant-tabs-content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.left-panel-tabs .ant-tabs-content-holder {
+  height: 100%;
+  overflow: hidden;
+}
+
+.left-panel-tabs .ant-tabs-tabpane {
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 滚动条样式 */
+.left-panel-tabs .ant-tabs-content-holder::-webkit-scrollbar {
+  width: 6px;
+}
+
+.left-panel-tabs .ant-tabs-content-holder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.left-panel-tabs .ant-tabs-content-holder::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #267872 100%);
+  border-radius: 3px;
+}
+
+.left-panel-tabs .ant-tabs-content-holder::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #47d3cd 0%, #38b2ac 100%);
+}
+

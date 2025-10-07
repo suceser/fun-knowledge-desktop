@@ -1,0 +1,502 @@
+/* 快捷键设置样式 */
+.shortcut-settings {
+  padding: 0;
+  width: 100%;
+}
+
+/* 设置区域 */
+.shortcut-settings .settings-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 设置卡片 */
+.shortcut-settings .settings-card {
+  background: rgba(26, 26, 46, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.shortcut-settings .settings-card:hover {
+  border-color: rgba(56, 178, 172, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(56, 178, 172, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 卡片头部 */
+.shortcut-settings .settings-card .ant-card-head {
+  background: rgba(56, 178, 172, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 12px 20px !important;
+  min-height: auto !important;
+}
+
+.shortcut-settings .settings-card .ant-card-head-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+}
+
+/* 卡片内容 */
+.shortcut-settings .settings-card .ant-card-body {
+  padding: 20px !important;
+  background: transparent !important;
+}
+
+/* 恢复默认按钮 */
+.reset-all-btn {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border: 1px solid rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reset-all-btn:hover {
+  background: rgba(56, 178, 172, 0.2) !important;
+  border-color: rgba(56, 178, 172, 0.4) !important;
+  color: #3ecac4 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.2);
+}
+
+/* 快捷键容器 */
+.shortcuts-container {
+  width: 100%;
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 快捷键项 */
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: rgba(26, 26, 46, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  gap: 16px;
+}
+
+.shortcut-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(56, 178, 172, 0.05), transparent);
+  transition: left 0.6s ease;
+}
+
+.shortcut-item:hover::before {
+  left: 100%;
+}
+
+.shortcut-item:hover {
+  background: rgba(56, 178, 172, 0.08);
+  border-color: rgba(56, 178, 172, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.1);
+}
+
+.shortcut-item.disabled {
+  opacity: 0.5;
+  background: rgba(26, 26, 46, 0.2);
+}
+
+.shortcut-item.disabled:hover {
+  background: rgba(26, 26, 46, 0.25);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: none;
+  box-shadow: none;
+}
+
+/* 快捷键信息 */
+.shortcut-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shortcut-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shortcut-icon {
+  color: #38b2ac;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.shortcut-item:hover .shortcut-icon {
+  color: #3ecac4;
+  transform: scale(1.1);
+}
+
+.shortcut-name {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.shortcut-toggle {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.shortcut-toggle .ant-switch {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.shortcut-toggle .ant-switch-checked {
+  background-color: #38b2ac !important;
+}
+
+.shortcut-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-left: 32px;
+}
+
+/* 快捷键控制区域 */
+.shortcut-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+  justify-content: center;
+}
+
+/* 快捷键显示 */
+.shortcut-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shortcut-key {
+  background: rgba(56, 178, 172, 0.15) !important;
+  border: 1px solid rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace !important;
+  min-width: 80px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.shortcut-key:hover {
+  background: rgba(56, 178, 172, 0.2) !important;
+  border-color: rgba(56, 178, 172, 0.4) !important;
+  color: #3ecac4 !important;
+  transform: scale(1.05);
+}
+
+.shortcut-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 编辑和重置按钮 */
+.edit-btn, .reset-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.edit-btn:hover, .reset-btn:hover {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.15);
+}
+
+.edit-btn:disabled, .reset-btn:disabled {
+  background: rgba(26, 26, 46, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 快捷键编辑 */
+.shortcut-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.key-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.key-input {
+  flex: 1;
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  transition: all 0.3s ease;
+}
+
+.key-input:focus {
+  background: rgba(26, 26, 46, 0.8) !important;
+  border-color: rgba(56, 178, 172, 0.4) !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.1) !important;
+}
+
+.key-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.record-btn {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border: 1px solid rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 60px;
+}
+
+.record-btn:hover {
+  background: rgba(56, 178, 172, 0.2) !important;
+  border-color: rgba(56, 178, 172, 0.4) !important;
+  color: #3ecac4 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.2);
+}
+
+.record-btn.recording {
+  background: rgba(255, 193, 7, 0.1) !important;
+  border-color: rgba(255, 193, 7, 0.3) !important;
+  color: #ffc107 !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  background: rgba(56, 178, 172, 0.2) !important;
+  border: 1px solid rgba(56, 178, 172, 0.4) !important;
+  color: #38b2ac !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 16px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.save-btn:hover {
+  background: rgba(56, 178, 172, 0.3) !important;
+  border-color: rgba(56, 178, 172, 0.5) !important;
+  color: #3ecac4 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.25);
+}
+
+.cancel-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 16px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cancel-btn:hover {
+  background: rgba(220, 53, 69, 0.1) !important;
+  border-color: rgba(220, 53, 69, 0.3) !important;
+  color: #dc3545 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+}
+
+/* 信息卡片 */
+.info-card {
+  background: rgba(26, 26, 46, 0.3) !important;
+}
+
+.default-shortcuts-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.default-shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.default-shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgba(26, 26, 46, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.default-shortcut-item:hover {
+  background: rgba(56, 178, 172, 0.05);
+  border-color: rgba(56, 178, 172, 0.1);
+}
+
+.default-shortcut-item span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .shortcut-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .shortcut-controls {
+    width: 100%;
+    justify-content: flex-start;
+    min-width: auto;
+  }
+  
+  .shortcut-edit {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .key-input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .record-btn {
+    width: 100%;
+  }
+  
+  .edit-actions {
+    justify-content: stretch;
+  }
+  
+  .save-btn, .cancel-btn {
+    flex: 1;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shortcut-item {
+  animation: slideIn 0.4s ease forwards;
+}
+
+.shortcut-item:nth-child(1) { animation-delay: 0.05s; }
+.shortcut-item:nth-child(2) { animation-delay: 0.1s; }
+.shortcut-item:nth-child(3) { animation-delay: 0.15s; }
+.shortcut-item:nth-child(4) { animation-delay: 0.2s; }
+.shortcut-item:nth-child(5) { animation-delay: 0.25s; }
+.shortcut-item:nth-child(6) { animation-delay: 0.3s; }
+.shortcut-item:nth-child(7) { animation-delay: 0.35s; }
+.shortcut-item:nth-child(8) { animation-delay: 0.4s; }
+.shortcut-item:nth-child(9) { animation-delay: 0.45s; }
+.shortcut-item:nth-child(10) { animation-delay: 0.5s; }
+.shortcut-item:nth-child(11) { animation-delay: 0.55s; }
+.shortcut-item:nth-child(12) { animation-delay: 0.6s; }
+.shortcut-item:nth-child(13) { animation-delay: 0.65s; }
+
+/* 滚动条样式 */
+.shortcuts-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.shortcuts-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.shortcuts-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #329a94 100%);
+  border-radius: 3px;
+}
+
+.shortcuts-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #329a94 0%, #2e918b 100%);
+}

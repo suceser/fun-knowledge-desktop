@@ -1,0 +1,139 @@
+/* 趣知桌面版应用样式 */
+
+/* 全局重置 */
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Antd 组件覆盖样式 */
+.ant-layout {
+  background: transparent !important;
+}
+
+.ant-layout-sider {
+  background: transparent !important;
+}
+
+.ant-layout-content {
+  background: transparent !important;
+}
+
+.ant-card {
+  box-shadow: var(--shadow-light) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.ant-card:hover {
+  box-shadow: var(--shadow-hover) !important;
+}
+
+.ant-btn {
+  transition: all var(--transition-fast) !important;
+}
+
+.ant-spin-dot-item {
+  background-color: var(--primary-color) !important;
+}
+
+.ant-typography {
+  color: var(--text-primary) !important;
+}
+
+.ant-typography.ant-typography-caption {
+  color: var(--text-secondary) !important;
+}
+
+.ant-tooltip .ant-tooltip-inner {
+  background: var(--bg-translucent-heavy) !important;
+  backdrop-filter: var(--backdrop-blur-medium);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary) !important;
+}
+
+.ant-tooltip .ant-tooltip-arrow::before {
+  background: var(--bg-translucent-heavy) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* 通用工具类 */
+.glass-card {
+  background: var(--bg-translucent-medium) !important;
+  backdrop-filter: var(--backdrop-blur-medium);
+  border: 1px solid var(--border-color) !important;
+}
+
+/* 页面通用样式 */
+.page-header {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.title-text {
+  margin: 0 !important;
+  color: var(--text-primary) !important;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-description {
+  margin: 0 !important;
+  color: var(--text-secondary) !important;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.placeholder-card {
+  background: var(--bg-translucent-medium) !important;
+  backdrop-filter: var(--backdrop-blur-medium);
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-xl) !important;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-card .ant-card-body {
+  padding: var(--spacing-3xl) !important;
+  background: transparent !important;
+}
+
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+.placeholder-content .ant-typography {
+  color: var(--text-primary) !important;
+  text-align: center;
+}
+
+.placeholder-content .ant-typography p {
+  color: var(--text-secondary) !important;
+  max-width: 500px;
+  line-height: 1.8;
+}

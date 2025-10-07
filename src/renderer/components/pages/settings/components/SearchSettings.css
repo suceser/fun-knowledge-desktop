@@ -1,0 +1,367 @@
+/* 网络搜索设置样式 */
+.settings-content-section {
+  padding: 0;
+  min-height: 100%;
+}
+
+.search-settings {
+  width: 100%;
+  height: 100%;
+}
+
+/* 设置头部 */
+.settings-header {
+  margin-bottom: 2rem;
+}
+
+.settings-header .ant-typography {
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 设置区域容器 */
+.settings-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 设置卡片 */
+.settings-card {
+  background: rgba(26, 26, 46, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.settings-card:hover {
+  border-color: rgba(56, 178, 172, 0.2) !important;
+  box-shadow: 0 8px 25px rgba(56, 178, 172, 0.1);
+}
+
+.settings-card .ant-card-head {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.settings-card .ant-card-head-title {
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+}
+
+.settings-card .ant-card-body {
+  padding: 1.5rem !important;
+  background: transparent !important;
+}
+
+/* 设置项 */
+.setting-item {
+  margin-bottom: 1.5rem;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.setting-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.setting-info .ant-typography {
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
+}
+
+.setting-description {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+}
+
+/* 表单组件样式 */
+.ant-select {
+  min-width: 120px;
+}
+
+.ant-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+}
+
+.ant-select .ant-select-selector:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #38b2ac !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.1) !important;
+}
+
+.ant-select .ant-select-selection-item {
+  color: #ffffff !important;
+}
+
+.ant-select .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 输入框样式 */
+.ant-input {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-size: 0.9rem;
+}
+
+.ant-input:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+}
+
+.ant-input:focus {
+  border-color: #38b2ac !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.1);
+}
+
+.ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 文本域样式 */
+.ant-input {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 开关样式 */
+.ant-switch {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.ant-switch-checked {
+  background: #38b2ac !important;
+}
+
+.ant-switch:hover:not(.ant-switch-disabled) {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.ant-switch-checked:hover:not(.ant-switch-disabled) {
+  background: #2d8a82 !important;
+}
+
+/* 滑块样式 */
+.ant-slider {
+  margin: 0.5rem 0;
+}
+
+.ant-slider-rail {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-slider-track {
+  background: #38b2ac !important;
+}
+
+.ant-slider-handle {
+  border: 2px solid #38b2ac !important;
+  background: #ffffff !important;
+}
+
+.ant-slider-handle:hover {
+  border-color: #2d8a82 !important;
+}
+
+.ant-slider-handle:focus {
+  border-color: #2d8a82 !important;
+  box-shadow: 0 0 0 5px rgba(56, 178, 172, 0.1) !important;
+}
+
+.ant-slider-dot {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.ant-slider-dot-active {
+  border-color: #38b2ac !important;
+}
+
+/* 滑块标签 */
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 按钮样式 */
+.ant-btn {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, #38b2ac 0%, #2d8a82 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #2d8a82 0%, #236b63 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3);
+}
+
+.ant-btn-default {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.ant-btn-default:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+}
+
+.ant-btn-link {
+  color: #38b2ac !important;
+  padding: 0 !important;
+  height: auto !important;
+  font-size: 0.9rem !important;
+}
+
+.ant-btn-link:hover {
+  color: #2d8a82 !important;
+}
+
+/* 标签样式 */
+.ant-tag {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border: 1px solid rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  border-radius: 6px !important;
+  font-size: 0.8rem !important;
+  padding: 2px 8px !important;
+}
+
+/* 黑名单区域 */
+.blacklist-section {
+  margin-top: 1rem;
+}
+
+.blacklist-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.blacklist-input .ant-input {
+  flex: 1;
+}
+
+.blacklist-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.blacklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 77, 79, 0.1) !important;
+  border: 1px solid rgba(255, 77, 79, 0.3) !important;
+  color: #ff4d4f !important;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.blacklist-item .anticon {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.blacklist-item .anticon:hover {
+  opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .setting-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .ant-select {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .blacklist-input {
+    flex-direction: column;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* 滚动条样式 */
+.settings-sections::-webkit-scrollbar {
+  width: 6px;
+}
+
+.settings-sections::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.settings-sections::-webkit-scrollbar-thumb {
+  background: rgba(56, 178, 172, 0.3);
+  border-radius: 3px;
+}
+
+.settings-sections::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 178, 172, 0.5);
+}

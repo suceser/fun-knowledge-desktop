@@ -1,0 +1,193 @@
+/* 通用设置样式 */
+.settings-section {
+  max-width: 900px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-header {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.section-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.section-description {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 13px;
+  margin: 0 !important;
+}
+
+.settings-form {
+  width: 100%;
+}
+
+.settings-form .ant-form-item {
+  margin-bottom: 24px;
+}
+
+.settings-form .ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.setting-input,
+.setting-textarea,
+.setting-select,
+.setting-input-number {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+}
+
+.setting-input:disabled,
+.setting-textarea:disabled {
+  background: rgba(26, 26, 46, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: not-allowed;
+}
+
+.setting-input::placeholder,
+.setting-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.setting-input:hover:not(:disabled),
+.setting-textarea:hover:not(:disabled) {
+  border-color: rgba(56, 178, 172, 0.5);
+}
+
+.setting-input:focus,
+.setting-textarea:focus,
+.setting-input-focused,
+.setting-textarea-focused {
+  border-color: #38b2ac;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+}
+
+.setting-textarea {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.settings-form .ant-input-textarea-show-count::after {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.token-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+}
+
+.settings-form .ant-btn-default {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+}
+
+.settings-form .ant-btn-default:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+  color: #38b2ac;
+}
+
+.settings-form .ant-btn-primary {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+  border-radius: 6px;
+}
+
+.settings-form .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+
+/* Switch 样式 */
+.settings-form .ant-switch {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.settings-form .ant-switch-checked {
+  background: #38b2ac;
+}
+
+/* Select 样式 */
+.setting-select .ant-select-selector {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+}
+
+.setting-select .ant-select-arrow {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.setting-select:hover .ant-select-selector {
+  border-color: rgba(56, 178, 172, 0.5) !important;
+}
+
+/* 空状态 */
+.empty-state-wrapper {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-state-wrapper .ant-empty-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 卡片列表 */
+.settings-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-card-item {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.settings-card-item:hover {
+  background: rgba(56, 178, 172, 0.1);
+  border-color: rgba(56, 178, 172, 0.3);
+}
+

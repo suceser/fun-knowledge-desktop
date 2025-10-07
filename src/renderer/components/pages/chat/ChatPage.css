@@ -1,0 +1,33 @@
+.qna-page {
+  padding: 0;
+  background: transparent;
+}
+
+.qna-layout {
+  height: calc(100vh - 200px);
+  margin: 0 !important;
+}
+
+.left-panel-col {
+  padding: 0 8px 0 0 !important;
+}
+
+.chat-area-col {
+  padding: 0 0 0 8px !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .qna-layout .ant-col {
+    padding: 0 !important;
+    margin-bottom: 16px;
+  }
+
+  .left-panel-col {
+    order: 2;
+  }
+
+  .chat-area-col {
+    order: 1;
+  }
+}

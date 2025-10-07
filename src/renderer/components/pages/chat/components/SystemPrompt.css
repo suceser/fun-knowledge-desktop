@@ -1,0 +1,163 @@
+.system-prompt-card {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.system-prompt-card:hover {
+  background: rgba(56, 178, 172, 0.1);
+  border-color: rgba(56, 178, 172, 0.3);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.15);
+}
+
+.system-prompt-card .ant-card-body {
+  padding: 16px;
+}
+
+.system-prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.assistant-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.assistant-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.assistant-name-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.edit-btn {
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  color: #38b2ac;
+  background: rgba(56, 178, 172, 0.1);
+}
+
+.system-prompt-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.6;
+  display: block;
+}
+
+/* 弹窗样式 */
+.edit-prompt-modal .ant-modal-content {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edit-prompt-modal .ant-modal-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.edit-prompt-modal .ant-modal-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.edit-prompt-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.edit-prompt-modal .ant-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.edit-prompt-form .ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label-hint {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.edit-prompt-form .ant-input,
+.edit-prompt-form .ant-input-textarea {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.edit-prompt-form .ant-input::placeholder,
+.edit-prompt-form .ant-input-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.edit-prompt-form .ant-input:hover,
+.edit-prompt-form .ant-input-textarea:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+}
+
+.edit-prompt-form .ant-input:focus,
+.edit-prompt-form .ant-input-textarea:focus,
+.edit-prompt-form .ant-input-focused,
+.edit-prompt-form .ant-input-textarea-focused {
+  border-color: #38b2ac;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.2);
+}
+
+.edit-prompt-form .ant-input-textarea-show-count::after {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 弹窗按钮样式 */
+.edit-prompt-modal .ant-btn-default {
+  background: rgba(26, 26, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.edit-prompt-modal .ant-btn-default:hover {
+  border-color: rgba(56, 178, 172, 0.5);
+  color: #38b2ac;
+}
+
+.edit-prompt-modal .ant-btn-primary {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+}
+
+.edit-prompt-modal .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+

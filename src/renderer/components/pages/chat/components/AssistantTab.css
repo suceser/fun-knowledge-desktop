@@ -1,0 +1,105 @@
+.assistant-tab {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.assistant-header {
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.add-assistant-btn {
+  background: linear-gradient(135deg, #38b2ac 0%, #329a94 100%);
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.add-assistant-btn:hover {
+  background: linear-gradient(135deg, #47d3cd 0%, #38b2ac 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(56, 178, 172, 0.3);
+}
+
+.assistant-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.assistant-list .ant-list-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: rgba(26, 26, 46, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.assistant-list .ant-list-item:hover {
+  background: rgba(56, 178, 172, 0.1);
+  border-color: rgba(56, 178, 172, 0.3);
+  transform: translateX(4px);
+}
+
+.assistant-list .ant-list-item.default-assistant {
+  border-color: rgba(56, 178, 172, 0.5);
+  background: rgba(56, 178, 172, 0.15);
+}
+
+.assistant-list .ant-list-item.active {
+  background: rgba(56, 178, 172, 0.25);
+  border-color: #38b2ac;
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.2);
+}
+
+.assistant-avatar {
+  background: rgba(56, 178, 172, 0.2);
+  font-size: 20px;
+}
+
+.assistant-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assistant-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.default-icon {
+  color: #38b2ac;
+  font-size: 14px;
+}
+
+.assistant-description {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+/* 滚动条样式 */
+.assistant-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.assistant-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.assistant-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38b2ac 0%, #267872 100%);
+  border-radius: 3px;
+}
+
+.assistant-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #47d3cd 0%, #38b2ac 100%);
+}
+

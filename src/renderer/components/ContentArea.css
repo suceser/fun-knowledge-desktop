@@ -1,0 +1,73 @@
+.content-area {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.content-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-2xl);
+  background: transparent;
+  position: relative;
+}
+
+.content-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+.content-loading .ant-spin {
+  color: var(--primary-color) !important;
+}
+
+.content-loading .ant-spin-dot-item {
+  background-color: var(--primary-color) !important;
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  animation: pulse 2s infinite;
+}
+
+/* 内容区域的滚动条样式 */
+.content-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: 3px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-darker) 100%);
+}
+
+/* 页面过渡动画 */
+.content-wrapper > * {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

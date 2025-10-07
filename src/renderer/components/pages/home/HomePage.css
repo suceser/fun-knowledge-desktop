@@ -1,0 +1,99 @@
+.home-page {
+  padding: 0;
+  background: transparent;
+}
+
+.page-header {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.title-text {
+  margin: 0 !important;
+  color: var(--text-primary) !important;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-description {
+  margin: 0 !important;
+  color: var(--text-secondary) !important;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.page-content {
+  background: transparent;
+}
+
+.feature-card {
+  background: var(--bg-translucent-medium) !important;
+  backdrop-filter: var(--backdrop-blur-medium);
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-xl) !important;
+  transition: all var(--transition-fast);
+  height: 200px;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color) !important;
+}
+
+.feature-card .ant-card-body {
+  padding: var(--spacing-2xl) !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent !important;
+}
+
+.card-content {
+  width: 100%;
+}
+
+.card-content .ant-typography {
+  color: var(--text-primary) !important;
+  margin-bottom: var(--spacing-lg) !important;
+}
+
+.card-content .ant-typography p {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+  line-height: 1.6;
+}
+
+/* 动画效果 */
+.feature-card {
+  animation: slideUp 0.6s ease forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
