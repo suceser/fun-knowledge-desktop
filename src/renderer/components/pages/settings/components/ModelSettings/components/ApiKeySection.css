@@ -1,0 +1,82 @@
+/* API Key 配置区域样式 */
+
+/* 表单项 */
+.form-item {
+  margin-bottom: 1rem;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.5rem !important;
+  display: block;
+}
+
+.form-input .ant-input {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: #ffffff !important;
+  font-size: 0.9rem;
+}
+
+.form-input .ant-input:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+}
+
+.form-input .ant-input:focus {
+  border-color: #38b2ac !important;
+  box-shadow: 0 0 0 2px rgba(56, 178, 172, 0.1);
+}
+
+.form-input .ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* 密码输入框 */
+.password-input {
+  position: relative;
+}
+
+.password-input .ant-input-password {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+}
+
+.password-input .ant-input-password:hover {
+  border-color: rgba(56, 178, 172, 0.3) !important;
+}
+
+.password-input .ant-input-password-icon {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.password-input .ant-input-password-icon:hover {
+  color: #38b2ac !important;
+}
+
+/* 测试按钮 */
+.test-btn {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border: 1px solid rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  transition: all 0.3s ease;
+}
+
+.test-btn:hover {
+  background: rgba(56, 178, 172, 0.2) !important;
+  border-color: rgba(56, 178, 172, 0.5) !important;
+  color: #3ecac4 !important;
+  transform: translateY(-1px);
+}
+

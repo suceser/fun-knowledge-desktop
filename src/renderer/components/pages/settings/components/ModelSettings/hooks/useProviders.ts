@@ -1,80 +1,77 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import { message } from 'antd';
+import { ProviderConfig, ModelInfo } from '../types';
+import { initialProviders } from '../constants';
 
-interface ModelInfo {
-  id: string;
-  name: string;
-  displayName: string;
-  status: 'available' | 'unavailable';
-  maxTokens?: number;
-  supportStream?: boolean;
-  costPer1kTokens?: number;
-  isCustom?: boolean;
-}
-
-interface ProviderConfig {
-  id: string;
-  name: string;
-  icon: string;
-  enabled: boolean;
-  apiKey: string;
-  apiUrl: string;
-  models: ModelInfo[];
-  description?: string;
-}
-
-export function useProviders(initialProviders: ProviderConfig[]) {
+export const useProviders = () => {
   const [providers, setProviders] = useState<ProviderConfig[]>(initialProviders);
   const [selectedProviderId, setSelectedProviderId] = useState<string>('modelscope');
 
-  const selectedProvider = providers.find((p) => p.id === selectedProviderId);
+  // 获取选中的提供商
+  const selectedProvider = useMemo(
+    () => providers.find((p) => p.id === selectedProviderId),
+    [providers, selectedProviderId]
+  );
 
-  // 更新提供商启用状态
-  const toggleProvider = (enabled: boolean) => {
-    setProviders(
-      providers.map((p) =>
-        p.id === selectedProviderId ? { ...p, enabled } : p
-      )
+  // 启用/禁用提供商
+  const toggleProvider = useCallback((providerId: string, enabled: boolean) => {
+    setProviders((prev) =>
+      prev.map((p) => (p.id === providerId ? { ...p, enabled } : p))
     );
-  };
+    message.success(enabled ? '服务商已启用' : '服务商已禁用');
+  }, []);
 
-  // 更新 API Key
-  const updateApiKey = (apiKey: string) => {
-    setProviders(
-      providers.map((p) =>
-        p.id === selectedProviderId ? { ...p, apiKey } : p
-      )
+  // 更新 API 密钥
+  const updateApiKey = useCallback((providerId: string, apiKey: string) => {
+    setProviders((prev) =>
+      prev.map((p) => (p.id === providerId ? { ...p, apiKey } : p))
     );
-  };
+  }, []);
 
-  // 更新 API URL
-  const updateApiUrl = (apiUrl: string) => {
-    setProviders(
-      providers.map((p) =>
-        p.id === selectedProviderId ? { ...p, apiUrl } : p
-      )
+  // 更新 API 地址
+  const updateApiUrl = useCallback((providerId: string, apiUrl: string) => {
+    setProviders((prev) =>
+      prev.map((p) => (p.id === providerId ? { ...p, apiUrl } : p))
     );
-  };
+  }, []);
 
   // 添加模型
-  const addModel = (model: ModelInfo) => {
-    setProviders(
-      providers.map((p) => {
-        if (p.id === selectedProviderId) {
+  const addModel = useCallback((providerId: string, model: Partial<ModelInfo>) => {
+    if (!model.name || !model.displayName) {
+      message.warning('请填写模型完整信息');
+      return false;
+    }
+
+    setProviders((prev) =>
+      prev.map((p) => {
+        if (p.id === providerId) {
           return {
             ...p,
-            models: [...p.models, model],
+            models: [
+              ...p.models,
+              {
+                id: model.name?.toLowerCase().replace(/\//g, '-') || '',
+                name: model.name || '',
+                displayName: model.displayName || '',
+                status: model.status || 'available',
+                supportStream: model.supportStream,
+                isCustom: true,
+              } as ModelInfo,
+            ],
           };
         }
         return p;
       })
     );
-  };
+    message.success('模型添加成功');
+    return true;
+  }, []);
 
   // 删除模型
-  const deleteModel = (modelId: string) => {
-    setProviders(
-      providers.map((p) => {
-        if (p.id === selectedProviderId) {
+  const deleteModel = useCallback((providerId: string, modelId: string) => {
+    setProviders((prev) =>
+      prev.map((p) => {
+        if (p.id === providerId) {
           return {
             ...p,
             models: p.models.filter((m) => m.id !== modelId),
@@ -83,7 +80,8 @@ export function useProviders(initialProviders: ProviderConfig[]) {
         return p;
       })
     );
-  };
+    message.success('模型已删除');
+  }, []);
 
   return {
     providers,
@@ -96,5 +94,5 @@ export function useProviders(initialProviders: ProviderConfig[]) {
     addModel,
     deleteModel,
   };
-}
+};
 

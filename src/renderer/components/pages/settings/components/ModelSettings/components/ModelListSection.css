@@ -1,0 +1,122 @@
+/* 模型列表区域样式 */
+
+.models-section {
+  margin-top: 1rem;
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.model-item {
+  background: rgba(26, 26, 46, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.model-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(56, 178, 172, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.model-item:hover::before {
+  left: 100%;
+}
+
+.model-item:hover {
+  background: rgba(56, 178, 172, 0.1);
+  border-color: rgba(56, 178, 172, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 模型项动画延迟 */
+.model-item:nth-child(1) { animation-delay: 0.6s; }
+.model-item:nth-child(2) { animation-delay: 0.65s; }
+.model-item:nth-child(3) { animation-delay: 0.7s; }
+.model-item:nth-child(4) { animation-delay: 0.75s; }
+.model-item:nth-child(5) { animation-delay: 0.8s; }
+.model-item:nth-child(6) { animation-delay: 0.85s; }
+
+.model-name {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.model-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.model-status .status-indicator {
+  width: 6px;
+  height: 6px;
+}
+
+.model-status .status-text {
+  font-size: 0.7rem;
+}
+
+/* 操作按钮区域 */
+.config-actions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 1rem;
+}
+
+.action-btn {
+  height: 36px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.manage-btn {
+  background: #38b2ac !important;
+  border-color: #38b2ac !important;
+  color: #ffffff !important;
+}
+
+.manage-btn:hover {
+  background: #329a94 !important;
+  border-color: #329a94 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+
+.add-btn {
+  background: rgba(26, 26, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.add-btn:hover {
+  background: rgba(56, 178, 172, 0.1) !important;
+  border-color: rgba(56, 178, 172, 0.3) !important;
+  color: #38b2ac !important;
+  transform: translateY(-1px);
+}
+

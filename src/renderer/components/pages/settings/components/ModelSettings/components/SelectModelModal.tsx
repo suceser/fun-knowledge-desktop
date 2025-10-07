@@ -1,38 +1,32 @@
 import React from 'react';
 import { Modal, Select, Typography } from 'antd';
+import { ModelInfo } from '../types';
 
 const { Text } = Typography;
 const { Option } = Select;
 
-interface Model {
-  id: string;
-  name: string;
-  displayName: string;
-  status: 'available' | 'unavailable';
-}
-
 interface SelectModelModalProps {
   visible: boolean;
-  models: Model[];
-  selectedModel: string;
-  onModelChange: (modelId: string) => void;
-  onOk: () => void;
+  models: ModelInfo[];
+  selectedModelId: string;
+  onSelect: (modelId: string) => void;
+  onConfirm: () => void;
   onCancel: () => void;
 }
 
-function SelectModelModal({
+export const SelectModelModal: React.FC<SelectModelModalProps> = ({
   visible,
   models,
-  selectedModel,
-  onModelChange,
-  onOk,
+  selectedModelId,
+  onSelect,
+  onConfirm,
   onCancel,
-}: SelectModelModalProps): React.ReactElement {
+}) => {
   return (
     <Modal
       title="选择测试模型"
       open={visible}
-      onOk={onOk}
+      onOk={onConfirm}
       onCancel={onCancel}
       okText="开始检测"
       cancelText="取消"
@@ -56,8 +50,8 @@ function SelectModelModal({
             选择模型
           </Text>
           <Select
-            value={selectedModel}
-            onChange={onModelChange}
+            value={selectedModelId}
+            onChange={onSelect}
             style={{ width: '100%' }}
             placeholder="请选择模型"
           >
@@ -100,7 +94,5 @@ function SelectModelModal({
       </div>
     </Modal>
   );
-}
-
-export default SelectModelModal;
+};
 

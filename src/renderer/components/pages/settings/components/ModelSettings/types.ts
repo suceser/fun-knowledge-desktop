@@ -1,7 +1,3 @@
-/**
- * 模型设置相关类型定义
- */
-
 export interface ModelInfo {
   id: string;
   name: string;
@@ -24,7 +20,7 @@ export interface ProviderConfig {
   description?: string;
 }
 
-export interface TestResult {
+export interface ApiTestResult {
   success: boolean;
   error?: string;
   model?: string;

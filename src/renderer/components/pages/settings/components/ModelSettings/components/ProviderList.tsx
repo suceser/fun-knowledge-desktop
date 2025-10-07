@@ -1,39 +1,35 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Typography, Input } from 'antd';
 import { SearchOutlined, ApiOutlined } from '@ant-design/icons';
+import { ProviderConfig } from '../types';
+import './ProviderList.css';
 
 const { Title, Text } = Typography;
 
-interface Model {
-  id: string;
-  name: string;
-  displayName: string;
-  status: 'available' | 'unavailable';
-}
-
-interface Provider {
-  id: string;
-  name: string;
-  icon: string;
-  enabled: boolean;
-  models: Model[];
-}
-
 interface ProviderListProps {
-  providers: Provider[];
+  providers: ProviderConfig[];
   selectedProviderId: string;
   searchText: string;
-  onSearchChange: (text: string) => void;
-  onProviderSelect: (id: string) => void;
+  onSearchChange: (value: string) => void;
+  onProviderSelect: (providerId: string) => void;
 }
 
-function ProviderList({
+export const ProviderList: React.FC<ProviderListProps> = ({
   providers,
   selectedProviderId,
   searchText,
   onSearchChange,
   onProviderSelect,
-}: ProviderListProps): React.ReactElement {
+}) => {
+  // 过滤后的提供商列表
+  const filteredProviders = useMemo(
+    () =>
+      providers.filter((provider) =>
+        provider.name.toLowerCase().includes(searchText.toLowerCase())
+      ),
+    [providers, searchText]
+  );
+
   return (
     <div className="model-providers-sidebar">
       <Title level={5} className="providers-title">
@@ -53,7 +49,7 @@ function ProviderList({
 
       {/* 提供商列表 */}
       <div className="providers-list">
-        {providers.map((provider) => (
+        {filteredProviders.map((provider) => (
           <div
             key={provider.id}
             className={`provider-item ${
@@ -82,7 +78,5 @@ function ProviderList({
       </div>
     </div>
   );
-}
-
-export default ProviderList;
+};
 

@@ -1,0 +1,79 @@
+/* 右侧配置面板样式 */
+
+.model-config-area {
+  flex: 1;
+  background: rgba(26, 26, 46, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: slideInRight 0.4s ease 0.1s forwards;
+  opacity: 0;
+}
+
+/* 配置头部 */
+.config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.config-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.config-title .provider-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  margin-right: 0;
+}
+
+.config-title-text {
+  color: #ffffff !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0 !important;
+}
+
+.config-subtitle {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* 配置表单 */
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.config-section {
+  background: rgba(26, 26, 46, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.section-title {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-title .anticon {
+  color: #38b2ac;
+  font-size: 0.9rem;
+}
+
