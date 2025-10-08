@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Card,
   Select,
@@ -24,54 +24,38 @@ import {
   LoadingOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG, DocumentItem } from '../../../../../types/storage';
 import './DocumentSettings.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 const { Dragger } = Upload;
 
-interface DocumentItem {
-  id: string;
-  name: string;
-  size: string;
-  status: 'processing' | 'completed' | 'error';
-  progress: number;
-  type: string;
-}
-
 function DocumentSettings(): React.ReactElement {
-  // 状态管理
-  const [ocrProvider, setOcrProvider] = useState('系统OCR');
-  const [apiUrl, setApiUrl] = useState('https://mineru.net');
-  const [documents, setDocuments] = useState<DocumentItem[]>([
-    {
-      id: '1',
-      name: 'sample_document.pdf',
-      size: '2.5MB',
-      status: 'completed',
-      progress: 100,
-      type: 'PDF',
-    },
-    {
-      id: '2',
-      name: 'research_paper.docx',
-      size: '1.8MB',
-      status: 'processing',
-      progress: 65,
-      type: 'DOCX',
-    },
-  ]);
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'document',
+    DEFAULT_APP_CONFIG.document
+  );
 
-  const handleOcrProviderChange = (value: string) => {
-    setOcrProvider(value);
+  const handleOcrProviderChange = async (value: string) => {
+    await updateSettings({ ocrProvider: value });
     message.success('OCR服务提供商已更新');
   };
 
-  const handleApiUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setApiUrl(e.target.value);
+  const handleApiUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await updateSettings({ apiUrl: e.target.value });
   };
 
-  const handleUpload = (info: any) => {
+  if (loading) {
+    return <div className="document-settings">加载中...</div>;
+  }
+
+  // 确保 documents 是数组
+  const documents = settings.documents || [];
+
+  const handleUpload = async (info: any) => {
     const { status } = info.file;
     if (status === 'done') {
       message.success(`${info.file.name} 文件上传成功`);
@@ -84,14 +68,18 @@ function DocumentSettings(): React.ReactElement {
         progress: 0,
         type: info.file.name.split('.').pop()?.toUpperCase() || 'UNKNOWN',
       };
-      setDocuments((prev) => [newDoc, ...prev]);
+      await updateSettings({
+        documents: [newDoc, ...documents],
+      });
     } else if (status === 'error') {
       message.error(`${info.file.name} 文件上传失败`);
     }
   };
 
-  const handleDeleteDocument = (id: string) => {
-    setDocuments((prev) => prev.filter((doc) => doc.id !== id));
+  const handleDeleteDocument = async (id: string) => {
+    await updateSettings({
+      documents: documents.filter((doc) => doc.id !== id),
+    });
     message.success('文档已删除');
   };
 
@@ -150,7 +138,7 @@ function DocumentSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Select
-                  value={ocrProvider}
+                  value={settings.ocrProvider}
                   onChange={handleOcrProviderChange}
                   style={{ minWidth: '120px' }}
                 >
@@ -242,7 +230,7 @@ function DocumentSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Input
-                  value={apiUrl}
+                  value={settings.apiUrl}
                   onChange={handleApiUrlChange}
                   placeholder="https://mineru.net"
                   style={{ width: '200px' }}

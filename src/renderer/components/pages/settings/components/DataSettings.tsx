@@ -9,12 +9,21 @@ import {
   ClearOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './DataSettings.css';
 
 const { Text } = Typography;
 const { confirm } = Modal;
 
 function DataSettings(): React.ReactElement {
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'data',
+    DEFAULT_APP_CONFIG.data
+  );
+  
+  // 本地操作状态
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
@@ -90,6 +99,10 @@ function DataSettings(): React.ReactElement {
       },
     });
   };
+
+  if (loading) {
+    return <div className="data-settings-container">加载中...</div>;
+  }
 
   return (
     <div className="settings-content-section data-settings-container">
@@ -172,11 +185,11 @@ function DataSettings(): React.ReactElement {
           className="data-settings-space-middle"
         >
           {/* 应用数据 */}
-          <div className="data-settings-directory-item data-settings-row">
+            <div className="data-settings-directory-item data-settings-row">
             <div className="data-settings-directory-info">
               <Text className="data-settings-text">应用数据</Text>
               <Text className="data-settings-path-text">
-                /Users/suce/Library/Application Support/CherryStudio
+                {settings.dataDirectory || '未设置'}
               </Text>
             </div>
             <Space>
@@ -196,7 +209,7 @@ function DataSettings(): React.ReactElement {
             <div className="data-settings-directory-info">
               <Text className="data-settings-text">应用日志</Text>
               <Text className="data-settings-path-text">
-                /Users/suce/Library/Application Support/CherryStudio/logs
+                {settings.logsPath || '未设置'}
               </Text>
             </div>
             <Space>

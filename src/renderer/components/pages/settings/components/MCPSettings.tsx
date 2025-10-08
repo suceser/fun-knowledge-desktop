@@ -6,6 +6,8 @@ import {
   LinkOutlined,
   AppstoreOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './MCPSettings.css';
 
 const { Title, Text } = Typography;
@@ -19,6 +21,11 @@ interface MCPServer {
 }
 
 function MCPSettings(): React.ReactElement {
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'mcp',
+    DEFAULT_APP_CONFIG.mcp
+  );
   // 模拟的更多MCP服务器数据
   const moreMCPServers: MCPServer[] = [
     {
@@ -105,6 +112,13 @@ function MCPSettings(): React.ReactElement {
     }
   };
 
+  if (loading) {
+    return <div className="settings-content-section">加载中...</div>;
+  }
+
+  // 确保 servers 是数组
+  const servers = settings.servers || [];
+
   return (
     <div className="settings-content-section">
       {/* 页面头部 */}
@@ -113,7 +127,11 @@ function MCPSettings(): React.ReactElement {
           <ApiOutlined style={{ marginRight: '8px', color: '#38b2ac' }} />
           MCP 服务器
         </Title>
-        <Text className="mcp-subtitle">未配置服务器</Text>
+        <Text className="mcp-subtitle">
+          {servers.length > 0
+            ? `已配置 ${servers.length} 个服务器`
+            : '未配置服务器'}
+        </Text>
       </div>
 
       {/* 空状态 */}

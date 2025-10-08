@@ -33,6 +33,7 @@ function ModelSettings(): React.ReactElement {
     updateApiUrl,
     addModel,
     deleteModel,
+    loading: providersLoading,
   } = useProviders({ message });
 
   const {
@@ -108,6 +109,10 @@ function ModelSettings(): React.ReactElement {
   const handleViewKeyHint = () => {
     message.info('点击这里获取密钥');
   };
+
+  if (providersLoading) {
+    return <div className="settings-content-section">加载中...</div>;
+  }
 
   return (
     <div className="settings-content-section">

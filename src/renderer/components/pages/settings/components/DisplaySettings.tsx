@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Switch, Typography, Space, Button } from 'antd';
 import {
   BgColorsOutlined,
@@ -8,22 +8,18 @@ import {
   MessageOutlined,
   RobotOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './DisplaySettings.css';
 
 const { Text } = Typography;
 
 function DisplaySettings(): React.ReactElement {
-  // 状态管理
-  const [theme, setTheme] = useState('深色');
-  const [themeColor, setThemeColor] = useState('#00B96B');
-  const [transparentWindow, setTransparentWindow] = useState(true);
-  const [navbarPosition, setNavbarPosition] = useState('左侧');
-  const [zoomLevel, setZoomLevel] = useState(100);
-  const [topicPosition, setTopicPosition] = useState('左侧');
-  const [autoSwitchTopic, setAutoSwitchTopic] = useState(false);
-  const [showTopicTime, setShowTopicTime] = useState(true);
-  const [pinTopicTop, setPinTopicTop] = useState(false);
-  const [modelIconType, setModelIconType] = useState('模型图标');
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'display',
+    DEFAULT_APP_CONFIG.display
+  );
 
   // 主题颜色选项
   const themeColors = [
@@ -41,33 +37,37 @@ function DisplaySettings(): React.ReactElement {
     '#00B96B',
   ];
 
-  const handleThemeChange = (value: string) => {
-    setTheme(value);
+  const handleThemeChange = async (value: '浅色' | '深色' | '系统') => {
+    await updateSettings({ theme: value });
   };
 
-  const handleThemeColorChange = (color: string) => {
-    setThemeColor(color);
+  const handleThemeColorChange = async (color: string) => {
+    await updateSettings({ themeColor: color });
   };
 
-  const handleNavbarPositionChange = (value: string) => {
-    setNavbarPosition(value);
+  const handleNavbarPositionChange = async (value: '左侧' | '顶部') => {
+    await updateSettings({ navbarPosition: value });
   };
 
-  const handleTopicPositionChange = (value: string) => {
-    setTopicPosition(value);
+  const handleTopicPositionChange = async (value: '左侧' | '右侧') => {
+    await updateSettings({ topicPosition: value });
   };
 
-  const handleZoomChange = (value: number) => {
-    setZoomLevel(value);
+  const handleZoomChange = async (value: number) => {
+    await updateSettings({ zoomLevel: value });
   };
 
-  const handleModelIconTypeChange = (value: string) => {
-    setModelIconType(value);
+  const handleModelIconTypeChange = async (value: '模型图标' | 'Emoji 表情' | '不显示') => {
+    await updateSettings({ modelIconType: value });
   };
 
-  const resetZoom = () => {
-    setZoomLevel(100);
+  const resetZoom = async () => {
+    await updateSettings({ zoomLevel: 100 });
   };
+
+  if (loading) {
+    return <div className="display-settings">加载中...</div>;
+  }
 
   const handleColorClick = (color: string) => {
     handleThemeColorChange(color);
@@ -100,20 +100,20 @@ function DisplaySettings(): React.ReactElement {
               </div>
               <div className="theme-selector">
                 <Button
-                  className={`theme-btn ${theme === '浅色' ? 'active' : ''}`}
+                  className={`theme-btn ${settings.theme === '浅色' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('浅色')}
                   icon={<BgColorsOutlined />}
                 >
                   浅色
                 </Button>
                 <Button
-                  className={`theme-btn ${theme === '深色' ? 'active' : ''}`}
+                  className={`theme-btn ${settings.theme === '深色' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('深色')}
                 >
                   深色
                 </Button>
                 <Button
-                  className={`theme-btn ${theme === '系统' ? 'active' : ''}`}
+                  className={`theme-btn ${settings.theme === '系统' ? 'active' : ''}`}
                   onClick={() => handleThemeChange('系统')}
                 >
                   系统
@@ -132,7 +132,7 @@ function DisplaySettings(): React.ReactElement {
                   <div
                     key={color}
                     className={`color-item ${
-                      themeColor === color ? 'selected' : ''
+                      settings.themeColor === color ? 'selected' : ''
                     }`}
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorClick(color)}
@@ -142,7 +142,7 @@ function DisplaySettings(): React.ReactElement {
                     aria-label={`选择颜色 ${color}`}
                   />
                 ))}
-                <div className="color-hex">{themeColor}</div>
+                <div className="color-hex">{settings.themeColor}</div>
               </div>
             </div>
 
@@ -154,8 +154,8 @@ function DisplaySettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={transparentWindow}
-                  onChange={setTransparentWindow}
+                  checked={settings.transparentWindow}
+                  onChange={(checked) => updateSettings({ transparentWindow: checked })}
                   size="small"
                 />
               </div>
@@ -184,7 +184,7 @@ function DisplaySettings(): React.ReactElement {
               <div className="position-selector">
                 <Button
                   className={`position-btn ${
-                    navbarPosition === '左侧' ? 'active' : ''
+                    settings.navbarPosition === '左侧' ? 'active' : ''
                   }`}
                   onClick={() => handleNavbarPositionChange('左侧')}
                 >
@@ -192,7 +192,7 @@ function DisplaySettings(): React.ReactElement {
                 </Button>
                 <Button
                   className={`position-btn ${
-                    navbarPosition === '顶部' ? 'active' : ''
+                    settings.navbarPosition === '顶部' ? 'active' : ''
                   }`}
                   onClick={() => handleNavbarPositionChange('顶部')}
                 >
@@ -227,20 +227,20 @@ function DisplaySettings(): React.ReactElement {
                   <Button
                     className="zoom-btn"
                     onClick={() =>
-                      handleZoomChange(Math.max(50, zoomLevel - 10))
+                      handleZoomChange(Math.max(50, settings.zoomLevel - 10))
                     }
                   >
                     -
                   </Button>
                   <div className="zoom-display">
                     <Text style={{ color: '#ffffff', fontSize: '14px' }}>
-                      {zoomLevel}%
+                      {settings.zoomLevel}%
                     </Text>
                   </div>
                   <Button
                     className="zoom-btn"
                     onClick={() =>
-                      handleZoomChange(Math.min(200, zoomLevel + 10))
+                      handleZoomChange(Math.min(200, settings.zoomLevel + 10))
                     }
                   >
                     +
@@ -276,7 +276,7 @@ function DisplaySettings(): React.ReactElement {
               <div className="position-selector">
                 <Button
                   className={`position-btn ${
-                    topicPosition === '左侧' ? 'active' : ''
+                    settings.topicPosition === '左侧' ? 'active' : ''
                   }`}
                   onClick={() => handleTopicPositionChange('左侧')}
                 >
@@ -284,7 +284,7 @@ function DisplaySettings(): React.ReactElement {
                 </Button>
                 <Button
                   className={`position-btn ${
-                    topicPosition === '右侧' ? 'active' : ''
+                    settings.topicPosition === '右侧' ? 'active' : ''
                   }`}
                   onClick={() => handleTopicPositionChange('右侧')}
                 >
@@ -301,8 +301,8 @@ function DisplaySettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={autoSwitchTopic}
-                  onChange={setAutoSwitchTopic}
+                  checked={settings.autoSwitchTopic}
+                  onChange={(checked) => updateSettings({ autoSwitchTopic: checked })}
                   size="small"
                 />
               </div>
@@ -316,8 +316,8 @@ function DisplaySettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={showTopicTime}
-                  onChange={setShowTopicTime}
+                  checked={settings.showTopicTime}
+                  onChange={(checked) => updateSettings({ showTopicTime: checked })}
                   size="small"
                 />
               </div>
@@ -331,8 +331,8 @@ function DisplaySettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={pinTopicTop}
-                  onChange={setPinTopicTop}
+                  checked={settings.pinTopicTop}
+                  onChange={(checked) => updateSettings({ pinTopicTop: checked })}
                   size="small"
                 />
               </div>
@@ -360,7 +360,7 @@ function DisplaySettings(): React.ReactElement {
               <div className="icon-type-selector">
                 <Button
                   className={`icon-type-btn ${
-                    modelIconType === '模型图标' ? 'active' : ''
+                    settings.modelIconType === '模型图标' ? 'active' : ''
                   }`}
                   onClick={() => handleModelIconTypeChange('模型图标')}
                 >
@@ -368,7 +368,7 @@ function DisplaySettings(): React.ReactElement {
                 </Button>
                 <Button
                   className={`icon-type-btn ${
-                    modelIconType === 'Emoji 表情' ? 'active' : ''
+                    settings.modelIconType === 'Emoji 表情' ? 'active' : ''
                   }`}
                   onClick={() => handleModelIconTypeChange('Emoji 表情')}
                 >
@@ -376,7 +376,7 @@ function DisplaySettings(): React.ReactElement {
                 </Button>
                 <Button
                   className={`icon-type-btn ${
-                    modelIconType === '不显示' ? 'active' : ''
+                    settings.modelIconType === '不显示' ? 'active' : ''
                   }`}
                   onClick={() => handleModelIconTypeChange('不显示')}
                 >

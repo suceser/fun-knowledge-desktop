@@ -8,140 +8,20 @@ import {
   EyeInvisibleOutlined,
   GlobalOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG, ShortcutItem } from '../../../../../types/storage';
 import './ShortcutSettings.css';
 
-interface ShortcutItem {
-  id: string;
-  name: string;
-  description: string;
-  defaultKey: string;
-  currentKey: string;
-  category: string;
-  enabled: boolean;
-}
-
-const defaultShortcuts: ShortcutItem[] = [
-  {
-    id: 'display-hidden-app',
-    name: '显示/隐藏应用',
-    description: '快速显示或隐藏应用窗口',
-    defaultKey: '按下快捷键',
-    currentKey: '按下快捷键',
-    category: 'app',
-    enabled: true,
-  },
-  {
-    id: 'quick-assistant',
-    name: '快捷助手',
-    description: '快速打开AI助手对话',
-    defaultKey: '⌘ + E',
-    currentKey: '⌘ + E',
-    category: 'assistant',
-    enabled: true,
-  },
-  {
-    id: 'open-assistant',
-    name: '开关助手手',
-    description: '开启或关闭助手功能',
-    defaultKey: '按下快捷键',
-    currentKey: '按下快捷键',
-    category: 'assistant',
-    enabled: true,
-  },
-  {
-    id: 'assistant-word',
-    name: '划词助手：取词',
-    description: '选中文字后快速取词翻译',
-    defaultKey: '按下快捷键',
-    currentKey: '按下快捷键',
-    category: 'assistant',
-    enabled: true,
-  },
-  {
-    id: 'exit-fullscreen',
-    name: '退出全屏',
-    description: '退出全屏模式',
-    defaultKey: 'Escape',
-    currentKey: 'Escape',
-    category: 'display',
-    enabled: true,
-  },
-  {
-    id: 'new-conversation',
-    name: '新建话题',
-    description: '创建新的对话话题',
-    defaultKey: '⌘ + N',
-    currentKey: '⌘ + N',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'toggle-assistant-tips',
-    name: '切换助手显示',
-    description: '显示或隐藏助手提示信息',
-    defaultKey: '⌘ + [',
-    currentKey: '⌘ + [',
-    category: 'assistant',
-    enabled: true,
-  },
-  {
-    id: 'toggle-conversation-tips',
-    name: '切换话题显示',
-    description: '显示或隐藏话题列表',
-    defaultKey: '⌘ + ]',
-    currentKey: '⌘ + ]',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'copy-last-message',
-    name: '复制上一条消息',
-    description: '快速复制最后一条对话消息',
-    defaultKey: '⌘ + ⇧ + C',
-    currentKey: '⌘ + ⇧ + C',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'search-messages',
-    name: '搜索消息',
-    description: '在对话历史中搜索消息',
-    defaultKey: '⌘ + ⇧ + F',
-    currentKey: '⌘ + ⇧ + F',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'clear-messages',
-    name: '清空消息',
-    description: '清空当前对话的所有消息',
-    defaultKey: '⌘ + L',
-    currentKey: '⌘ + L',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'clear-context',
-    name: '清除上下文',
-    description: '清除对话的上下文记忆',
-    defaultKey: '⌘ + K',
-    currentKey: '⌘ + K',
-    category: 'conversation',
-    enabled: true,
-  },
-  {
-    id: 'search-previous',
-    name: '在当前对话中搜索消息',
-    description: '在当前对话历史中搜索特定消息',
-    defaultKey: '⌘ + F',
-    currentKey: '⌘ + F',
-    category: 'conversation',
-    enabled: true,
-  },
-];
+const { Text } = Typography;
 
 function ShortcutSettings(): React.ReactElement {
-  const [shortcuts, setShortcuts] = useState<ShortcutItem[]>(defaultShortcuts);
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'shortcuts',
+    DEFAULT_APP_CONFIG.shortcuts
+  );
+  
+  // 本地编辑状态
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingKey, setEditingKey] = useState('');
   const [filterCategory, setFilterCategory] = useState<string>('all');
@@ -160,15 +40,16 @@ function ShortcutSettings(): React.ReactElement {
     setEditingKey(currentKey);
   };
 
-  const handleSaveShortcut = () => {
+  const handleSaveShortcut = async () => {
     if (editingId && editingKey.trim()) {
-      setShortcuts(
-        shortcuts.map((shortcut) =>
+      const shortcuts = settings.shortcuts || [];
+      await updateSettings({
+        shortcuts: shortcuts.map((shortcut) =>
           shortcut.id === editingId
             ? { ...shortcut, currentKey: editingKey.trim() }
             : shortcut,
         ),
-      );
+      });
       setEditingId(null);
       setEditingKey('');
       message.success('快捷键已更新');
@@ -180,36 +61,41 @@ function ShortcutSettings(): React.ReactElement {
     setEditingKey('');
   };
 
-  const handleResetShortcut = (id: string) => {
-    setShortcuts(
-      shortcuts.map((shortcut) =>
+  const handleResetShortcut = async (id: string) => {
+    const shortcuts = settings.shortcuts || [];
+    await updateSettings({
+      shortcuts: shortcuts.map((shortcut) =>
         shortcut.id === id
           ? { ...shortcut, currentKey: shortcut.defaultKey }
           : shortcut,
       ),
-    );
+    });
     message.success('快捷键已重置');
   };
 
-  const handleToggleShortcut = (id: string, enabled: boolean) => {
-    setShortcuts(
-      shortcuts.map((shortcut) =>
+  const handleToggleShortcut = async (id: string, enabled: boolean) => {
+    const shortcuts = settings.shortcuts || [];
+    await updateSettings({
+      shortcuts: shortcuts.map((shortcut) =>
         shortcut.id === id ? { ...shortcut, enabled } : shortcut,
       ),
-    );
+    });
     message.success(enabled ? '快捷键已启用' : '快捷键已禁用');
   };
 
-  const handleResetAll = () => {
-    setShortcuts(
-      shortcuts.map((shortcut) => ({
-        ...shortcut,
-        currentKey: shortcut.defaultKey,
-        enabled: true,
-      })),
-    );
+  const handleResetAll = async () => {
+    await updateSettings({
+      shortcuts: DEFAULT_APP_CONFIG.shortcuts.shortcuts,
+    });
     message.success('所有快捷键已重置');
   };
+
+  if (loading) {
+    return <div className="shortcut-settings">加载中...</div>;
+  }
+
+  // 确保 shortcuts 存在且是数组
+  const shortcuts = settings.shortcuts || [];
 
   const filteredShortcuts = shortcuts.filter((shortcut) => {
     const matchesCategory =

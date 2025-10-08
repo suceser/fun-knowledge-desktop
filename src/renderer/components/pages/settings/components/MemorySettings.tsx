@@ -7,21 +7,28 @@ import {
   MoreOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './MemorySettings.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 function MemorySettings(): React.ReactElement {
-  const [userManagementEnabled, setUserManagementEnabled] = useState(true);
-  const [selectedUser, setSelectedUser] = useState('default');
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'memory',
+    DEFAULT_APP_CONFIG.memory
+  );
+  
+  // 本地搜索状态
   const [searchTerm, setSearchTerm] = useState('');
 
   // 模拟用户数据
   const users = [{ id: 'default', name: '默认用户', memoryCount: 0 }];
 
-  const handleUserChange = (userId: string) => {
-    setSelectedUser(userId);
+  const handleUserChange = async (userId: string) => {
+    await updateSettings({ selectedUser: userId });
   };
 
   const handleAddMemory = () => {
@@ -32,7 +39,11 @@ function MemorySettings(): React.ReactElement {
     // TODO: 实现更多操作功能
   };
 
-  const currentUser = users.find((u) => u.id === selectedUser);
+  const currentUser = users.find((u) => u.id === settings.selectedUser);
+
+  if (loading) {
+    return <div className="settings-content-section">加载中...</div>;
+  }
 
   return (
     <div className="settings-content-section">
@@ -44,13 +55,13 @@ function MemorySettings(): React.ReactElement {
               用户管理
             </Title>
             <Switch
-              checked={userManagementEnabled}
-              onChange={setUserManagementEnabled}
+              checked={settings.userManagementEnabled}
+              onChange={(checked) => updateSettings({ userManagementEnabled: checked })}
               className="user-management-switch"
             />
           </div>
 
-          {userManagementEnabled && (
+          {settings.userManagementEnabled && (
             <div className="user-info-section">
               {/* 用户ID */}
               <div className="user-info-row">
@@ -70,7 +81,7 @@ function MemorySettings(): React.ReactElement {
                 <Text className="user-info-label">用户</Text>
                 <div className="user-info-content">
                   <Select
-                    value={selectedUser}
+                    value={settings.selectedUser}
                     onChange={handleUserChange}
                     className="user-select"
                     suffixIcon={

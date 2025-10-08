@@ -19,52 +19,57 @@ import {
   EyeOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './SearchSettings.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 function SearchSettings(): React.ReactElement {
-  // 状态管理
-  const [searchProvider, setSearchProvider] = useState('Tavily (API 密钥)');
-  const [apiKey, setApiKey] = useState('');
-  const [apiUrl, setApiUrl] = useState('https://api.tavily.com');
-  const [includeAnswer, setIncludeAnswer] = useState(true);
-  const [maxResults, setMaxResults] = useState(5);
-  const [compressionMethod, setCompressionMethod] = useState('不压缩');
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'search',
+    DEFAULT_APP_CONFIG.search
+  );
+  
+  // 本地临时输入状态
   const [blacklistInput, setBlacklistInput] = useState('');
-  const [blacklistSites, setBlacklistSites] = useState<string[]>([]);
 
-  const handleProviderChange = (value: string) => {
-    setSearchProvider(value);
+  const handleProviderChange = async (value: string) => {
+    await updateSettings({ searchProvider: value });
     message.success('搜索服务商已更新');
   };
 
-  const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setApiKey(e.target.value);
+  const handleApiKeyChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await updateSettings({ apiKey: e.target.value });
   };
 
-  const handleApiUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setApiUrl(e.target.value);
+  const handleApiUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await updateSettings({ apiUrl: e.target.value });
   };
 
-  const handleMaxResultsChange = (value: number) => {
-    setMaxResults(value);
+  const handleMaxResultsChange = async (value: number) => {
+    await updateSettings({ maxResults: value });
   };
 
-  const handleAddBlacklistSite = () => {
+  const handleAddBlacklistSite = async () => {
     if (
       blacklistInput.trim() &&
       !blacklistSites.includes(blacklistInput.trim())
     ) {
-      setBlacklistSites([...blacklistSites, blacklistInput.trim()]);
+      await updateSettings({
+        blacklistSites: [...blacklistSites, blacklistInput.trim()],
+      });
       setBlacklistInput('');
       message.success('已添加到黑名单');
     }
   };
 
-  const handleRemoveBlacklistSite = (site: string) => {
-    setBlacklistSites(blacklistSites.filter((s) => s !== site));
+  const handleRemoveBlacklistSite = async (site: string) => {
+    await updateSettings({
+      blacklistSites: blacklistSites.filter((s) => s !== site),
+    });
     message.success('已从黑名单移除');
   };
 
@@ -74,6 +79,13 @@ function SearchSettings(): React.ReactElement {
       message.success('连接测试成功');
     }, 1000);
   };
+
+  if (loading) {
+    return <div className="search-settings">加载中...</div>;
+  }
+
+  // 确保 blacklistSites 是数组
+  const blacklistSites = settings.blacklistSites || [];
 
   return (
     <div className="settings-content-section search-settings">
@@ -99,7 +111,7 @@ function SearchSettings(): React.ReactElement {
             <div className="form-item">
               <Text className="form-label">搜索服务商</Text>
               <Select
-                value={searchProvider}
+                value={settings.searchProvider}
                 onChange={handleProviderChange}
                 style={{ width: '100%' }}
               >
@@ -113,7 +125,7 @@ function SearchSettings(): React.ReactElement {
             <div className="form-item">
               <Text className="form-label">API 密钥</Text>
               <Input.Password
-                value={apiKey}
+                value={settings.apiKey}
                 onChange={handleApiKeyChange}
                 placeholder="请输入API密钥"
                 visibilityToggle
@@ -123,7 +135,7 @@ function SearchSettings(): React.ReactElement {
             <div className="form-item">
               <Text className="form-label">API 地址</Text>
               <Input
-                value={apiUrl}
+                value={settings.apiUrl}
                 onChange={handleApiUrlChange}
                 placeholder="请输入API地址"
                 addonBefore={<LinkOutlined />}
@@ -157,8 +169,8 @@ function SearchSettings(): React.ReactElement {
               <div className="form-item-header">
                 <Text className="form-label">包含答案</Text>
                 <Switch
-                  checked={includeAnswer}
-                  onChange={setIncludeAnswer}
+                  checked={settings.includeAnswer}
+                  onChange={(checked) => updateSettings({ includeAnswer: checked })}
                   size="small"
                 />
               </div>
@@ -168,11 +180,11 @@ function SearchSettings(): React.ReactElement {
             </div>
 
             <div className="form-item">
-              <Text className="form-label">最大结果数: {maxResults}</Text>
+              <Text className="form-label">最大结果数: {settings.maxResults}</Text>
               <Slider
                 min={1}
                 max={20}
-                value={maxResults}
+                value={settings.maxResults}
                 onChange={handleMaxResultsChange}
                 marks={{
                   1: '1',
@@ -187,8 +199,8 @@ function SearchSettings(): React.ReactElement {
             <div className="form-item">
               <Text className="form-label">压缩方法</Text>
               <Select
-                value={compressionMethod}
-                onChange={setCompressionMethod}
+                value={settings.compressionMethod}
+                onChange={(value) => updateSettings({ compressionMethod: value })}
                 style={{ width: '100%' }}
               >
                 <Option value="不压缩">不压缩</Option>

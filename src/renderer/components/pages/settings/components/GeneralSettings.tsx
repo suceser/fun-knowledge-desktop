@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Switch, Select, Typography, Space, message } from 'antd';
 import {
   GlobalOutlined,
@@ -7,35 +7,33 @@ import {
   AppstoreOutlined,
   InfoCircleOutlined,
 } from '@ant-design/icons';
+import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../../types/storage';
 import './GeneralSettings.css';
 
 const { Text } = Typography;
 const { Option } = Select;
 
 function GeneralSettings(): React.ReactElement {
-  // 状态管理
-  const [language, setLanguage] = useState('zh-CN');
-  const [proxyMode, setProxyMode] = useState('system');
-  const [spellCheck, setSpellCheck] = useState(true);
-  const [hardwareAcceleration, setHardwareAcceleration] = useState(true);
-  const [assistantMessages, setAssistantMessages] = useState(true);
-  const [backup, setBackup] = useState(true);
-  const [knowledgeBase, setKnowledgeBase] = useState(true);
-  const [autoStart, setAutoStart] = useState(true);
-  const [minimizeToTray, setMinimizeToTray] = useState(true);
-  const [showTrayIcon, setShowTrayIcon] = useState(true);
-  const [closeToTray, setCloseToTray] = useState(true);
-  const [anonymousReporting, setAnonymousReporting] = useState(true);
+  // 使用持久化存储
+  const [settings, updateSettings, loading] = usePartialUpdate(
+    'general',
+    DEFAULT_APP_CONFIG.general
+  );
 
-  const handleLanguageChange = (value: string) => {
-    setLanguage(value);
+  const handleLanguageChange = async (value: string) => {
+    await updateSettings({ language: value });
     message.success('语言设置已更新');
   };
 
-  const handleProxyModeChange = (value: string) => {
-    setProxyMode(value);
+  const handleProxyModeChange = async (value: 'system' | 'direct' | 'custom') => {
+    await updateSettings({ proxyMode: value });
     message.success('代理模式已更新');
   };
+
+  if (loading) {
+    return <div className="general-settings">加载中...</div>;
+  }
 
   return (
     <div className="general-settings">
@@ -65,7 +63,7 @@ function GeneralSettings(): React.ReactElement {
                 <Text style={{ color: '#ffffff', fontSize: '14px' }}>语言</Text>
               </div>
               <Select
-                value={language}
+                value={settings.language}
                 onChange={handleLanguageChange}
                 style={{ width: 120 }}
                 size="small"
@@ -83,7 +81,7 @@ function GeneralSettings(): React.ReactElement {
                 </Text>
               </div>
               <Select
-                value={proxyMode}
+                value={settings.proxyMode}
                 onChange={handleProxyModeChange}
                 style={{ width: 120 }}
                 size="small"
@@ -102,8 +100,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={spellCheck}
-                  onChange={setSpellCheck}
+                  checked={settings.spellCheck}
+                  onChange={(checked) => updateSettings({ spellCheck: checked })}
                   size="small"
                 />
               </div>
@@ -117,8 +115,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={!hardwareAcceleration}
-                  onChange={(checked) => setHardwareAcceleration(!checked)}
+                  checked={!settings.hardwareAcceleration}
+                  onChange={(checked) => updateSettings({ hardwareAcceleration: !checked })}
                   size="small"
                 />
               </div>
@@ -152,8 +150,8 @@ function GeneralSettings(): React.ReactElement {
                   />
                 </div>
                 <Switch
-                  checked={assistantMessages}
-                  onChange={setAssistantMessages}
+                  checked={settings.assistantMessages}
+                  onChange={(checked) => updateSettings({ assistantMessages: checked })}
                   size="small"
                 />
               </div>
@@ -166,7 +164,11 @@ function GeneralSettings(): React.ReactElement {
                     备份
                   </Text>
                 </div>
-                <Switch checked={backup} onChange={setBackup} size="small" />
+                <Switch
+                  checked={settings.backup}
+                  onChange={(checked) => updateSettings({ backup: checked })}
+                  size="small"
+                />
               </div>
             </div>
 
@@ -178,8 +180,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={knowledgeBase}
-                  onChange={setKnowledgeBase}
+                  checked={settings.knowledgeBase}
+                  onChange={(checked) => updateSettings({ knowledgeBase: checked })}
                   size="small"
                 />
               </div>
@@ -208,8 +210,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={autoStart}
-                  onChange={setAutoStart}
+                  checked={settings.autoStart}
+                  onChange={(checked) => updateSettings({ autoStart: checked })}
                   size="small"
                 />
               </div>
@@ -223,8 +225,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={minimizeToTray}
-                  onChange={setMinimizeToTray}
+                  checked={settings.minimizeToTray}
+                  onChange={(checked) => updateSettings({ minimizeToTray: checked })}
                   size="small"
                 />
               </div>
@@ -253,8 +255,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={showTrayIcon}
-                  onChange={setShowTrayIcon}
+                  checked={settings.showTrayIcon}
+                  onChange={(checked) => updateSettings({ showTrayIcon: checked })}
                   size="small"
                 />
               </div>
@@ -268,8 +270,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={closeToTray}
-                  onChange={setCloseToTray}
+                  checked={settings.closeToTray}
+                  onChange={(checked) => updateSettings({ closeToTray: checked })}
                   size="small"
                 />
               </div>
@@ -298,8 +300,8 @@ function GeneralSettings(): React.ReactElement {
                   </Text>
                 </div>
                 <Switch
-                  checked={anonymousReporting}
-                  onChange={setAnonymousReporting}
+                  checked={settings.anonymousReporting}
+                  onChange={(checked) => updateSettings({ anonymousReporting: checked })}
                   size="small"
                 />
               </div>
