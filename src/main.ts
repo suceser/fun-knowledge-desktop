@@ -1,11 +1,15 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
+import { registerStorageHandlers } from './ipc/storageHandlers';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
+
+// 注册 IPC 处理器
+registerStorageHandlers();
 
 const createWindow = () => {
   // Create the browser window.
