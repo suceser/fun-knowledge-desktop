@@ -3,15 +3,15 @@ import { Spin } from 'antd';
 import './ContentArea.css';
 
 // 懒加载各个页面组件
-const HomePage = lazy(() => import('./pages/home/HomePage'));
-const NotesPage = lazy(() => import('./pages/notes/NotesPage'));
-const ChatPage = lazy(() => import('./pages/chat/ChatPage'));
+const HomePage = lazy(() => import('./home/HomePage'));
+const NotesPage = lazy(() => import('./notes/NotesPage'));
+const ChatPage = lazy(() => import('./chat/ChatPage'));
 const KnowledgeGraphPage = lazy(
-  () => import('./pages/knowledge/KnowledgeGraphPage'),
+  () => import('./knowledge/KnowledgeGraphPage'),
 );
-const LibraryPage = lazy(() => import('./pages/library/LibraryPage'));
-const AnalyticsPage = lazy(() => import('./pages/analytics/AnalyticsPage'));
-const SettingsPage = lazy(() => import('./pages/settings/SettingsPage'));
+const LibraryPage = lazy(() => import('./library/LibraryPage'));
+const AnalyticsPage = lazy(() => import('./analytics/AnalyticsPage'));
+const SettingsPage = lazy(() => import('./settings/SettingsPage'));
 
 export interface ContentAreaProps {
   selectedTab: string;

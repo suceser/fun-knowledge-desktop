@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { ChatProvider } from '../../../contexts/ChatContext';
+import { ChatProvider } from '../../contexts/ChatContext';
 import LeftPanel from './components/LeftPanel';
 import ChatArea from './components/ChatArea';
 import './ChatPage.css';

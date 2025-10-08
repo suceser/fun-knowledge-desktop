@@ -19,7 +19,7 @@ import {
   MCPSettings,
   MemorySettings,
   DEFAULT_APP_CONFIG,
-} from '../../types/storage';
+} from '../../main/types/storage';
 
 /**
  * 通用的设置 Hook 工厂函数

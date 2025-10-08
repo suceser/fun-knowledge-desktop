@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Empty, Typography, Space, Tag } from 'antd';
 import { PlusOutlined, DatabaseOutlined } from '@ant-design/icons';
-import { Assistant } from '../../../../../types/assistant';
+import { Assistant } from '../../../../types/assistant';
 import './SettingsCommon.css';
 
 const { Title, Paragraph, Text } = Typography;

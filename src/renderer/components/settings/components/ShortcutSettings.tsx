@@ -8,8 +8,8 @@ import {
   EyeInvisibleOutlined,
   GlobalOutlined,
 } from '@ant-design/icons';
-import { usePartialUpdate } from '../../../../hooks/useSettingsStorage';
-import { DEFAULT_APP_CONFIG, ShortcutItem } from '../../../../../types/storage';
+import { usePartialUpdate } from '../../../hooks/useSettingsStorage';
+import { DEFAULT_APP_CONFIG, ShortcutItem } from '../../../../main/types/storage';
 import './ShortcutSettings.css';
 
 const { Text } = Typography;

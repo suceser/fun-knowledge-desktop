@@ -9,7 +9,7 @@ import {
   UserOutlined,
   MessageOutlined,
 } from '@ant-design/icons';
-import { useChatContext } from '../../../../contexts/ChatContext';
+import { useChatContext } from '../../../contexts/ChatContext';
 import SystemPrompt from './SystemPrompt';
 import './ChatArea.css';
 

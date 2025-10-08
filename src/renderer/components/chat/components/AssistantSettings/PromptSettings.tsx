@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message, Typography, Space } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
-import { Assistant } from '../../../../../types/assistant';
+import { Assistant } from '../../../../types/assistant';
 import './SettingsCommon.css';
 
 const { TextArea } = Input;

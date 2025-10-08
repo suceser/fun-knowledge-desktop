@@ -3,8 +3,8 @@
  */
 
 import { ipcMain, IpcMainInvokeEvent } from 'electron';
-import { storageService } from '../services/storageService';
-import { AppConfig } from '../types/storage';
+import { storageService } from '../main/services/storageService';
+import { AppConfig } from '../main/types/storage';
 
 /**
  * 注册所有存储相关的 IPC 处理器
