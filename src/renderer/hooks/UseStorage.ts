@@ -3,8 +3,8 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { storageService } from '../services/storageService';
-import { AppConfig } from '../../main/types/storage';
+import { storageService } from '../services/StorageService';
+import { AppConfig } from '../../main/types/Storage';
 
 /**
  * 使用存储值的 Hook

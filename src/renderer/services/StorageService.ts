@@ -3,7 +3,7 @@
  * 封装与主进程的通信，提供简洁的 API
  */
 
-import { AppConfig, StorageResult } from '../../main/types/storage';
+import { AppConfig, StorageResult } from '../../main/types/Storage';
 
 class RendererStorageService {
   private cache: Map<string, unknown>;

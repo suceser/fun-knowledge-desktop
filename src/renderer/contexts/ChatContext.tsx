@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Assistant, Conversation, Message, Topic } from '../types/assistant';
+import { Assistant, Conversation, Message, Topic } from '../types/Assistant';
 
 interface ChatContextType {
   // 助手相关

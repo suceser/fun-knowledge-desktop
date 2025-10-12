@@ -2,7 +2,7 @@
  * 全局类型声明
  */
 
-import { AppConfig, StorageResult } from './storage';
+import { AppConfig, StorageResult } from './Storage';
 
 export interface ElectronAPI {
   storage: {

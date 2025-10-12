@@ -8,7 +8,7 @@ import {
   MessageOutlined,
   BookOutlined,
 } from '@ant-design/icons';
-import { Assistant } from '../../../../types/assistant';
+import { Assistant } from '../../../../types/Assistant';
 import PromptSettings from './PromptSettings';
 import ModelSettingsTab from './ModelSettingsTab';
 import KnowledgeSettings from './KnowledgeSettings';

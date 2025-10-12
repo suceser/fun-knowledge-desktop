@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Select, InputNumber, Switch, Typography, Space } from 'antd';
-import { Assistant } from '../../../../types/assistant';
+import { Assistant } from '../../../../types/Assistant';
 import './SettingsCommon.css';
 
 const { Title, Paragraph, Text } = Typography;

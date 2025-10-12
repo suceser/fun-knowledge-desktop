@@ -2,7 +2,7 @@ import React from 'react';
 import { ConfigProvider, theme, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import MainLayout from './components/MainLayout';
-import './styles/theme.css';
+import './styles/Theme.css';
 import './App.css';
 
 const { darkAlgorithm } = theme;

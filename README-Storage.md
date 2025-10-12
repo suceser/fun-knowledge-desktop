@@ -60,18 +60,18 @@ function Settings() {
 ```
 src/
 ├── types/
-│   ├── storage.ts              # 类型定义
-│   └── global.d.ts             # 全局类型
+│   ├── Storage.ts              # 类型定义
+│   └── Global.d.ts             # 全局类型
 ├── services/
-│   └── storageService.ts       # 主进程服务
+│   └── StorageService.ts       # 主进程服务
 ├── ipc/
-│   └── storageHandlers.ts      # IPC 处理器
+│   └── StorageHandlers.ts      # IPC 处理器
 ├── preload.ts                  # Preload 脚本
 └── renderer/
     ├── services/
-    │   └── storageService.ts   # 渲染进程服务
+    │   └── StorageService.ts   # 渲染进程服务
     ├── hooks/
-    │   └── useStorage.ts       # React Hooks
+    │   └── UseStorage.ts       # React Hooks
     └── examples/
         └── StorageExample.tsx  # 使用示例
 ```

@@ -6,7 +6,7 @@
  */
 
 import { useCallback, useEffect, useState } from 'react';
-import { storageService } from '../services/storageService';
+import { storageService } from '../services/StorageService';
 import {
   GeneralSettings,
   DisplaySettings,
@@ -19,7 +19,7 @@ import {
   MCPSettings,
   MemorySettings,
   DEFAULT_APP_CONFIG,
-} from '../../main/types/storage';
+} from '../../main/types/Storage';
 
 /**
  * 通用的设置 Hook 工厂函数

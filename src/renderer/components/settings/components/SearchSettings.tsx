@@ -19,8 +19,8 @@ import {
   EyeOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { usePartialUpdate } from '../../../hooks/useSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/storage';
+import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './SearchSettings.css';
 
 const { Title, Text } = Typography;

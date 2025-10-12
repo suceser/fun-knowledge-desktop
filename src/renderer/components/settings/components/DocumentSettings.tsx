@@ -24,8 +24,8 @@ import {
   LoadingOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { usePartialUpdate } from '../../../hooks/useSettingsStorage';
-import { DEFAULT_APP_CONFIG, DocumentItem } from '../../../../main/types/storage';
+import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
+import { DEFAULT_APP_CONFIG, DocumentItem } from '../../../../main/types/Storage';
 import './DocumentSettings.css';
 
 const { Title, Text } = Typography;

@@ -6,7 +6,29 @@
 import Store from 'electron-store';
 import { app } from 'electron';
 import path from 'path';
-import { AppConfig, DEFAULT_APP_CONFIG, StorageResult } from '../types/storage';
+import { AppConfig, DEFAULT_APP_CONFIG, StorageResult } from '../types/Storage';
+
+// 扩展 Store 类型以包含所有方法（解决类型推断问题）
+type StoreType<T> = Store<T> & {
+  get<K extends keyof T>(key: K): T[K];
+  get<V = unknown>(key: string): V;
+  set<K extends keyof T>(key: K, value: T[K]): void;
+  set(key: string, value: unknown): void;
+  delete(key: string): void;
+  has(key: string): boolean;
+  clear(): void;
+  store: T;
+  readonly path: string;
+  readonly size: number;
+  onDidChange<K extends keyof T>(
+    key: K,
+    callback: (newValue: T[K], oldValue: T[K]) => void
+  ): () => void;
+  onDidChange(
+    key: string,
+    callback: (newValue: unknown, oldValue: unknown) => void
+  ): () => void;
+};
 
 // 存储配置
 const storeConfig = {
@@ -18,13 +40,13 @@ const storeConfig = {
 };
 
 // 创建存储实例
-const store = new Store<AppConfig>(storeConfig);
+const store = new Store<AppConfig>(storeConfig) as StoreType<AppConfig>;
 
 /**
  * 存储服务类
  */
 class StorageService {
-  private store: Store<AppConfig>;
+  private store: StoreType<AppConfig>;
   private listeners: Map<string, Set<(value: unknown) => void>>;
 
   constructor() {

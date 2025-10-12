@@ -7,8 +7,8 @@ import {
   AppstoreOutlined,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import { usePartialUpdate } from '../../../hooks/useSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/storage';
+import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
+import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './GeneralSettings.css';
 
 const { Text } = Typography;
