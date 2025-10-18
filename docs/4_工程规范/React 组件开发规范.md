@@ -24,7 +24,7 @@ components/
   ├── ComponentName/
   │   ├── index.tsx              # 组件主文件
   │   ├── ComponentName.css      # 组件样式
-  │   ├── types.ts               # 类型定义（如果复杂）
+  │   ├── Types.ts               # 类型定义（如果复杂）
   │   ├── hooks/                 # 自定义 Hooks（如果需要）
   │   │   └── useComponentLogic.ts
   │   ├── components/            # 子组件

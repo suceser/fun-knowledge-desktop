@@ -6,20 +6,20 @@
 
 ```
 ai/
-├── index.ts              # 统一导出接口
-├── types.ts              # 类型定义
-├── chatCompletion.ts     # 聊天补全核心功能
-├── urlUtils.ts           # URL 处理工具
-├── requestBuilder.ts     # 请求构建器
-├── errorHandler.ts       # 错误处理器
-├── streamHandler.ts      # 流式响应处理
-├── responseHandler.ts    # 非流式响应处理
+├── Index.ts              # 统一导出接口
+├── Types.ts              # 类型定义
+├── ChatCompletion.ts     # 聊天补全核心功能
+├── UrlUtils.ts           # URL 处理工具
+├── RequestBuilder.ts     # 请求构建器
+├── RrrorHandler.ts       # 错误处理器
+├── StreamHandler.ts      # 流式响应处理
+├── ResponseHandler.ts    # 非流式响应处理
 └── README.md            # 本文档
 ```
 
 ## 模块说明
 
-### 1. types.ts
+### 1. Types.ts
 定义所有 AI 服务相关的类型：
 - `ChatMessage` - 聊天消息接口
 - `ChatCompletionOptions` - 聊天补全选项
@@ -27,41 +27,41 @@ ai/
 - `TokenUsage` - Token 使用情况
 - `ApiResponse` - API 响应数据结构
 
-### 2. chatCompletion.ts
+### 2. ChatCompletion.ts
 核心功能模块，提供 `chatCompletion` 函数：
 - 调用大模型 API
 - 支持流式和非流式响应
 - 统一的错误处理
 
-### 3. urlUtils.ts
+### 3. UrlUtils.ts
 URL 处理工具：
 - `normalizeApiUrl` - 标准化 API URL
 - `buildChatEndpoint` - 构建聊天端点
 - `prepareEndpointUrl` - 准备完整的端点 URL
 
-### 4. requestBuilder.ts
+### 4. RequestBuilder.ts
 请求构建工具：
 - `buildRequestBody` - 构建请求体
 - `buildRequestHeaders` - 构建请求头
 
-### 5. errorHandler.ts
+### 5. RrrorHandler.ts
 错误处理工具：
 - `getErrorMessageByStatus` - 根据状态码获取错误消息
 - `extractErrorMessage` - 从响应中提取错误消息
 - `handleApiError` - 处理 API 错误
 - `handleNetworkError` - 处理网络错误
 
-### 6. streamHandler.ts
+### 6. StreamHandler.ts
 流式响应处理：
 - `handleStreamResponse` - 处理 SSE (Server-Sent Events) 流式响应
 - 支持实时接收和处理流式内容
 
-### 7. responseHandler.ts
+### 7. ResponseHandler.ts
 非流式响应处理：
 - `handleNormalResponse` - 处理标准 JSON 响应
 - 提取内容和 Token 使用情况
 
-### 8. index.ts
+### 8. Index.ts
 统一导出接口，对外暴露所有公共 API。
 
 ## 使用示例
@@ -170,18 +170,18 @@ function ChatComponent() {
 
 ### 1. 单一职责
 每个模块只负责一个特定的功能：
-- URL 处理只在 `urlUtils.ts`
-- 错误处理只在 `errorHandler.ts`
-- 流式响应只在 `streamHandler.ts`
+- URL 处理只在 `UrlUtils.ts`
+- 错误处理只在 `RrrorHandler.ts`
+- 流式响应只在 `StreamHandler.ts`
 
 ### 2. 可测试性
 所有函数都是纯函数或具有明确的输入输出，便于单元测试。
 
 ### 3. 可扩展性
 模块化设计使得添加新功能变得简单：
-- 添加新的 API 端点：在 `urlUtils.ts` 中添加
-- 添加新的错误类型：在 `errorHandler.ts` 中添加
-- 支持新的响应格式：在 `responseHandler.ts` 中添加
+- 添加新的 API 端点：在 `UrlUtils.ts` 中添加
+- 添加新的错误类型：在 `RrrorHandler.ts` 中添加
+- 支持新的响应格式：在 `ResponseHandler.ts` 中添加
 
 ### 4. 类型安全
 所有接口和函数都有明确的 TypeScript 类型定义。

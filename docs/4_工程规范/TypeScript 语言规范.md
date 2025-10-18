@@ -860,7 +860,7 @@ export interface CreateUserData {
 
 export type UpdateUserData = Partial<CreateUserData>;
 
-// types/index.ts
+// types/Index.ts
 export * from './User';
 export * from './Post';
 export * from './Comment';

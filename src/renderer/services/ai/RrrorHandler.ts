@@ -2,7 +2,7 @@
  * API 错误处理器
  */
 
-import { ApiResponse, ChatCompletionResult } from './types';
+import { ApiResponse, ChatCompletionResult } from './Types';
 
 /**
  * 根据 HTTP 状态码获取友好的错误消息

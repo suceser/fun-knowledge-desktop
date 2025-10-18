@@ -5,7 +5,7 @@
  */
 
 // 导出主要功能
-export { chatCompletion } from './chatCompletion';
+export { chatCompletion } from './ChatCompletion';
 
 // 导出类型定义
 export type {
@@ -14,32 +14,32 @@ export type {
   ChatCompletionResult,
   TokenUsage,
   ApiResponse,
-} from './types';
+} from './Types';
 
 // 导出工具函数（如果需要在外部使用）
 export {
   normalizeApiUrl,
   buildChatEndpoint,
   prepareEndpointUrl,
-} from './urlUtils';
+} from './UrlUtils';
 
 export {
   buildRequestBody,
   buildRequestHeaders,
-} from './requestBuilder';
+} from './RequestBuilder';
 
 export {
   getErrorMessageByStatus,
   extractErrorMessage,
   handleApiError,
   handleNetworkError,
-} from './errorHandler';
+} from './RrrorHandler';
 
 export {
   handleStreamResponse,
-} from './streamHandler';
+} from './StreamHandler';
 
 export {
   handleNormalResponse,
-} from './responseHandler';
+} from './ResponseHandler';
 

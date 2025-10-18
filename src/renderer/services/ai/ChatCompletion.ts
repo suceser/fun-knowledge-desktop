@@ -2,12 +2,12 @@
  * 聊天补全核心功能
  */
 
-import { ChatCompletionOptions, ChatCompletionResult } from './types';
-import { prepareEndpointUrl } from './urlUtils';
-import { buildRequestBody, buildRequestHeaders } from './requestBuilder';
-import { handleStreamResponse } from './streamHandler';
-import { handleNormalResponse } from './responseHandler';
-import { handleNetworkError } from './errorHandler';
+import { ChatCompletionOptions, ChatCompletionResult } from './Types';
+import { prepareEndpointUrl } from './UrlUtils';
+import { buildRequestBody, buildRequestHeaders } from './RequestBuilder';
+import { handleStreamResponse } from './StreamHandler';
+import { handleNormalResponse } from './ResponseHandler';
+import { handleNetworkError } from './RrrorHandler';
 
 /**
  * 调用大模型 API 进行聊天补全
