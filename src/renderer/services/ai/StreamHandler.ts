@@ -2,7 +2,7 @@
  * 流式响应处理器
  */
 
-import { ChatCompletionResult } from './Types';
+import {ChatCompletionResult} from "./model/ChatCompletionResult";
 
 /**
  * 解析 SSE (Server-Sent Events) 数据行

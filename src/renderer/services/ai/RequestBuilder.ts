@@ -2,7 +2,7 @@
  * API 请求构建器
  */
 
-import { ChatCompletionOptions } from './Types';
+import {ChatCompletionOptions} from "./model/ChatCompletionOptions";
 
 /**
  * 构建聊天补全请求体

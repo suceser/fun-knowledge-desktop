@@ -2,8 +2,10 @@
  * API 响应处理器
  */
 
-import { ApiResponse, ChatCompletionResult, TokenUsage } from './Types';
 import { handleApiError } from './RrrorHandler';
+import {ApiResponse} from "./model/ApiResponse";
+import {TokenUsage} from "./model/TokenUsage";
+import {ChatCompletionResult} from "./model/ChatCompletionResult";
 
 /**
  * 提取 Token 使用情况
