@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Button, Avatar, Typography, Empty } from 'antd';
+import { Input, Button, Avatar, Typography, Empty, message } from 'antd';
 import {
   SendOutlined,
   PaperClipOutlined,
@@ -11,6 +11,8 @@ import {
 } from '@ant-design/icons';
 import { useChatContext } from '../../../contexts/ChatContext';
 import SystemPrompt from './SystemPrompt';
+import { useModelConfig } from '../../../hooks/UseModelConfig';
+import { chatCompletion, ChatMessage } from '../../../services/AIService';
 import './ChatArea.css';
 
 const { TextArea } = Input;
@@ -18,6 +20,7 @@ const { Text } = Typography;
 
 const ChatArea: React.FC = () => {
   const { currentAssistant, currentTopic, currentMessages, addMessage } = useChatContext();
+  const { modelConfig, loading: modelLoading, error: modelError } = useModelConfig();
   const [inputValue, setInputValue] = useState('');
   const [isSending, setIsSending] = useState(false);
   const messageListRef = useRef<HTMLDivElement>(null);
@@ -30,29 +33,95 @@ const ChatArea: React.FC = () => {
   }, [currentMessages]);
 
   // 发送消息
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!inputValue.trim() || !currentAssistant || isSending) return;
 
+    // 检查模型配置
+    if (!modelConfig) {
+      message.error(modelError || '未配置模型，请在设置中配置并启用模型');
+      return;
+    }
+
     setIsSending(true);
+    const userMessage = inputValue.trim();
 
     // 添加用户消息
     addMessage({
       role: 'user',
-      content: inputValue.trim(),
+      content: userMessage,
     });
 
-    // 模拟AI回复（实际应该调用AI API）
-    setTimeout(() => {
+    setInputValue('');
+
+    try {
+      // 构建消息历史
+      const messages: ChatMessage[] = [];
+
+      // 添加系统提示词
+      if (currentAssistant.systemPrompt) {
+        messages.push({
+          role: 'system',
+          content: currentAssistant.systemPrompt,
+        });
+      }
+
+      // 添加历史消息（只取最近的10条，避免token超限）
+      const recentMessages = currentMessages.slice(-10);
+      for (const msg of recentMessages) {
+        if (msg.role === 'user' || msg.role === 'assistant') {
+          messages.push({
+            role: msg.role,
+            content: msg.content,
+          });
+        }
+      }
+
+      // 添加当前用户消息
+      messages.push({
+        role: 'user',
+        content: userMessage,
+      });
+
+      // 调用大模型 API
+      const result = await chatCompletion({
+        apiUrl: modelConfig.apiUrl,
+        apiKey: modelConfig.apiKey,
+        model: modelConfig.modelName,
+        messages,
+        temperature: 0.7,
+        maxTokens: 2000,
+      });
+
+      if (result.success && result.content) {
+        // 添加AI回复
+        addMessage({
+          role: 'assistant',
+          content: result.content,
+          model: `${modelConfig.modelDisplayName} | ${modelConfig.providerName}`,
+          tokens: result.usage
+            ? `${result.usage.promptTokens || 0} + ${result.usage.completionTokens || 0} = ${result.usage.totalTokens || 0}`
+            : undefined,
+        });
+      } else {
+        // 显示错误消息
+        message.error(result.error || '生成回复失败');
+        addMessage({
+          role: 'assistant',
+          content: `抱歉，生成回复时出错了：${result.error || '未知错误'}`,
+          model: `${modelConfig.modelDisplayName} | ${modelConfig.providerName}`,
+        });
+      }
+    } catch (error) {
+      console.error('Error calling AI API:', error);
+      message.error('调用 AI 服务失败');
       addMessage({
         role: 'assistant',
-        content: '这是一条模拟的AI回复。在实际应用中，这里会调用真实的AI API来生成回复。',
-        model: 'Qwen/Qwen2.5-72B-Instruct | ModelScope 魔搭',
-        tokens: '50 + 20 + 100',
+        content: '抱歉，调用 AI 服务时出现了错误。请检查网络连接和模型配置。',
+        model: modelConfig ? `${modelConfig.modelDisplayName} | ${modelConfig.providerName}` : undefined,
       });
+    } finally {
       setIsSending(false);
-    }, 1000);
-
-    setInputValue('');
+    }
   };
 
   // 处理Enter键发送
