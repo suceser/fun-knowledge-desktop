@@ -12,7 +12,7 @@ import {
 import { useChatContext } from '../../../contexts/ChatContext';
 import SystemPrompt from './SystemPrompt';
 import { useModelConfig } from '../../../hooks/UseModelConfig';
-import { chatCompletion, ChatMessage } from '../../../services/AIService';
+import { chatCompletion, ChatMessage } from '../../../services/ai';
 import './ChatArea.css';
 
 const { TextArea } = Input;
