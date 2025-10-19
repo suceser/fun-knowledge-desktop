@@ -9,8 +9,8 @@ import {
   GlobalOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG, ShortcutItem } from '../../../../main/types/Storage';
 import './ShortcutSettings.css';
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Text } = Typography;
 

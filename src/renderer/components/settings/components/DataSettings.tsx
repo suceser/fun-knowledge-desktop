@@ -10,8 +10,8 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './DataSettings.css';
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Text } = Typography;
 const { confirm } = Modal;

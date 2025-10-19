@@ -21,7 +21,7 @@ import {ChatCompletionResult} from "./model/ChatCompletionResult";
  * const result = await chatCompletion({
  *   apiUrl: 'https://api.example.com/v1',
  *   apiKey: 'your-api-key',
- *   model: 'gpt-3.5-turbo',
+ *   models: 'gpt-3.5-turbo',
  *   messages: [
  *     { role: 'user', content: 'Hello!' }
  *   ],

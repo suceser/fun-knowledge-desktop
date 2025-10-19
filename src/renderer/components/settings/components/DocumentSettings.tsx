@@ -25,8 +25,9 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG, DocumentItem } from '../../../../main/types/Storage';
 import './DocumentSettings.css';
+import {DocumentItem} from "../models/DocumentItem";
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Title, Text } = Typography;
 const { Option } = Select;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { App } from 'antd';
 import { ModelInfo } from './types';
-import { useProviders } from './hooks/useProviders';
-import { useApiKeyTest } from './hooks/useApiKeyTest';
+import { useProviders } from './hooks/UseProviders';
+import { useApiKeyTest } from './hooks/UseApiKeyTest';
 import { ProviderList } from './components/ProviderList';
 import { ProviderConfigPanel } from './components/ProviderConfigPanel';
 import { SelectModelModal } from './components/SelectModelModal';

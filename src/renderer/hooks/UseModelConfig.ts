@@ -3,8 +3,9 @@
  */
 
 import { useEffect, useState } from 'react';
-import { storageService } from '../services/StorageService';
-import { DEFAULT_APP_CONFIG } from '../../main/types/Storage';
+import { storageService } from '../services/storage/StorageService';
+import { DEFAULT_APP_CONFIG } from '../components/settings/models/DefaultAppConfig';
+import { ModelSettings } from '../components/settings/models/ModelSettings';
 
 export interface ModelConfig {
   providerId: string;
@@ -30,8 +31,8 @@ export function useModelConfig() {
         setError(null);
 
         // 获取模型设置
-        const modelSettings = await storageService.get('models');
-        const settings = modelSettings || DEFAULT_APP_CONFIG.models;
+        const modelSettings = await storageService.get<ModelSettings>('models');
+        const settings: ModelSettings = modelSettings || DEFAULT_APP_CONFIG.models;
 
         // 查找第一个已启用且配置完整的provider
         const providers = Object.values(settings.providers || {});
@@ -64,7 +65,7 @@ export function useModelConfig() {
         setError('未找到已启用的模型。请在设置中配置并启用至少一个模型。');
         setModelConfig(null);
       } catch (err) {
-        console.error('Failed to load model config:', err);
+        console.error('Failed to load models config:', err);
         setError('加载模型配置失败');
         setModelConfig(null);
       } finally {
@@ -93,8 +94,8 @@ export function useAllModelConfigs() {
         setError(null);
 
         // 获取模型设置
-        const modelSettings = await storageService.get('models');
-        const settings = modelSettings || DEFAULT_APP_CONFIG.models;
+        const modelSettings = await storageService.get<ModelSettings>('models');
+        const settings: ModelSettings = modelSettings || DEFAULT_APP_CONFIG.models;
 
         // 获取所有已启用的providers
         const providers = Object.values(settings.providers || {});
@@ -128,7 +129,7 @@ export function useAllModelConfigs() {
           setError('未找到已启用的模型。请在设置中配置并启用至少一个模型。');
         }
       } catch (err) {
-        console.error('Failed to load model configs:', err);
+        console.error('Failed to load models configs:', err);
         setError('加载模型配置失败');
       } finally {
         setLoading(false);

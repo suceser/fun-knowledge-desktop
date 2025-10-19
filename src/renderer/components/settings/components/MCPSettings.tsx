@@ -7,8 +7,8 @@ import {
   AppstoreOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './MCPSettings.css';
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Title, Text } = Typography;
 

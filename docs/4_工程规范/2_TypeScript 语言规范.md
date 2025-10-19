@@ -14,8 +14,8 @@
 
 1. ts 文件名的每个单词首字母必须大写，例如 ChatMessage.ts、UseApiHooks.ts/
 2. 一个文件导出一个主要类型/接口，相关类型可放在同一文件
-3. 类型定义文件放在 `types/` 目录
-4. 共享类型放在项目根级别的 `types/` 目录
+3. 类型定义文件放在 `models/` 目录
+4. 共享类型放在项目根级别的 `models/` 目录
 5. 组件 Props 类型与组件放在同一文件
 
 ## 三 语法规则
@@ -74,7 +74,7 @@
 
 ### 模块与导入
 
-1. 使用具名导入（`import { User } from './types'`） 
+1. 使用具名导入（`import { User } from './model'`） 
 2. 仅导入类型使用 `import type { User }`
 3. 避免使用命名空间导入（`import * as`），除非必要 
 4. 重新导出使用 `export * from './module'` 或 `export { Type }`

@@ -20,8 +20,8 @@ import {
   CloseOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './SearchSettings.css';
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Title, Text } = Typography;
 const { Option } = Select;

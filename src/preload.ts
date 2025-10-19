@@ -4,7 +4,8 @@
  */
 
 import { contextBridge, ipcRenderer } from 'electron';
-import {AppConfig, StorageResult} from "./main/types/Storage";
+import {StorageResult} from "./main/services/storage/models/StorageResult";
+import {AppConfig} from "./renderer/components/settings/models/AppConfig";
 
 // 暴露存储 API 到渲染进程
 contextBridge.exposeInMainWorld('electronAPI', {

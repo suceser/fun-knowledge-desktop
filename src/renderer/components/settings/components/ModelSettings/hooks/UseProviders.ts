@@ -3,7 +3,7 @@ import { MessageInstance } from 'antd/es/message/interface';
 import { ProviderConfig, ModelInfo } from '../types';
 import { initialProviders } from '../constants';
 import { usePartialUpdate } from '../../../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../../../main/types/Storage';
+import {DEFAULT_APP_CONFIG} from "../../../models/DefaultAppConfig";
 
 interface UseProvidersProps {
   message: MessageInstance;

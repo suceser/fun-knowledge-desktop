@@ -9,8 +9,8 @@ import {
   RobotOutlined,
 } from '@ant-design/icons';
 import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
-import { DEFAULT_APP_CONFIG } from '../../../../main/types/Storage';
 import './DisplaySettings.css';
+import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
 
 const { Text } = Typography;
 
