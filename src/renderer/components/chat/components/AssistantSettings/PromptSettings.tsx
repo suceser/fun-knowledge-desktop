@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message, Typography, Space } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
-import { Assistant } from '../../../../types/Assistant';
 import './SettingsCommon.css';
+import {Assistant} from "../../../../services/ai/model/Assistant";
 
 const { TextArea } = Input;
 const { Title, Text, Paragraph } = Typography;

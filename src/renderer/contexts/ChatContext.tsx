@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Assistant, Conversation, Message, Topic } from '../types/Assistant';
+import {Assistant} from "../services/ai/model/Assistant";
+import {Topic} from "../services/ai/model/Topic";
+import {Conversation} from "../services/ai/model/Conversation";
+import {Message} from "../services/ai/model/Message";
 
 interface ChatContextType {
   // 助手相关
