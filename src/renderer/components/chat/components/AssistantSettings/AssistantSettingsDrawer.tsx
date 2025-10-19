@@ -8,7 +8,7 @@ import {
   MessageOutlined,
   BookOutlined,
 } from '@ant-design/icons';
-import { Assistant } from '../../../../types/Assistant';
+import { Assistant } from 'rservices/ai/model/Assistant';
 import PromptSettings from './PromptSettings';
 import ModelSettingsTab from './ModelSettingsTab';
 import KnowledgeSettings from './KnowledgeSettings';

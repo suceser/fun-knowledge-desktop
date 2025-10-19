@@ -6,16 +6,16 @@
  */
 
 import { useCallback, useEffect, useState } from 'react';
-import { storageService } from '../services/storage/StorageService';
-import {GeneralSettings} from "../components/settings/models/GeneralSettings";
-import {DEFAULT_APP_CONFIG} from "../components/settings/models/DefaultAppConfig";
-import {DisplaySettings} from "../components/settings/models/DisplaySettings";
-import {SearchSettings} from "../components/settings/models/SearchSettings";
-import {ShortcutSettings} from "../components/settings/models/ShortcutSettings";
-import {DocumentSettings} from "../components/settings/models/DocumentSettings";
-import {DataSettings} from "../components/settings/models/DataSettings";
-import {MCPSettings} from "../components/settings/models/MCPSettings";
-import {MemorySettings} from "../components/settings/models/MemorySettings";
+import { storageService } from 'rservices/storage/StorageService';
+import {GeneralSettings} from "components/settings/models/GeneralSettings";
+import {DEFAULT_APP_CONFIG} from "components/settings/models/DefaultAppConfig";
+import {DisplaySettings} from "components/settings/models/DisplaySettings";
+import {SearchSettings} from "components/settings/models/SearchSettings";
+import {ShortcutSettings} from "components/settings/models/ShortcutSettings";
+import {DocumentSettings} from "components/settings/models/DocumentSettings";
+import {DataSettings} from "components/settings/models/DataSettings";
+import {MCPSettings} from "components/settings/models/MCPSettings";
+import {MemorySettings} from "components/settings/models/MemorySettings";
 
 /**
  * 通用的设置 Hook 工厂函数

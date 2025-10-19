@@ -3,9 +3,9 @@
  */
 
 import { useEffect, useState } from 'react';
-import { storageService } from '../services/storage/StorageService';
-import { DEFAULT_APP_CONFIG } from '../components/settings/models/DefaultAppConfig';
-import { ModelSettings } from '../components/settings/models/ModelSettings';
+import { storageService } from 'rservices/storage/StorageService';
+import { DEFAULT_APP_CONFIG } from 'components/settings/models/DefaultAppConfig';
+import { ModelSettings } from 'components/settings/models/ModelSettings';
 
 export interface ModelConfig {
   providerId: string;

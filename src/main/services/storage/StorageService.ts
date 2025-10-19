@@ -6,9 +6,9 @@
 import Store from 'electron-store';
 import {app} from 'electron';
 import path from 'path';
-import {AppConfig} from "../../../renderer/components/settings/models/AppConfig";
+import {AppConfig} from "components/settings/models/AppConfig";
 import {StorageResult} from "./models/StorageResult";
-import {DEFAULT_APP_CONFIG} from "../../../renderer/components/settings/models/DefaultAppConfig";
+import {DEFAULT_APP_CONFIG} from "components/settings/models/DefaultAppConfig";
 
 // 扩展 Store 类型以包含所有方法（解决类型推断问题）
 type StoreType<T> = Store<T> & {

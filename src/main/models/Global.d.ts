@@ -2,8 +2,8 @@
  * 全局类型声明
  */
 
-import {AppConfig} from '../../renderer/components/settings/models/AppConfig';
-import {StorageResult} from '../services/storage/models/StorageResult';
+import {AppConfig} from 'components/settings/models/AppConfig';
+import {StorageResult} from 'mservices/storage/models/StorageResult';
 
 export interface ElectronAPI {
     storage: {

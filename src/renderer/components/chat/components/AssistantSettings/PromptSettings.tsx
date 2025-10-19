@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message, Typography, Space } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 import './SettingsCommon.css';
-import {Assistant} from "../../../../services/ai/model/Assistant";
+import {Assistant} from "rservices/ai/model/Assistant";
 
 const { TextArea } = Input;
 const { Title, Text, Paragraph } = Typography;

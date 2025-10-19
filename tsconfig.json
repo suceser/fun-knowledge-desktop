@@ -12,6 +12,14 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "paths": {
+      "main/*": ["src/main/*"],
+      "mservices/*": ["src/main/services/*"],
+      "renderer/*": ["src/renderer/*"],
+      "components/*": ["src/renderer/components/*"],
+      "hooks/*": ["src/renderer/hooks/*"],
+      "rservices/*": ["src/renderer/services/*"]
+    }
   }
 }

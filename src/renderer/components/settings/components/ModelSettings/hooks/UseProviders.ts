@@ -2,8 +2,8 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { MessageInstance } from 'antd/es/message/interface';
 import { ProviderConfig, ModelInfo } from '../types';
 import { initialProviders } from '../constants';
-import { usePartialUpdate } from '../../../../../hooks/UseSettingsStorage';
-import {DEFAULT_APP_CONFIG} from "../../../models/DefaultAppConfig";
+import { usePartialUpdate } from 'hooks/UseSettingsStorage';
+import {DEFAULT_APP_CONFIG} from "components/settings/models/DefaultAppConfig";
 
 interface UseProvidersProps {
   message: MessageInstance;

@@ -11,10 +11,10 @@ import {
 } from '@ant-design/icons';
 import { useChatContext } from '../contexts/ChatContext';
 import SystemPrompt from './SystemPrompt';
-import { useModelConfig } from '../../../hooks/UseModelConfig';
+import { useModelConfig } from 'hooks/UseModelConfig';
 import './ChatArea.css';
-import {ChatMessage} from "../../../services/ai/model/ChatMessage";
-import {chatCompletion} from "../../../services/ai/ChatCompletion";
+import {ChatMessage} from "rservices/ai/model/ChatMessage";
+import {chatCompletion} from "rservices/ai/ChatCompletion";
 
 const { TextArea } = Input;
 const { Text } = Typography;

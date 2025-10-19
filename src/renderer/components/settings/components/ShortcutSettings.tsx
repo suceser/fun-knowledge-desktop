@@ -8,9 +8,9 @@ import {
   EyeInvisibleOutlined,
   GlobalOutlined,
 } from '@ant-design/icons';
-import { usePartialUpdate } from '../../../hooks/UseSettingsStorage';
+import { usePartialUpdate } from 'hooks/UseSettingsStorage';
 import './ShortcutSettings.css';
-import {DEFAULT_APP_CONFIG} from "../models/DefaultAppConfig";
+import {DEFAULT_APP_CONFIG} from "components/settings/models/DefaultAppConfig";
 
 const { Text } = Typography;
 
