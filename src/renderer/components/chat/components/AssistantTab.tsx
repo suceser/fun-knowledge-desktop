@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { List, Avatar, Button, Typography, Modal, Form, Input, message } from 'antd';
 import { PlusOutlined, StarOutlined } from '@ant-design/icons';
-import { useChatContext } from '../../../contexts/ChatContext';
+import { useChatContext } from '../contexts/ChatContext';
 import './AssistantTab.css';
 import './ModalStyles.css';
 

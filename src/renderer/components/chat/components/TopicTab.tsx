@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Button, message, App, Empty } from 'antd';
 import { ClockCircleOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-import { useChatContext } from '../../../contexts/ChatContext';
+import { useChatContext } from '../contexts/ChatContext';
 import './TopicTab.css';
 
 const { Text } = Typography;

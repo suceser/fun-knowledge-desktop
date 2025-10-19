@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button, Typography } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
-import { useChatContext } from '../../../contexts/ChatContext';
+import { useChatContext } from '../contexts/ChatContext';
 import AssistantSettingsDrawer from './AssistantSettings/AssistantSettingsDrawer';
 import './SystemPrompt.css';
 
